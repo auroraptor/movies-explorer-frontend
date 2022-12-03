@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import AboutProject from '../AboutProject/AboutProject';
+import Main from '../Main/Main';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
@@ -10,7 +10,7 @@ import './App.css';
 function App() {
   return (
       <Routes>
-        <Route path='/' element={<AboutProject/>}></Route>
+        <Route path='/' element={<Main/>}></Route>
         <Route path='/movies' element={<Movies/>}></Route>
         <Route path='/saved-movies' element={<SavedMovies/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
