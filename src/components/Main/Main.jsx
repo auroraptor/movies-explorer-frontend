@@ -8,7 +8,7 @@ import './Main.css';
 
 function Main() {
   return (
-    <div className="Main">
+    <div className="main">
         <Promo></Promo>
         <NavTab></NavTab>
         <AboutProject></AboutProject>
