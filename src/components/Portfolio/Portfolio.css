@@ -17,7 +17,7 @@
   flex-direction: column;
   list-style: none;
   padding: 0;
-  margin: 20px 0 0 0;
+  margin: 20px 0 70px 0;
 }
 
 .portfolio__item {
@@ -25,6 +25,10 @@
 
   border-bottom: 1px solid white;
   position: relative;
+}
+
+.portfolio__item:last-child {
+  border-bottom: none;
 }
 
 .portfolio__link {
