@@ -1,0 +1,5 @@
+.movies-card-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 40px 10px 26px 10px;
+}

@@ -1,9 +1,9 @@
 import './MoviesCardList.css';
 
-function MoviesCardList() {
+function MoviesCardList({children}) {
   return (
-    <div className="MoviesCardList">
-
+    <div className="movies-card-list">
+      {children}
     </div>
   );
 }
