@@ -1,0 +1,39 @@
+.register {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  font-family: "Inter";
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 30px 0 30px;
+}
+
+.input-group__input {
+  background: #2f2f2f;
+  border-radius: 8px;
+  border: none;
+  min-width: 260px;
+  height: 46px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #ffffff;
+}
+
+.input-group__label {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8b8b8b;
+}
+
+.input-group__help-text {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+}
