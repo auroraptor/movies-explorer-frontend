@@ -14,7 +14,8 @@ function Movies() {
       <Preloader></Preloader>
       <MoviesCardList>
         <MoviesCard></MoviesCard>
-        <MoviesCard></MoviesCard>
+         <MoviesCard></MoviesCard>
+        <p className="movies-card-list_empty movies-card-list_empty_hidden">Без результатов поиска</p>
       </MoviesCardList>
       <MoviesLoadMore></MoviesLoadMore>
     </div>

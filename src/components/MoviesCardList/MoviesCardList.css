@@ -1,6 +1,22 @@
 .movies-card-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 40px 10px 26px 10px;
-    gap: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 10px 26px 10px;
+  gap: 14px;
+}
+
+.movies-card-list_empty {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #8b8b8b;
+}
+
+.movies-card-list_empty_hidden {
+  display: none;
 }
