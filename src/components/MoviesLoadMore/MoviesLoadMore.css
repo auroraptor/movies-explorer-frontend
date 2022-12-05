@@ -1,0 +1,17 @@
+.movies-load-more {
+  margin: 50px auto 80px auto;
+  display: flex;
+}
+
+.movies-load-more__button {
+  min-width: 240px;
+  height: 36px;
+  background-color: transparent;
+  border: 1px solid rgba(66, 66, 66, 1);
+  border-radius: 6px;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+}
