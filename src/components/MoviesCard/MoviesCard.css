@@ -39,13 +39,19 @@
   margin: 7px 10px 0 0;
   background-color: transparent;
   border: none;
-  background-image: url("../../images/icon-like.png");
+  background-image: url("../../images/icon-like.svg");
   background-repeat: no-repeat;
   background-position: center center;
 }
 
 .movies-card__button_active {
-  background-image: url("../../images/icon-like_active.png");
+  background-image: url("../../images/icon-like_active.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.movies-card__button_remove {
+  background-image: url("../../images/icon-remove.svg");
   background-repeat: no-repeat;
   background-position: center center;
 }
