@@ -32,8 +32,13 @@
 }
 
 .input-group__help-text {
+  visibility: hidden;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
+}
+
+.input-group__error_visible {
+  visibility: visible;
   color: #ee3465;
 }

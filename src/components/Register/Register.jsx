@@ -4,9 +4,9 @@ import "./Register.css";
 function Register() {
   return (
     <div className="register">
-      <Input label="Имя" type="text" helpText={'This ih help text'}></Input>
-      <Input label="E-mail" type="email" helpText={'This ih help text'}></Input>
-      <Input label="Пароль" type="password" helpText={'This ih help text'}></Input>
+      <Input label="Имя" type="text" errorText={'This is help text'}></Input>
+      <Input label="E-mail" type="email" errorText={'This is help text'}></Input>
+      <Input label="Пароль" type="password" errorText={'This is help text'} isVisible={true}></Input>
     </div>
   );
 }
