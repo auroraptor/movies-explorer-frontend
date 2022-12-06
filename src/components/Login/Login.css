@@ -1,0 +1,23 @@
+.login {
+  height: 100vh;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+}
+
+.login__header {
+  height: 253px;
+  gap: 50px;
+  font-family: "Inter";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login__text {
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #ffffff;
+}

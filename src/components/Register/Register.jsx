@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import Form from "../Form/Form";
 import Input from "../Input/Input";
 import "./Register.css";
 
@@ -10,7 +10,14 @@ function Register() {
         <Logo></Logo>
         <p className="register__text">Добро пожаловать!</p>
       </header>
-      <form className="register__form" name="register" id="register">
+      <Form
+        name={"register"}
+        id={"register"}
+        buttonText={"Зарегистрироваться"}
+        label={"Уже зарегистрированы?"}
+        link={"/signin"}
+        linkText="Войти"
+      >
         <Input label="Имя" type="text" errorText={"This is help text"}></Input>
         <Input
           label="E-mail"
@@ -23,18 +30,7 @@ function Register() {
           errorText={"This is help text"}
           isVisible={true}
         ></Input>
-        <div className="register__container">
-          <button className="register__button" type="submit">
-            Зарегистрироваться
-          </button>
-          <label className="register__label">
-            Уже зарегистрированы?{" "}
-            <Link to="/signin" className="register__link">
-              Войти
-            </Link>
-          </label>
-        </div>
-      </form>
+      </Form>
     </div>
   );
 }
