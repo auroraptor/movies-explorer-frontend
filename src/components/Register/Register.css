@@ -1,9 +1,34 @@
 .register {
+  height: 100vh;
+  font-style: normal;
   display: flex;
   flex-direction: column;
-  margin: 0 30px 0 30px;
+}
+
+.register__header {
+  height: 253px;
+  gap: 50px;
   font-family: "Inter";
-  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.register__text {
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #ffffff;
+}
+
+.register__form {
+  font-family: "Inter";
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 30px 0 30px;
 }
 
 .register__container {
@@ -11,10 +36,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 157px 0 30px 0;
+  margin-top: auto;
+  margin-bottom: 30px;
 }
 
 .register__button {
+  font-family: "Inter";
   width: 100%;
   height: 45px;
   background: #4285f4;
@@ -27,9 +54,9 @@
 }
 
 .register__button:hover {
-    cursor: pointer;
-    scale: 1.02;
-    transition: .2s all ease-in-out;
+  cursor: pointer;
+  scale: 1.02;
+  transition: 0.2s all ease-in-out;
 }
 
 .register__label {
@@ -50,7 +77,7 @@
 }
 
 .register__link:hover {
-    cursor: pointer;
-    opacity: .8;
-    transition: .2s all ease-in-out;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
 }
