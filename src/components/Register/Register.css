@@ -1,44 +1,56 @@
 .register {
   display: flex;
   flex-direction: column;
-}
-
-.input-group {
+  margin: 0 30px 0 30px;
   font-family: "Inter";
   font-style: normal;
+}
+
+.register__container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 0 30px 0 30px;
+  justify-content: center;
+  align-items: center;
+  margin: 157px 0 30px 0;
 }
 
-.input-group__input {
-  background: #2f2f2f;
-  border-radius: 8px;
-  border: none;
-  min-width: 260px;
-  height: 46px;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
+.register__button {
+  width: 100%;
+  height: 45px;
+  background: #4285f4;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
   color: #ffffff;
+  border: none;
 }
 
-.input-group__label {
+.register__button:hover {
+    cursor: pointer;
+    scale: 1.02;
+    transition: .2s all ease-in-out;
+}
+
+.register__label {
+  margin-top: 14px;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+  font-size: 12px;
+  line-height: 15px;
   color: #8b8b8b;
 }
 
-.input-group__help-text {
-  visibility: hidden;
+.register__link {
+  text-decoration: none;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+  font-size: 12px;
+  line-height: 15px;
+  color: #4285f4;
+  margin-left: 7px;
 }
 
-.input-group__error_visible {
-  visibility: visible;
-  color: #ee3465;
+.register__link:hover {
+    cursor: pointer;
+    opacity: .8;
+    transition: .2s all ease-in-out;
 }
