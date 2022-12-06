@@ -1,4 +1,4 @@
-import Logo from "../Logo/Logo";
+import Header from "../Header/Header";
 import Form from "../Form/Form";
 import Input from "../Input/Input";
 import "./Login.css";
@@ -6,10 +6,9 @@ import "./Login.css";
 function Login() {
   return (
     <div className="login">
-      <header className="login__header">
-        <Logo></Logo>
+      <Header className={"login__header"}>
         <p className="login__text">Рады видеть!</p>
-      </header>
+      </Header>
       <Form
         name="login"
         id="login"

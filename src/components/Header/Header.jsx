@@ -1,12 +1,11 @@
 import Logo from "../Logo/Logo";
-import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import "./Header.css";
 
-function Header() {
+function Header({children, className}) {
   return (
-    <header className="header">
+    <header className={className}>
       <Logo></Logo>
-      <HamburgerMenu></HamburgerMenu>
+      {children}
     </header>
   );
 }

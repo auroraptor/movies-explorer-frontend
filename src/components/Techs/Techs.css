@@ -1,7 +1,7 @@
 .techs {
   display: flex;
   flex-direction: column;
-  margin: 0 18px;
+  padding: 0 18px;
 }
 
 .techs__title {

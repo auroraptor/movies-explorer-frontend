@@ -1,4 +1,4 @@
-import Logo from "../Logo/Logo";
+import Header from "../Header/Header";
 import Form from "../Form/Form";
 import Input from "../Input/Input";
 import "./Register.css";
@@ -6,10 +6,9 @@ import "./Register.css";
 function Register() {
   return (
     <div className="register">
-      <header className="register__header">
-        <Logo></Logo>
+      <Header className={"register__header"}>
         <p className="register__text">Добро пожаловать!</p>
-      </header>
+      </Header>
       <Form
         name={"register"}
         id={"register"}

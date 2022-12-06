@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import Header from "../Header/Header";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import "./Profile.css";
 
-function Profile({ name = "useR", email= "love@eda.jp" }) {
+function Profile({ name = "useR", email = "love@eda.jp" }) {
   const firstName = name[0].toUpperCase() + name.slice(1).toLowerCase();
 
   return (
     <div className="profile">
-      <Header></Header>
+      <Header className={"header"}>
+        <HamburgerMenu></HamburgerMenu>
+      </Header>
       <div className="profile__container">
         <p className="profile__hello-name">{`Привет, ${firstName}!`}</p>
         <div className="profile__user-info">
@@ -23,11 +26,11 @@ function Profile({ name = "useR", email= "love@eda.jp" }) {
       </div>
       <div className="profile__control">
         <button className="profile__button_edit" type="button">
-        Редактировать
+          Редактировать
         </button>
-          <Link to="/signin" className="profile__link">
+        <Link to="/signin" className="profile__link">
           Выйти из аккаунта
-          </Link>
+        </Link>
       </div>
     </div>
   );

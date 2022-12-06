@@ -5,5 +5,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: auto 14px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .header_place_main {
+    background-color: #073042;
   }

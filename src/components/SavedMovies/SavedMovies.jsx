@@ -1,4 +1,5 @@
 import Header from "../Header/Header";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
@@ -8,10 +9,17 @@ import "./SavedMovies.css";
 function SavedMovies() {
   return (
     <div className="saved-movies">
-      <Header></Header>
+      <Header className={"header"}>
+        <HamburgerMenu></HamburgerMenu>
+      </Header>
       <SearchForm></SearchForm>
       <MoviesCardList>
-        <MoviesCard icon={"movies-card__button movies-card__button_remove"} ariaLabel="Удалить" onClick={() => console.log('remove')} buttonName="remove"></MoviesCard>
+        <MoviesCard
+          icon={"movies-card__button movies-card__button_remove"}
+          ariaLabel="Удалить"
+          onClick={() => console.log("remove")}
+          buttonName="remove"
+        ></MoviesCard>
       </MoviesCardList>
       <MoviesLoadMore></MoviesLoadMore>
     </div>
