@@ -1,6 +1,8 @@
 import "./MoviesCard.css";
 
-function MoviesCard({icon}) {
+function MoviesCard(props) {
+  const {icon, ariaLabel, onClick, buttonName} = props;
+
   return (
     <div className="movies-card">
       <img
@@ -10,7 +12,7 @@ function MoviesCard({icon}) {
       ></img>
       <div className="movies-card__container">
         <p className="movies-card__name">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dapibus finibus ultricies. Quisque hendrerit sit amet elit et placerat. Nulla dapibus, sapien eu consequat blandit, justo sapien tempus risus, nec tempor justo lectus at nibh. Cras condimentum metus et finibus fringilla. Quisque sed purus eget turpis suscipit fermentum. Suspendisse ac purus et sapien suscipit scelerisque et id felis. Nulla tincidunt augue nec erat efficitur, in ultricies velit fringilla.</p>
-        <button type="button" name="like" id="like" className={icon}></button>
+        <button type="button" name={buttonName} className={icon} aria-label={ariaLabel} onClick={onClick}></button>
       </div>
 
       <p className="movies-card__duration">111</p>

@@ -9,7 +9,7 @@ function SavedMovies() {
     <div className="saved-movies">
       <SearchForm></SearchForm>
       <MoviesCardList>
-        <MoviesCard icon={"movies-card__button movies-card__button_remove"}></MoviesCard>
+        <MoviesCard icon={"movies-card__button movies-card__button_remove"} ariaLabel="Удалить" onClick={() => console.log('remove')} buttonName="remove"></MoviesCard>
       </MoviesCardList>
       <MoviesLoadMore></MoviesLoadMore>
     </div>
