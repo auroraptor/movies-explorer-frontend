@@ -29,7 +29,7 @@ function Profile({ name = "useR", email= "love@eda.jp" }) {
         <button className="profile__button_edit" type="button">
         Редактировать
         </button>
-          <Link to="/signout" className="profile__link">
+          <Link to="/signin" className="profile__link">
           Выйти из аккаунта
           </Link>
       </div>
