@@ -10,7 +10,7 @@ function Register() {
       <Input label="Пароль" type="password" errorText={'This is help text'} isVisible={true}></Input>
       <div className="register__container">
         <button className="register__button" type="submit">Зарегистрироваться</button>
-        <label className="register__label">Уже зарегистрированы? <Link to="/" className="register__link">Войти</Link></label>
+        <label className="register__label">Уже зарегистрированы? <Link to="/signin" className="register__link">Войти</Link></label>
       </div>
     </form>
   );
