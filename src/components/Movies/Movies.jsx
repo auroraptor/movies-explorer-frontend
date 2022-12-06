@@ -4,6 +4,7 @@ import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
+import Footer from "../Footer/Footer";
 
 import "./Movies.css";
 import Header from "../Header/Header";
@@ -32,6 +33,7 @@ function Movies() {
         </p>
       </MoviesCardList>
       <MoviesLoadMore></MoviesLoadMore>
+      <Footer></Footer>
     </div>
   );
 }
