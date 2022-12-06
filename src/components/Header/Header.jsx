@@ -1,10 +1,13 @@
-import './Header.css';
+import Logo from "../Logo/Logo";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import "./Header.css";
 
 function Header() {
   return (
-    <div className="Header">
-
-    </div>
+    <header className="header">
+      <Logo></Logo>
+      <HamburgerMenu></HamburgerMenu>
+    </header>
   );
 }
 

@@ -6,10 +6,12 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 
 import "./Movies.css";
+import Header from "../Header/Header";
 
 function Movies() {
   return (
     <div className="movies">
+      <Header></Header>
       <SearchForm></SearchForm>
       <Preloader></Preloader>
       <MoviesCardList>

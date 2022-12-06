@@ -8,7 +8,7 @@
   color: #ffffff;
 }
 
-.profile__header {
+/* .profile__header {
   position: relative;
   min-height: 74px;
   display: flex;
@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: space-between;
   margin: auto 14px;
-}
+} */
 
 .profile__container {
   display: flex;

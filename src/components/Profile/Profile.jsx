@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "../Logo/Logo";
-import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import Header from "../Header/Header";
 import "./Profile.css";
 
 function Profile({ name = "useR", email= "love@eda.jp" }) {
@@ -8,10 +7,7 @@ function Profile({ name = "useR", email= "love@eda.jp" }) {
 
   return (
     <div className="profile">
-      <header className="profile__header">
-        <Logo></Logo>
-        <HamburgerMenu></HamburgerMenu>
-      </header>
+      <Header></Header>
       <div className="profile__container">
         <p className="profile__hello-name">{`Привет, ${firstName}!`}</p>
         <div className="profile__user-info">
