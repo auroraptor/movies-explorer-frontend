@@ -3,7 +3,7 @@ import './SearchForm.css';
 
 function SearchForm() {
   return (
-    <div className="search-form">
+    <form name="search" id="search" className="search-form">
       <div className="search-form__container">
         <input type="search" className="search-form__input" id="site-search" name="search" placeholder="Фильм"></input>
         <button type="submit" className="search-form__button" aria-label="Найти">
@@ -11,7 +11,7 @@ function SearchForm() {
         </button>
       </div>
       <FilterCheckbox/>
-    </div>
+    </form>
   );
 }
 
