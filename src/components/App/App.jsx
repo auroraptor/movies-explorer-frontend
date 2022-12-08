@@ -12,17 +12,18 @@ import "./App.css";
 function App() {
   return (
     <div className="app">
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/movies" element={<Movies />}></Route>
-        <Route path="/saved-movies" element={<SavedMovies />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/signin" element={<Login />}></Route>
-        <Route path="/signup" element={<Register />}></Route>
-        <Route path="/nav" element={<Navigation></Navigation>}></Route>
-        <Route path="/*" element={<NotFound/>}></Route>
-
-      </Routes>
+      <div className="app__container">
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/movies" element={<Movies />}></Route>
+          <Route path="/saved-movies" element={<SavedMovies />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/signin" element={<Login />}></Route>
+          <Route path="/signup" element={<Register />}></Route>
+          <Route path="/nav" element={<Navigation></Navigation>}></Route>
+          <Route path="/*" element={<NotFound />}></Route>
+        </Routes>
+      </div>
     </div>
   );
 }
