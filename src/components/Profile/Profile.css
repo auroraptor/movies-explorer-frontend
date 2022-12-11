@@ -1,8 +1,8 @@
 .profile {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  justify-content: center;
+  height: 100vh;
+  justify-content: space-between;
   font-family: "Inter";
   font-style: normal;
   color: #ffffff;
@@ -61,7 +61,7 @@
   color: #ffffff;
 }
 
-.profile__link {
+.profile__logout {
   margin-top: 16px;
   margin-bottom: 40px;
   text-decoration: none;
@@ -72,7 +72,8 @@
   color: #ee3465;
 }
 
-.profile__control {
+.profile_managment {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
 }

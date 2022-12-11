@@ -24,11 +24,11 @@ function Profile({ name = "useR", email = "love@eda.jp" }) {
           </div>
         </div>
       </div>
-      <div className="profile__control">
+      <div className="profile_managment">
         <button className="profile__button_edit" type="button">
           Редактировать
         </button>
-        <Link to="/signin" className="profile__link">
+        <Link to="/signin" className="profile__logout">
           Выйти из аккаунта
         </Link>
       </div>
