@@ -1,3 +1,11 @@
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  position: absolute;
+  right: 14px;
+}
+
 .hamburger__icon {
   width: 24px;
   height: 24px;
@@ -37,16 +45,16 @@
   transition: 0.5s;
 }
 
-.hamburger__icon.hamburger__icon__active .hamburger__button_close {
+.hamburger__icon.hamburger__icon_active .hamburger__button_close {
   background: rgba(0, 0, 0, 0);
 }
 
-.hamburger__icon.hamburger__icon__active .hamburger__button_close:before {
+.hamburger__icon.hamburger__icon_active .hamburger__button_close:before {
   top: 0;
   transform: rotate(45deg);
 }
 
-.hamburger__icon.hamburger__icon__active .hamburger__button_close:after {
+.hamburger__icon.hamburger__icon_active .hamburger__button_close:after {
   top: 0;
   transform: rotate(135deg);
 }

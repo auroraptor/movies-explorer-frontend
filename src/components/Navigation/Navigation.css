@@ -2,7 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  position: absolute;
+  top: 74px;
+  right: -100%;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
   justify-content: space-between;
   text-decoration: none;
   font-family: "Inter";
@@ -13,13 +17,20 @@
   text-align: center;
 }
 
+.menu_active {
+  right: 0;
+  background-color: #202020;
+  z-index: 1;
+  max-width: 520px;
+}
+
 .menu__container {
-  margin-top: 144px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
   gap: 15px;
+  margin-top: 70px;
 }
 
 .menu__link {
@@ -40,10 +51,17 @@
   border-bottom: 2px solid white;
 }
 
+.active {
+  border-bottom: 2px solid white;
+}
+
 .menu__profile_container {
   margin: 46px auto;
   border: 2px solid rgba(170, 170, 170, .2);
   border-radius: 50px;
+}
+
+.menu__profile_active {
   display: flex;
   align-items: baseline;
   padding: 7px 12px;
@@ -58,4 +76,37 @@
 
 .menu__profile_type_text {
   margin: 0;
+}
+
+@media screen and (max-width: 960px) {
+  .navbar {
+    position: relative;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+
+  .nav-menu.active {
+    background: #1e3c72;
+    background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+}
+
+.menu__profile.active {
+  border: 2px solid rgb(170, 170, 170);
+  border-radius: 50px;
 }

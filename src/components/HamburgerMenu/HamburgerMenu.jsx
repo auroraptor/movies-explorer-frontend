@@ -1,22 +1,21 @@
-import { useState } from "react";
+import Navigation from "../Navigation/Navigation";
 import "./HamburgerMenu.css";
 
-function HamburgerMenu() {
-  const [click, setClick] = useState(false);
-  const handleClick = () => {
-    setClick(!click);
-  };
+function HamburgerMenu({ click, handleMenu }) {
   return (
+    <div>
     <div
       className={
-        click ? "hamburger__icon hamburger__icon__active" : "hamburger__icon"
+        click ? "hamburger__icon hamburger__icon_active" : "hamburger__icon"
       }
-      onClick={handleClick}
+      onClick={handleMenu}
     >
       <div
         className="hamburger__button hamburger__button_close"
         aria-label="Показать меню"
       />
+    </div>
+    <Navigation className={click ? "menu menu_active" : "menu"}/>
     </div>
   );
 }

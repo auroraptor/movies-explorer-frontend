@@ -10,11 +10,11 @@ import Footer from "../Footer/Footer";
 import "./Movies.css";
 import Header from "../Header/Header";
 
-function Movies() {
+function Movies({isClickMenu, handleMenu}) {
   return (
     <div className="movies">
-      <Header className={"header"}>
-        <HamburgerMenu></HamburgerMenu>
+      <Header className={"header"} click={isClickMenu}>
+        <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
       </Header>
       <SearchForm></SearchForm>
       <Preloader></Preloader>

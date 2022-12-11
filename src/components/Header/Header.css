@@ -12,3 +12,11 @@
   .header_place_main {
     background-color: #073042;
   }
+
+  .header__container {
+    display: flex;
+    min-height: 74px;
+    justify-content: space-between;
+    padding-left: 14px;
+    padding-right: 14px;
+  }

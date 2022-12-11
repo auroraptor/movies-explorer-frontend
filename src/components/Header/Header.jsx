@@ -1,10 +1,10 @@
 import Logo from "../Logo/Logo";
 import "./Header.css";
 
-function Header({children, className}) {
+function Header({children, className, click}) {
   return (
     <header className={className}>
-      <Logo></Logo>
+      <Logo/>
       {children}
     </header>
   );
