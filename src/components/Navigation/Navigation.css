@@ -1,4 +1,4 @@
-.navigation {
+.menu {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,20 +13,49 @@
   text-align: center;
 }
 
-.navigation__container {
-    margin-top: 144px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    gap: 24px;
+.menu__container {
+  margin-top: 144px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 15px;
 }
 
-.navigation__link {
+.menu__link {
   text-decoration: none;
   color: #ffffff;
+  padding-bottom: 7px;
 }
 
-.navigation__profile {
-    height: 78px;
+.menu__link_main {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  opacity: 0.1;
+}
+
+.menu__link_active {
+  border-bottom: 2px solid white;
+}
+
+.menu__profile_container {
+  margin: 46px auto;
+  border: 2px solid rgba(170, 170, 170, .2);
+  border-radius: 50px;
+  display: flex;
+  align-items: baseline;
+  padding: 7px 12px;
+}
+
+.menu__profile_type_icon {
+  background-image: url("../../images/icon-account.svg");
+  width: 12px;
+  height: 14px;
+  margin-right: 7px;
+}
+
+.menu__profile_type_text {
+  margin: 0;
 }
