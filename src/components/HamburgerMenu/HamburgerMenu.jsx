@@ -3,7 +3,7 @@ import "./HamburgerMenu.css";
 
 function HamburgerMenu({ click, handleMenu }) {
   return (
-    <div>
+    <div className="hamburger">
     <div
       className={
         click ? "hamburger__icon hamburger__icon_active" : "hamburger__icon"
@@ -15,7 +15,7 @@ function HamburgerMenu({ click, handleMenu }) {
         aria-label="Показать меню"
       />
     </div>
-    <Navigation className={click ? "menu menu_active" : "menu"}/>
+    <Navigation className={click ? "menu menu_active" : "menu"} handleMenu={handleMenu}/>
     </div>
   );
 }

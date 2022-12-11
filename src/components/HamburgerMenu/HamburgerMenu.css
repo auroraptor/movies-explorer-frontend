@@ -1,9 +1,9 @@
 .hamburger {
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  position: absolute;
-  right: 14px;
+  /* justify-content: end; */
+  /* position: absolute; */
+  /* right: 14px; */
 }
 
 .hamburger__icon {
