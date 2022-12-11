@@ -1,6 +1,9 @@
 .promo {
   margin: 0;
   background-color: #073042;
+  background-image: url(../../images/logo-praktikum.svg);
+  background-repeat: no-repeat;
+  background-position: left 50% top 44%;  
 }
 
 .promo__title {
