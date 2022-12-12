@@ -12,5 +12,5 @@
   max-width: 1140px;
   margin: 0 auto;
   min-height: 100vh;
-
+  overflow: hidden;
 }
