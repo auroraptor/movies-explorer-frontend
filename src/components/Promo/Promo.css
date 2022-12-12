@@ -1,9 +1,11 @@
 .promo {
   margin: 0;
+  width: 100%;
+  position: relative;
   background-color: #073042;
   background-image: url(../../images/logo-praktikum.svg);
   background-repeat: no-repeat;
-  background-position: left 50% top 44%;  
+  background-position: left 50% top 44%;
 }
 
 .promo__title {
@@ -15,4 +17,19 @@
   padding: 207px 10px 246px 10px;
   text-align: center;
   letter-spacing: -0.04em;
+}
+
+@media (min-width: 500px) {
+  .promo:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  .promo__title {
+    position: absolute;
+    top: 40%;
+    padding: 0;
+  }
+
 }
