@@ -4,7 +4,7 @@ import "./Header.css";
 function Header({children, className, click}) {
   return (
     <header className={className}>
-      <Logo/>
+      <Logo click={click}/>
       {children}
     </header>
   );
