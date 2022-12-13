@@ -24,6 +24,7 @@
   max-width: 520px;
   min-width: 320px;
   width: 100%;
+  height: calc(100vh - 70px);
   transition: all 0.5s ease-in-out;
 }
 
