@@ -19,7 +19,7 @@
   letter-spacing: -0.04em;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 520px) {
   .promo:before {
     content: "";
     display: block;
@@ -30,6 +30,15 @@
     position: absolute;
     top: 40%;
     padding: 0;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
   }
+}
 
+@media (min-width: 980px) {
+  .promo {
+    max-height: 524px;
+  }
 }
