@@ -41,4 +41,8 @@
   .promo {
     max-height: 524px;
   }
+
+  .promo__title {
+    margin: 0 20%;
+  }
 }
