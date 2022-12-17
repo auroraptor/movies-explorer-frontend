@@ -38,8 +38,8 @@
 }
 
 @media (min-width: 980px) {
-  .promo {
-    max-height: 524px;
+  .promo:before {
+    padding-top: 524px;
   }
 
   .promo__title {
