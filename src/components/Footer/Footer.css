@@ -4,8 +4,7 @@
   align-items: center;
   font-style: normal;
   margin: 0 auto;
-  max-width: 300px;
-  width: 100%;
+  padding: 0 10px 0 10px;
 }
 
 .footer__collab {

@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 14px;
 }
 
 .techs__title {
@@ -16,7 +16,6 @@
   line-height: 22px;
   letter-spacing: -0.04em;
   width: 100%;
-  max-width: 284px;
 }
 
 .techs__subtitle {
@@ -42,7 +41,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 50px 71px 70px;
+
+  /* padding: 28px item: 84px * 2 + gap: 10px */
+  margin: 50px calc((100vw - 28px - 178px) / 2) 70px;
   padding: 0;
 }
 
