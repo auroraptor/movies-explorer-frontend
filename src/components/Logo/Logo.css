@@ -4,9 +4,3 @@
   height: 38px;
   background-image: url("../../images/logo.svg");
 }
-
-@media (max-width: 520px) {
-  .logo_hidden {
-    visibility: hidden;
-  }
-}

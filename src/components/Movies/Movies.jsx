@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
@@ -11,6 +11,13 @@ import "./Movies.css";
 import Header from "../Header/Header";
 
 function Movies({isClickMenu, handleMenu}) {
+  const [like, setLike] = useState('♥︎');
+
+  const handleLike = () => {
+    alert(like);
+    setLike(like === '♥︎' ? "♡" : '♥︎');
+  }
+
   return (
     <div className="movies">
       <Header className={"header"} click={isClickMenu}>
@@ -22,13 +29,13 @@ function Movies({isClickMenu, handleMenu}) {
         <MoviesCard
           icon={"movies-card__button"}
           ariaLabel="Нравится"
-          onClick={() => console.log("click")}
+          onClick={handleLike}
           buttonName="like"
         ></MoviesCard>
         <MoviesCard
           icon={"movies-card__button movies-card__button_active"}
           ariaLabel="Не нравится"
-          onClick={() => console.log("click")}
+          onClick={handleLike}
           buttonName="like"
         ></MoviesCard>
         <p className="movies-card-list_empty movies-card-list_empty_hidden">

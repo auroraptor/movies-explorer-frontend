@@ -2,9 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  top: 74px;
-  right: -100%;
+  /* position: absolute; */
+  position: fixed;
+  padding-top: 74px;
+  margin: 0;
+  top: 0;
+  /* top: 74px; */
+  /* right: -100%; */
+
   opacity: 1;
   transition: all 0.5s ease-in-out;
   justify-content: space-between;
@@ -15,9 +20,11 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+  display: none;
 }
 
 .menu_active {
+  display: flex;
   right: 0;
   background-color: #202020;
   z-index: 1;
@@ -27,7 +34,6 @@
 
   /* .header { height: 74px }*/
   height: calc(100vh - 74px); 
-  transition: all 0.5s ease-in-out;
 }
 
 .menu__container {
