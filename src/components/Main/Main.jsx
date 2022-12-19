@@ -11,25 +11,33 @@ import "./Main.css";
 
 function Main() {
   return (
-    <div className="main">
+    <>
       <Header className={"header header_place_main"}>
-        <div className="header__navigation_page_main">
-          <Link to="/signup" className="header__button header__button_color_transparent">
+        <nav className="header__navigation_page_main">
+          <Link
+            to="/signup"
+            className="header__button header__button_color_transparent"
+          >
             Регистрация
           </Link>
-          <Link to="/signin" className="header__button header__button_color_green">
+          <Link
+            to="/signin"
+            className="header__button header__button_color_green"
+          >
             Войти
           </Link>
-        </div>
+        </nav>
       </Header>
-      <Promo></Promo>
-      <NavTab></NavTab>
-      <AboutProject></AboutProject>
-      <Techs></Techs>
-      <AboutMe></AboutMe>
-      <Portfolio></Portfolio>
+      <main className="main">
+        <Promo></Promo>
+        <NavTab></NavTab>
+        <AboutProject></AboutProject>
+        <Techs></Techs>
+        <AboutMe></AboutMe>
+        <Portfolio></Portfolio>
+      </main>
       <Footer></Footer>
-    </div>
+    </>
   );
 }
 

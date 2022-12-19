@@ -88,7 +88,7 @@
 
   .about-project__description {
     margin-top: 70px;
-    grid-template-columns: repeat(2, 319px);
+    grid-template-columns: repeat(auto-fill, minmax(284px, 319px));
     row-gap: 22px;
     column-gap: 30px;
   }
@@ -134,7 +134,7 @@
   }
 
   .about-project__description {
-    grid-template-columns: repeat(2, 550px);
+    grid-template-columns: repeat(2, minmax(319px, 550px));
     row-gap: 26px;
     column-gap: 40px;
   }

@@ -2,7 +2,7 @@ import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <article className="about-me" id="about-me">
+    <section className="about-me" id="about-me">
       <h4 className="about-me__title">Студент</h4>
       <div className="about-me__container">
         <img src={require('../../images/generated-image-phni7h.jpg')} alt="Фото студента" className="about-me__item about-me__photo"></img>
@@ -16,7 +16,7 @@ function AboutMe() {
         <a href="https://github.com/auroraptor" className="about-me__link">Github</a>
         </div>
       </div>
-    </article>
+    </section>
   );
 }
 

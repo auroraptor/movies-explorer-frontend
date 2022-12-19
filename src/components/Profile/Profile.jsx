@@ -7,32 +7,37 @@ function Profile({ isClickMenu, handleMenu, name = "useR", email = "love@eda.jp"
   const firstName = name[0].toUpperCase() + name.slice(1).toLowerCase();
 
   return (
-    <div className="profile">
+    <article className="profile">
       <Header className={"header"} click={isClickMenu}>
         <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
       </Header>
       <div className="profile__container">
+        <div className="profile__info">
+
+        
         <p className="profile__hello-name">{`Привет, ${firstName}!`}</p>
-        <div className="profile__user-info">
-          <div className="profile__user-info_name">
-            <p className="profile__user-info_text">Имя</p>
-            <p className="profile__user-info_text">{firstName}</p>
-          </div>
-          <div className="profile__user-info_email">
-            <p className="profile__user-info_text">E-mail</p>
-            <p className="profile__user-info_text">{email}</p>
-          </div>
+        <ul className="profile__user">
+          <li className="profile__user_name profile__list-item">
+            <p className="profile__user_text">Имя</p>
+            <p className="profile__user_text">{firstName}</p>
+          </li>
+          <li className="profile__user_email profile__list-item">
+            <p className="profile__user_text">E-mail</p>
+            <p className="profile__user_text">{email}</p>
+          </li>
+        </ul>
         </div>
-      </div>
-      <div className="profile_managment">
-        <button className="profile__button_edit" type="button">
+      <div className="profile__settings">
+        <button className="profile__button_edit" type="button" onClick={() => alert('not really button')}>
           Редактировать
         </button>
         <Link to="/signin" className="profile__logout">
           Выйти из аккаунта
         </Link>
       </div>
-    </div>
+      </div>
+
+    </article>
   );
 }
 

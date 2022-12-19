@@ -27,6 +27,12 @@
   align-items: center;
 }
 
+.footer__container_link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer__link {
   text-decoration: none;
   list-style: none;
@@ -56,8 +62,7 @@
 
 @media (min-width: 520px) {
   .footer {
-    /* max-width: 708px; */
-  margin: 0 30px;
+    margin: 0 30px;
 
   }
 
@@ -74,6 +79,12 @@
     justify-content: space-between;
   }
 
+  .footer__container_link {
+    flex-direction: row;
+    gap: 20px;
+    order: 1;
+  }
+
   .footer__link {
     font-size: 13px;
     line-height: 16px;
@@ -81,13 +92,12 @@
 
   .footer__link_practicum {
     margin-top: 0px;
-    order: 1;
-    /* margin-left: 478px; */
+    /* order: 1; */
   }
 
   .footer__link_github {
     margin-top: 0px;
-    order: 2;
+    /* order: 2; */
   }
   .footer__copyright {
     margin: 0;
@@ -101,9 +111,5 @@
 @media (min-width: 980px) {
   .footer {
     max-width: 1140px;
-  }
-
-  .footer__link_practicum {
-    /* margin-left: 910px; */
   }
 }
