@@ -1,4 +1,3 @@
-import Navigation from "../Navigation/Navigation";
 import "./HamburgerMenu.css";
 
 function HamburgerMenu({ click, handleMenu }) {
@@ -15,7 +14,6 @@ function HamburgerMenu({ click, handleMenu }) {
         aria-label="Показать меню"
       />
     </div>
-    <Navigation className={click ? "menu menu_active" : "menu"} handleMenu={handleMenu}/>
     </div>
   );
 }

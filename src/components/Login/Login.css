@@ -21,3 +21,28 @@
   line-height: 29px;
   color: #ffffff;
 }
+
+@media (min-width: 520px) {
+  .login {
+    width: 396px;
+    margin: 0 auto;
+    margin-top: 232px;
+  }
+
+  .login__header {
+    height: auto;
+    align-items: start;
+    justify-content: start;
+    margin-bottom: 40px;
+  }
+
+  .login__text {
+    margin: 0;
+  }
+}
+
+@media (min-width: 980px) {
+  .login {
+    margin-top: 70px;
+  }
+}

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
-import { NavLink } from "react-router-dom";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import "./Profile.css";
 
