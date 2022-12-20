@@ -2,6 +2,7 @@ import { useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import Navigation from "../Navigation/Navigation";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
@@ -22,6 +23,7 @@ function Movies({isClickMenu, handleMenu}) {
     <div className="movies">
       <Header className={"header"} click={isClickMenu}>
         <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
+        <Navigation className={`menu menu_desktop ${isClickMenu && "menu_active"}`} handleMenu={handleMenu}/>
       </Header>
       <SearchForm></SearchForm>
       <Preloader></Preloader>

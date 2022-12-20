@@ -1,6 +1,6 @@
 .header {
   position: relative;
-  min-height: 74px;
+  height: 74px;
   display: flex;
   flex-direction: row;
   align-items: center;

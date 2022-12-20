@@ -1,5 +1,6 @@
 import Header from "../Header/Header";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import Navigation from "../Navigation/Navigation";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
@@ -11,6 +12,7 @@ function SavedMovies({isClickMenu, handleMenu}) {
     <div className="saved-movies">
       <Header className={"header"} click={isClickMenu}>
         <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
+        <Navigation className={`menu menu_desktop ${isClickMenu && "menu_active"}`} handleMenu={handleMenu}/>
       </Header>
       <SearchForm></SearchForm>
       <MoviesCardList>

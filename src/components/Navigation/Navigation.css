@@ -2,14 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* position: absolute; */
   position: fixed;
   padding-top: 74px;
   margin: 0;
   top: 0;
-  /* top: 74px; */
-  /* right: -100%; */
-
   opacity: 1;
   transition: all 0.5s ease-in-out;
   justify-content: space-between;
@@ -33,7 +29,7 @@
   width: 100%;
 
   /* .header { height: 74px }*/
-  height: calc(100vh - 74px); 
+  height: calc(100vh - 74px);
 }
 
 .menu__container {
@@ -69,7 +65,7 @@
 
 .menu__profile_container {
   margin: 46px auto;
-  border: 2px solid rgba(170, 170, 170, .2);
+  border: 2px solid rgba(170, 170, 170, 0.2);
   border-radius: 50px;
 }
 
@@ -110,7 +106,12 @@
 
   .nav-menu.active {
     background: #1e3c72;
-    background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+    background-image: linear-gradient(
+      to top,
+      #1e3c72 0%,
+      #1e3c72 1%,
+      #2a5298 100%
+    );
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -121,4 +122,75 @@
 .menu__profile.active {
   border: 2px solid rgb(170, 170, 170);
   border-radius: 50px;
+}
+
+@media (min-width: 980px) {
+  .menu {
+    display: none;
+    position: inherit;
+  }
+
+  .menu_active {
+    width: auto;
+  }
+
+  .menu_desktop {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: baseline;
+    gap: 50px;
+    padding: 0;
+  }
+
+  .menu__container {
+    margin: 0;
+    flex-direction: row;
+    gap: 20px;
+    margin: 28px 0;
+    flex: none;
+  }
+
+  .menu__link {
+    text-decoration: none;
+    color: #ffffff;
+    padding-bottom: 7px;
+  }
+
+  .menu__profile_container {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  }
+
+  .menu__profile {
+    border: 2px solid rgb(170, 170, 170, 0.2);
+    border-radius: 50px;
+  }
+
+  .menu__link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .menu__link_weight_medium {
+    font-weight: 500;
+  }
+
+  .menu__link_main {
+    display: none;
+  }
+
+  .menu__profile_type_text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .active {
+    border-bottom: none;
+  }
 }

@@ -1,9 +1,6 @@
 .hamburger {
   display: flex;
   flex-direction: column;
-  /* justify-content: end; */
-  /* position: absolute; */
-  /* right: 14px; */
 }
 
 .hamburger__icon {
@@ -60,3 +57,11 @@
   top: 0;
   transform: rotate(135deg);
 }
+
+@media (min-width: 980px) {
+  .hamburger_hidden {
+    display: none;
+  }
+}
+
+

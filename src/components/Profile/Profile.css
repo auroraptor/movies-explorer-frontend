@@ -88,6 +88,16 @@
   flex-direction: column;
 }
 
-@media (min-width: 520px) {
+.profile__nav_desktop {
+  display: none;
+}
 
+@media (min-width: 520px) {
+  .profile__container {
+    justify-content: space-around;
+  }
+
+  .profile__logout {
+    margin-bottom: 0;
+  }
 }
