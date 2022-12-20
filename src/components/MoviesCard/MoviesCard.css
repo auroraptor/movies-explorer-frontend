@@ -55,10 +55,56 @@
   background-position: center center;
 }
 
+.movies-card__button_remove:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transform: rotate(90deg);
+  transition: all 0.5s ease-in-out;
+}
+
 .movies-card__duration {
   margin: 14px 0 14px 14px;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #8b8b8b;
+}
+
+@media (min-width: 520px) {
+  .movies-card {
+    width: 339px;
+  }
+
+  .movies-card__thumbnail {
+    height: 190px;
+  }
+
+  .movies-card__name {
+    font-size: 13px;
+    line-height: 14px;
+  }
+
+  .movies-card__duration {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .movies-card__button_remove {
+    visibility: hidden;
+  }
+
+  .movies-card:hover .movies-card__button_remove {
+    visibility: visible;
+  }
+
+}
+
+@media (min-width: 980px) {
+  .movies-card {
+    width: 364px;
+  }
+
+  .movies-card__thumbnail {
+    height: 203px;
+  }
 }

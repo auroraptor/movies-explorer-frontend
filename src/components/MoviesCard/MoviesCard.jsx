@@ -4,7 +4,7 @@ function MoviesCard(props) {
   const {icon, ariaLabel, onClick, buttonName} = props;
 
   return (
-    <div className="movies-card">
+    <li className="movies-card">
       <img
         src={require('../../images/thumbnail.jpg')}
         alt="Миниатюрное изображение постера к фильму"
@@ -15,8 +15,8 @@ function MoviesCard(props) {
         <button type="button" name={buttonName} className={icon} aria-label={ariaLabel} onClick={onClick}></button>
       </div>
 
-      <p className="movies-card__duration">111</p>
-    </div>
+      <p className="movies-card__duration">1ч 11м</p>
+    </li>
   );
 }
 

@@ -19,6 +19,14 @@ function Movies({isClickMenu, handleMenu}) {
     setLike(like === '♥︎' ? "♡" : '♥︎');
   }
 
+  const items = [...Array(12)].map((item, index) => (<MoviesCard
+    key={index}
+    icon={`movies-card__button ${index % 3 === 0 && "movies-card__button_active"}`}
+    ariaLabel="Нравится"
+    onClick={handleLike}
+    buttonName="like"
+  ></MoviesCard>))
+
   return (
     <div className="movies">
       <Header className={"header"} click={isClickMenu}>
@@ -28,18 +36,7 @@ function Movies({isClickMenu, handleMenu}) {
       <SearchForm></SearchForm>
       <Preloader></Preloader>
       <MoviesCardList>
-        <MoviesCard
-          icon={"movies-card__button"}
-          ariaLabel="Нравится"
-          onClick={handleLike}
-          buttonName="like"
-        ></MoviesCard>
-        <MoviesCard
-          icon={"movies-card__button movies-card__button_active"}
-          ariaLabel="Не нравится"
-          onClick={handleLike}
-          buttonName="like"
-        ></MoviesCard>
+        {items}
         <p className="movies-card-list_empty movies-card-list_empty_hidden">
           Без результатов поиска
         </p>

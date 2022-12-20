@@ -5,9 +5,19 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import SearchForm from "../SearchForm/SearchForm";
+import Footer from "../Footer/Footer";
 import "./SavedMovies.css";
 
 function SavedMovies({isClickMenu, handleMenu}) {
+
+  const items = [...Array(8)].map((item, index) => (<MoviesCard
+    key={index}
+    icon={"movies-card__button movies-card__button_remove"}
+    ariaLabel="Удалить"
+    onClick={() => console.log("remove")}
+    buttonName="remove"
+  ></MoviesCard>))
+
   return (
     <div className="saved-movies">
       <Header className={"header"} click={isClickMenu}>
@@ -16,20 +26,10 @@ function SavedMovies({isClickMenu, handleMenu}) {
       </Header>
       <SearchForm></SearchForm>
       <MoviesCardList>
-        <MoviesCard
-          icon={"movies-card__button movies-card__button_remove"}
-          ariaLabel="Удалить"
-          onClick={() => console.log("remove")}
-          buttonName="remove"
-        ></MoviesCard>
-        <MoviesCard
-          icon={"movies-card__button movies-card__button_remove"}
-          ariaLabel="Удалить"
-          onClick={() => console.log("remove")}
-          buttonName="remove"
-        ></MoviesCard>
+        {items}
       </MoviesCardList>
       <MoviesLoadMore></MoviesLoadMore>
+      <Footer></Footer>
     </div>
   );
 }

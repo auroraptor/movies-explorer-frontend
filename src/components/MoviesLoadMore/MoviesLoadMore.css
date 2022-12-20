@@ -15,3 +15,7 @@
   line-height: 15px;
   color: #ffffff;
 }
+
+.movies-load-more__button_hidden {
+  visibility: hidden;
+}

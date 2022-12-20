@@ -21,7 +21,7 @@
   width: 22px;
   height: 2.5px;
   background: #fff;
-  position: fixed;
+  position: absolute;
   top: 39px;
   transition: 0.5s;
 }

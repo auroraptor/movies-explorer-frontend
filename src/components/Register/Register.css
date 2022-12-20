@@ -81,3 +81,30 @@
   opacity: 0.8;
   transition: 0.2s all ease-in-out;
 }
+
+@media (min-width: 520px) {
+  .register {
+    width: 396px;
+    margin: 0 auto;
+    margin-top: 232px;
+  }
+
+  .register__header {
+    align-items: start;
+    justify-content: start;
+    justify-content: start;
+    margin-bottom: 40px;
+    height: auto;
+  }
+
+  .register__text {
+    margin: 0;
+  }
+
+}
+
+@media (min-width: 980px) {
+  .register {
+    margin-top: 70px;
+  }
+}
