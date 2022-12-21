@@ -5,7 +5,7 @@ import "./Login.css";
 
 function Login() {
   return (
-    <div className="login">
+    <article className="login">
       <Header className={"login__header"}>
         <p className="login__text">Рады видеть!</p>
       </Header>
@@ -28,7 +28,7 @@ function Login() {
           errorText={"This is help text"}
         ></Input>
       </Form>
-    </div>
+    </article>
   );
 }
 

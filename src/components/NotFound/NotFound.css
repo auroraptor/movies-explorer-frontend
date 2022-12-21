@@ -9,10 +9,10 @@
   color: #ffffff;
 }
 .not-found-page__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
 }
 .not-found-page__text {
   margin: 0;
@@ -37,4 +37,50 @@
   line-height: 15px;
   color: #4285f4;
   margin-bottom: 30px;
+}
+
+@media (min-width: 520px) {
+  .not-found-page {
+    margin-top: 25%;
+    height: auto;
+  }
+
+  .not-found-page__container {
+    align-items: center;
+    justify-content: center;
+    flex: 0;
+  }
+
+  .not-found-page__text {
+    margin: 0;
+    font-size: 140px;
+    line-height: 169px;
+  }
+
+  .not-found-page__message {
+    flex: 0;
+  }
+
+  .not-found-page__link {
+    margin-top: 184px;
+  }
+}
+
+@media (min-width: 980px) {
+  .not-found-page {
+    justify-content: start;
+    margin-top: 0;
+    justify-content: center;
+    gap: 184px;
+
+  }
+
+  .not-found-page__container {
+    margin-top: 246px;
+  }
+
+  .not-found-page__link {
+    margin-top: 0;
+    margin-bottom: 60px;
+  }
 }

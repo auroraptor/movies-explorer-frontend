@@ -3,7 +3,7 @@ import "./NotFound.css";
 
 function NotFound() {
   return (
-    <div className="not-found-page">
+    <article className="not-found-page">
       <div className="not-found-page__container">
         {" "}
         <p className="not-found-page__text">404</p>
@@ -13,7 +13,7 @@ function NotFound() {
       <Link className="not-found-page__link" to="/">
         Назад
       </Link>
-    </div>
+    </article>
   );
 }
 

@@ -5,7 +5,7 @@ import "./Register.css";
 
 function Register() {
   return (
-    <div className="register">
+    <article className="register">
       <Header className={"register__header"}>
         <p className="register__text">Добро пожаловать!</p>
       </Header>
@@ -30,7 +30,7 @@ function Register() {
           isVisible={true}
         ></Input>
       </Form>
-    </div>
+    </article>
   );
 }
 
