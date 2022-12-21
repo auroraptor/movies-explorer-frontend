@@ -31,6 +31,7 @@ function Movies({isClickMenu, handleMenu}) {
     <div className="movies">
       <Header className={"header"} click={isClickMenu}>
         <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
+        {isClickMenu && <div className="background"></div>}
         <Navigation className={`menu menu_desktop ${isClickMenu && "menu_active"}`} handleMenu={handleMenu}/>
       </Header>
       <SearchForm></SearchForm>
