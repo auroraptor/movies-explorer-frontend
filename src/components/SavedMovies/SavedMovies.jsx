@@ -19,7 +19,7 @@ function SavedMovies({isClickMenu, handleMenu}) {
   ></MoviesCard>))
 
   return (
-    <div className="saved-movies">
+    <section className="saved-movies">
       <Header className={"header"} click={isClickMenu}>
         <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
         {isClickMenu && <div className="background"></div>}
@@ -31,7 +31,7 @@ function SavedMovies({isClickMenu, handleMenu}) {
       </MoviesCardList>
       <MoviesLoadMore></MoviesLoadMore>
       <Footer></Footer>
-    </div>
+    </section>
   );
 }
 
