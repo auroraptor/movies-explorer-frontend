@@ -25,19 +25,19 @@ function Profile({
         <div className="profile__info">
           <p className="profile__hello-name">{`Привет, ${firstName}!`}</p>
           <ul className="profile__user">
-            <li className="profile__user_name profile__list-item">
-              <p className="profile__user_text">Имя</p>
-              <p className="profile__user_text">{firstName}</p>
+            <li className="profile__list-item_name profile__list-item">
+              <p className="profile__text">Имя</p>
+              <p className="profile__text">{firstName}</p>
             </li>
-            <li className="profile__user_email profile__list-item">
-              <p className="profile__user_text">E-mail</p>
-              <p className="profile__user_text">{email}</p>
+            <li className="profile__list-item_email profile__list-item">
+              <p className="profile__text">E-mail</p>
+              <p className="profile__text">{email}</p>
             </li>
           </ul>
         </div>
         <div className="profile__settings">
           <button
-            className="profile__button_edit"
+            className="profile__button profile__button_edit"
             type="button"
             onClick={() => alert("not really button")}
           >

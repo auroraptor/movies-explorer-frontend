@@ -69,11 +69,19 @@
     .form__container {
       margin-bottom: 0;
     }
+
+    .form__button {
+      margin-top: 69px;
+    }
   }
 
   @media (min-width: 980px) {
     .form {
       flex: 0.75;
+    }
+    
+    .form__button {
+      margin-top: 0;
     }
   }
   

@@ -55,11 +55,11 @@
   transition: all 0.2s ease-in-out;
 }
 
-.portfolio__link_text {
+.link_text {
   margin: 0;
 }
 
-.portfolio__link_icon {
+.link_icon {
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -72,7 +72,7 @@
   margin: 10px;
 }
 
-.portfolio__link_icon:before {
+.link_icon:before {
   content: "";
   box-sizing: border-box;
   right: 0;
@@ -100,17 +100,17 @@
     margin: 50px 0 90px;
   }
 
-  .portfolio__link_text {
+  .link_text {
     font-size: 28px;
     line-height: 50px;
   }
 
-  .portfolio__link_icon {
+  .link_icon {
     width: 15px;
     height: 15px;
   }
 
-  .portfolio__link_icon:before {
+  .link_icon:before {
     width: 20px;
   }
 }
@@ -125,7 +125,7 @@
     margin-bottom: 125px;
   }
 
-  .portfolio__link_text {
+  .link_text {
     font-size: 30px;
   }
 }

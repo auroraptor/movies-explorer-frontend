@@ -13,7 +13,7 @@ function Main() {
   return (
     <>
       <Header className={"header header_place_main"}>
-        <nav className="header__navigation_page_main">
+        <nav className="header__navigation header__navigation_place_main">
           <Link
             to="/signup"
             className="header__button header__button_color_transparent"

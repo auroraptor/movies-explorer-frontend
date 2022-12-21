@@ -20,26 +20,27 @@
   row-gap: 16px;
 }
 
-.about-project__description_type_key {
+.about-project__text {
   margin: 0;
   font-weight: 400;
+}
+
+.about-project__text_type_key {
   font-size: 18px;
   line-height: 22px;
   letter-spacing: -0.04em;
 }
 
-.about-project__description_type_value {
-  margin: 0;
-  font-weight: 400;
+.about-project__text_type_value {
   font-size: 11px;
   line-height: 16px;
 }
 
-.about-project__description_margin-top {
+.about-project__text_margin-top {
   margin-top: 40px;
 }
 
-.about-project__progress-bar {
+.about-project__progress {
   margin: 60px 0 70px 0;
   display: grid;
   grid-template-columns: minmax(100px, 228px) minmax(184px, 912px);
@@ -65,11 +66,11 @@
   color: #a0a0a0;
 }
 
-.about-project__progress-bar_timestamps {
+.about-project__timestamps_week {
   margin: 11px 10px;
 }
 
-.about-project__progress-bar_help-text {
+.about-project__timestamps_help-text {
   margin: 14px 0 0 0;
 }
 
@@ -93,31 +94,29 @@
     column-gap: 30px;
   }
 
-  .about-project__description_type_key {
-    font-weight: 400;
+  .about-project__text_type_key {
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.04em;
   }
-  .about-project__description_type_value {
-    font-weight: 400;
+  .about-project__text_type_value {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .about-project__description_margin-top {
+  .about-project__text_margin-top {
     margin-top: 0;
   }
 
-  .about-project__description_order_first {
+  .about-project__text_order_first {
     order: 1;
   }
 
-  .about-project__description_order_second {
+  .about-project__text_order_second {
     order: 2;
   }
 
-  .about-project__progress-bar {
+  .about-project__progress {
     margin: 93px 0 90px 0;
     font-size: 14px;
     line-height: 17px;
@@ -139,16 +138,16 @@
     column-gap: 40px;
   }
 
-  .about-project__description_type_key {
+  .about-project__text_type_key {
     max-width: 550px;
   }
 
-  .about-project__description_type_value {
+  .about-project__text_type_value {
     max-width: 550px;
     padding-right: 11%;
   }
 
-  .about-project__progress-bar {
+  .about-project__progress {
     margin: 110px 0 110px 0;
   }
 

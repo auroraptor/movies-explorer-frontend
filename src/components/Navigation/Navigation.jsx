@@ -17,10 +17,10 @@ function Navigation({className, handleMenu}) {
       </div>
 
       
-       <div className="menu__profile_container">
-       <NavLink to="/profile" className="menu__link menu__link_profile menu__profile menu__profile_active" onClick={handleMenu}>
-        <div className="menu__profile_type_icon"></div>
-        <p className="menu__profile_type_text">Аккаунт</p>
+       <div className="menu__profile menu__profile_container">
+       <NavLink to="/profile" className="menu__link menu__link_profile menu__navlink menu__navlink_active menu__navlink_border" onClick={handleMenu}>
+        <div className="menu__profile-link menu__profile-link_type_icon"></div>
+        <p className="menu__profile-link menu__profile-link_type_text">Аккаунт</p>
       </NavLink>
       </div>
 

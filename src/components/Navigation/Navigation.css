@@ -69,20 +69,20 @@
   border-radius: 50px;
 }
 
-.menu__profile_active {
+.menu__navlink_active {
   display: flex;
   align-items: baseline;
   padding: 7px 12px;
 }
 
-.menu__profile_type_icon {
+.menu__profile-link_type_icon {
   background-image: url("../../images/icon-account.svg");
   width: 12px;
   height: 14px;
   margin-right: 7px;
 }
 
-.menu__profile_type_text {
+.menu__profile-link_type_text {
   margin: 0;
 }
 
@@ -119,7 +119,7 @@
   }
 }
 
-.menu__profile.active {
+.menu__navlink.active {
   border: 2px solid rgb(170, 170, 170);
   border-radius: 50px;
 }
@@ -165,7 +165,7 @@
     border: none;
   }
 
-  .menu__profile {
+  .menu__navlink_border {
     border: 2px solid rgb(170, 170, 170, 0.2);
     border-radius: 50px;
   }
@@ -184,7 +184,7 @@
     display: none;
   }
 
-  .menu__profile_type_text {
+  .menu__profile-link_type_text {
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;

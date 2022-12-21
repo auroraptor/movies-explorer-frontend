@@ -14,8 +14,11 @@
   background-color: #073042;
 }
 
-.header__navigation_page_main {
+.header__navigation {
   display: flex;
+}
+
+.header__navigation_place_main {
   gap: 14px;
   text-decoration: none;
 }

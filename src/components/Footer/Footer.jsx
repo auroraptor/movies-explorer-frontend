@@ -7,7 +7,7 @@ function Footer() {
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h6>
       <div className="footer__container">
-        <div className="footer__container_link">
+        <div className="footer__list">
           <a
             href="https://practicum.yandex.ru/"
             className="footer__link footer__link_practicum"

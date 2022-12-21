@@ -37,7 +37,7 @@ function Movies({isClickMenu, handleMenu}) {
       <Preloader></Preloader>
       <MoviesCardList>
         {items}
-        <p className="movies-card-list_empty movies-card-list_empty_hidden">
+        <p className="movies-card-list__container movies-card-list__container_empty movies-card-list__container_empty_hidden">
           Без результатов поиска
         </p>
       </MoviesCardList>

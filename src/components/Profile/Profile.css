@@ -49,16 +49,16 @@
   margin: 0;
 }
 
-.profile__user_name {
+.profile__list-item_name {
   border-bottom: 1px solid #424242;
   padding-bottom: 16px;
 }
 
-.profile__user_email {
+.profile__list-item_email {
   padding-top: 17px;
 }
 
-.profile__user_text {
+.profile__text {
   margin: 0;
 }
 
