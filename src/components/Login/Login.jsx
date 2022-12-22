@@ -5,7 +5,7 @@ import "./Login.css";
 
 function Login() {
   return (
-    <article className="login">
+    <div className="login">
       <Header className={"login__header"}>
         <p className="login__text">Рады видеть!</p>
       </Header>
@@ -30,7 +30,7 @@ function Login() {
           isRequired={true}
         ></Input>
       </Form>
-    </article>
+    </div>
   );
 }
 

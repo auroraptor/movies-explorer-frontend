@@ -5,7 +5,7 @@ import "./Register.css";
 
 function Register() {
   return (
-    <article className="register">
+    <div className="register">
       <Header className={"register__header"}>
         <p className="register__text">Добро пожаловать!</p>
       </Header>
@@ -37,7 +37,7 @@ function Register() {
           isRequired={true}
         ></Input>
       </Form>
-    </article>
+    </div>
   );
 }
 
