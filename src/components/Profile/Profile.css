@@ -71,6 +71,10 @@
   color: #ffffff;
 }
 
+.profile__button_edit:hover {
+  cursor: pointer;
+}
+
 .profile__logout {
   margin-top: 16px;
   margin-bottom: 40px;

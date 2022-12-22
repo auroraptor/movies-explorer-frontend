@@ -17,17 +17,24 @@ function Register() {
         link={"/signin"}
         linkText="Войти"
       >
-        <Input label="Имя" type="text" errorText={"This is help text"}></Input>
+        <Input
+          label="Имя"
+          type="text"
+          errorText={"This is help text"}
+          isRequired={true}
+        ></Input>
         <Input
           label="E-mail"
           type="email"
           errorText={"This is help text"}
+          isRequired={true}
         ></Input>
         <Input
           label="Пароль"
           type="password"
           errorText={"This is help text"}
           isVisible={true}
+          isRequired={true}
         ></Input>
       </Form>
     </article>

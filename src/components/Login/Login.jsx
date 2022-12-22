@@ -21,11 +21,13 @@ function Login() {
           label="E-mail"
           type="email"
           errorText={"This is help text"}
+          isRequired={true}
         ></Input>
         <Input
           label="Пароль"
           type="password"
           errorText={"This is help text"}
+          isRequired={true}
         ></Input>
       </Form>
     </article>
