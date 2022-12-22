@@ -11,7 +11,7 @@ function FilterCheckbox() {
         className="filter-checkbox__switch"
         aria-label="Показывать только"
       />
-      <div className="filter-checkbox__container"></div>Короткометражки</label>
+      <i className="filter-checkbox__container"></i>Короткометражки</label>
     </div>
   );
 }

@@ -11,7 +11,6 @@ function HamburgerMenu({ click, handleMenu }) {
     >
       <div
         className="hamburger__button hamburger__button_close"
-        aria-label="Показать меню"
       />
     </div>
     </div>
