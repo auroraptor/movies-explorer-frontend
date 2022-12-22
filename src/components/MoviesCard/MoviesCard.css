@@ -72,7 +72,7 @@
   }
 }
 
-.movies-card__button:hover {
+.movies-card__button_like:hover {
   cursor: pointer;
   animation: heartbeat 1s infinite;
 }

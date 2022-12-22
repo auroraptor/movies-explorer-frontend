@@ -22,7 +22,7 @@ function Movies({ isClickMenu, handleMenu }) {
   const items = [...Array(12)].map((item, index) => (
     <MoviesCard
       key={index}
-      icon={`movies-card__button ${
+      icon={`movies-card__button movies-card__button_like ${
         index % 3 === 0 && "movies-card__button_active"
       }`}
       ariaLabel="Нравится"
