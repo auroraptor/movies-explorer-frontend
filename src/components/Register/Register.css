@@ -8,7 +8,7 @@
 .register__header {
   height: 253px;
   gap: 50px;
-  font-family: "Inter";
+  font-family: "Inter", "Arial", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,7 +23,7 @@
 }
 
 .register__form {
-  font-family: "Inter";
+  font-family: "Inter", "Arial", sans-serif;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -41,7 +41,7 @@
 }
 
 .register__button {
-  font-family: "Inter";
+  font-family: "Inter", "Arial", sans-serif;
   width: 100%;
   height: 45px;
   background: #4285f4;

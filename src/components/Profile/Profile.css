@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100vh;
   justify-content: space-between;
-  font-family: "Inter";
+  font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
   color: #ffffff;
 }
