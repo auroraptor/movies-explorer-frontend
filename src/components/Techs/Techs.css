@@ -41,9 +41,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin: 50px auto 70px;
 
-  /* padding: 28px item: 84px * 2 + gap: 10px */
-  margin: 50px calc((100vw - 28px - 178px) / 2) 70px;
+  /* item: 84px * 2 + gap: 10px */
+  width: 178px;
   padding: 0;
 }
 
@@ -93,6 +94,7 @@
 
   .techs__list {
     margin: 83px auto 90px;
+    width: auto;
   }
 }
 
