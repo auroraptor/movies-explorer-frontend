@@ -16,6 +16,12 @@
   color: #ffffff;
 }
 
+.movies-load-more__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.5s ease-in-out;
+}
+
 .movies-load-more__button_hidden {
   visibility: hidden;
 }
