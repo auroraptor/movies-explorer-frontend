@@ -21,9 +21,10 @@
   font-size: 12px;
   line-height: 15px;
   color: #ffffff;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow-y: hidden;
 }
 
 .movies-card__container {

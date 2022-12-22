@@ -13,7 +13,7 @@ function AboutMe() {
           <p className="about-me__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis odio ut elit auctor pharetra sed vestibulum erat. Mauris hendrerit velit magna, eget molestie sem aliquam vitae. Vestibulum vitae quam in nunc maximus scelerisque. Sed auctor suscipit convallis. Phasellus id dui ante. Nullam malesuada felis ac sapien porta, nec placerat eros convallis. Proin eget enim dictum ante fringilla porttitor non eget ipsum.</p>
           
         </div>
-        <a href="https://github.com/auroraptor" className="about-me__link">Github</a>
+        <a target="_blank" href="https://github.com/auroraptor" className="about-me__link">Github</a>
         </div>
       </div>
     </section>

@@ -135,6 +135,10 @@
 }
 
 @media (min-width: 980px) {
+  .background {
+    display: none;
+  }
+  
   .menu {
     display: none;
     position: inherit;

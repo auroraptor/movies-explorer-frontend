@@ -29,7 +29,7 @@ function Movies({isClickMenu, handleMenu}) {
 
   return (
     <div className="movies">
-      <Header className={"header"} click={isClickMenu}>
+      <Header className={"header"}>
         <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
         {isClickMenu && <div className="background"></div>}
         <Navigation className={`menu menu_desktop ${isClickMenu && "menu_active"}`} handleMenu={handleMenu}/>
