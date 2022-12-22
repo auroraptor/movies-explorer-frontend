@@ -54,6 +54,10 @@
   border-radius: 48px;
 }
 
+.search-form__button {
+  cursor: pointer;
+}
+
 .search-form__icon {
   background-image: url("../../images/icon-search.svg");
   background-size: 22px;
