@@ -7,13 +7,30 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
-import "./App.css";
 import SearchForm from "../SearchForm/SearchForm";
+import Preloader from "../Preloader/Preloader";
+import getBeatfilmMovies from "../../utils/MoviesApi";
+import "./App.css";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleMenu = () => {
     setClickMenu(!isClickMenu);
+  };
+
+  const handleSearch = (event) => {
+    setIsLoading(true);
+    
+    getBeatfilmMovies()
+      .then((movies) => console.log(movies))
+      .catch((err) => {
+        console.log(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+        );
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -25,7 +42,8 @@ function App() {
             path="/movies"
             element={
               <Movies isClickMenu={isClickMenu} handleMenu={handleMenu}>
-                <SearchForm />
+                <SearchForm onSearch={handleSearch} />
+                {isLoading && <Preloader />}
               </Movies>
             }
           ></Route>
@@ -33,7 +51,8 @@ function App() {
             path="/saved-movies"
             element={
               <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu}>
-                <SearchForm />
+                <SearchForm onSearch={handleSearch} />
+                {isLoading && <Preloader />}
               </SavedMovies>
             }
           ></Route>

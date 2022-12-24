@@ -1,6 +1,4 @@
 import { useState } from "react";
-import SearchForm from "../SearchForm/SearchForm";
-import Preloader from "../Preloader/Preloader";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import Navigation from "../Navigation/Navigation";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -45,7 +43,6 @@ function Movies({ isClickMenu, handleMenu, children }) {
         />
       </Header>
       { children }
-      <Preloader></Preloader>
       <MoviesCardList>
         {items}
         <li>

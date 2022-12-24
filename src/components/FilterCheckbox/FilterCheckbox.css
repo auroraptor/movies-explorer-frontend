@@ -21,7 +21,7 @@
   display: block;
   width: 34px;
   height: 14px;
-  background-color: #3ddc84;
+  background-color: #424242;
   border-radius: 20px;
   position: relative;
   cursor: pointer;
@@ -37,7 +37,7 @@
   position: absolute;
   border-radius: 50%;
   top: 2px;
-  left: 22px;
+  right: 22px;
   transition: 0.5s;
 }
 
@@ -49,12 +49,12 @@
 }
 
 .filter-checkbox__switch:checked + .filter-checkbox__container:after {
-  left: calc(100% - 22px);
-  transform: translateX(-100%);
+  right: calc(100% - 22px);
+  transform: translateX(100%);
 }
 
 .filter-checkbox__switch:checked + .filter-checkbox__container {
-  background-color: #424242;
+  background-color: #3ddc84;
 }
 
 .filter-checkbox__container:active:after {
