@@ -1,7 +1,5 @@
 import getResponse from "./getResponse";
 const baseUrl = "https://hey.nomoredomains.club/api/";
-// const baseUrl = "http://localhost:3000/api/";
-
 
 const signupUser = async (name, email, password) => {
   const user = await fetch(`${baseUrl}signup`, {
@@ -14,7 +12,6 @@ const signupUser = async (name, email, password) => {
     body: JSON.stringify({ name, email, password }),
   });
 
-//   return  user.ok ? user.json() : Promise.reject(user.status);
   return getResponse(user);
 };
 
@@ -30,8 +27,6 @@ const signinUser = async (email, password) => {
   });
 
   return getResponse(user);
-// return  user.ok ? console.log(user) : Promise.reject(user.status);
-
 };
 
 const signoutUser = async () => {
@@ -40,7 +35,7 @@ const signoutUser = async () => {
     credentials: "include",
   });
 
-  return getResponse(clearCookie);
+  return clearCookie.ok ? Promise.resolve() : Promise.reject(clearCookie.status);
 };
 
 const getCurrentUser = async () => {
