@@ -1,0 +1,6 @@
+.logo {
+  display: flex;
+  width: 38px;
+  height: 38px;
+  background-image: url("../../images/logo.svg");
+}

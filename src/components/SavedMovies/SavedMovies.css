@@ -1,0 +1,5 @@
+.saved-movies {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}

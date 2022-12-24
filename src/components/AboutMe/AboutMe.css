@@ -1,0 +1,151 @@
+.about-me {
+  padding: 0 14px;
+  margin: 0 auto;
+}
+
+.about-me__title {
+  padding-top: 70px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.04em;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #dadada;
+}
+
+.about-me__container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 60px;
+  gap: 40px;
+}
+
+.about-me__photo {
+  width: 292px;
+  height: 352px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.about-me__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about-me__description {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-me__name {
+  margin: 0;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -0.04em;
+}
+
+.about-me__subtitle {
+  margin: 0;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.about-me__text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.about-me__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  margin-top: 40px;
+}
+
+@media (min-width: 520px) {
+  .about-me {
+    max-width: 668px;
+  }
+
+  .about-me__title {
+    font-size: 22px;
+    line-height: 27px;
+    padding-top: 90px;
+  }
+
+  .about-me__container {
+    flex-wrap: nowrap;
+    margin-top: 66px;
+    gap: 49px;
+  }
+
+  .about-me__photo {
+    order: 1;
+    width: 255px;
+    height: 307px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .about-me__description {
+    gap: 16px;
+  }
+
+  .about-me__text {
+    margin-top: 4px;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media (min-width: 980px) {
+  .about-me {
+    max-width: 1140px;
+  }
+
+  .about-me__title {
+    padding-top: 110px;
+  }
+
+  .about-me__container {
+    gap: 270px;
+  }
+
+  .about-me__photo {
+    width: 270px;
+    height: 327px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .about-me__description {
+    gap: 18px;
+  }
+
+  .about-me__text {
+    margin-top: 8px;
+  }
+}

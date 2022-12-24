@@ -1,0 +1,27 @@
+.movies-load-more {
+  margin: 50px auto 80px auto;
+  display: flex;
+}
+
+.movies-load-more__button {
+  min-width: 240px;
+  height: 36px;
+  background-color: transparent;
+  border: 1px solid rgba(66, 66, 66, 1);
+  border-radius: 6px;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+}
+
+.movies-load-more__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.5s ease-in-out;
+}
+
+.movies-load-more__button_hidden {
+  visibility: hidden;
+}
