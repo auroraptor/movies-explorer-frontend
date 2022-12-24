@@ -8,6 +8,7 @@ import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
 import "./App.css";
+import SearchForm from "../SearchForm/SearchForm";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
@@ -23,28 +24,23 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies
-                isClickMenu={isClickMenu}
-                handleMenu={handleMenu}
-              />
+              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu}>
+                <SearchForm />
+              </Movies>
             }
           ></Route>
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies
-                isClickMenu={isClickMenu}
-                handleMenu={handleMenu}
-              />
+              <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu}>
+                <SearchForm />
+              </SavedMovies>
             }
           ></Route>
           <Route
             path="/profile"
             element={
-              <Profile
-                isClickMenu={isClickMenu}
-                handleMenu={handleMenu}
-              />
+              <Profile isClickMenu={isClickMenu} handleMenu={handleMenu} />
             }
           ></Route>
           <Route path="/signin" element={<Login />}></Route>

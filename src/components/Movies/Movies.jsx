@@ -11,7 +11,7 @@ import Footer from "../Footer/Footer";
 import "./Movies.css";
 import Header from "../Header/Header";
 
-function Movies({ isClickMenu, handleMenu }) {
+function Movies({ isClickMenu, handleMenu, children }) {
   const [like, setLike] = useState("♥︎");
 
   const handleLike = () => {
@@ -44,7 +44,7 @@ function Movies({ isClickMenu, handleMenu }) {
           handleMenu={handleMenu}
         />
       </Header>
-      <SearchForm></SearchForm>
+      { children }
       <Preloader></Preloader>
       <MoviesCardList>
         {items}
