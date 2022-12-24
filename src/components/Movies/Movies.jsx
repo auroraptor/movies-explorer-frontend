@@ -9,7 +9,8 @@ import Footer from "../Footer/Footer";
 import "./Movies.css";
 import Header from "../Header/Header";
 
-function Movies({ isClickMenu, handleMenu, children }) {
+function Movies(props) {
+  const { isClickMenu, handleMenu, movies, children } = props;
   const [like, setLike] = useState("♥︎");
 
   const handleLike = () => {
@@ -17,15 +18,26 @@ function Movies({ isClickMenu, handleMenu, children }) {
     setLike(like === "♥︎" ? "♡" : "♥︎");
   };
 
-  const items = [...Array(12)].map((item, index) => (
+  const getFormatDuration = (minutes) => {
+    const hh = Math.floor(minutes / 60);
+    const mm = Math.floor(minutes % 60);
+
+    return `${hh > 0 ? (hh + 'ч ') : ''}${mm + 'м'}`
+  } 
+
+  console.log('MOVIES 13:', movies[13]?.image);
+
+  const cards = movies.map((item, index) => (
     <MoviesCard
       key={index}
-      icon={`movies-card__button movies-card__button_like ${
-        index % 3 === 0 && "movies-card__button_active"
-      }`}
+      icon={`movies-card__button movies-card__button_like`}
       ariaLabel="Нравится"
       onClick={handleLike}
       buttonName="like"
+      nameEN={item?.nameEN}
+      nameRU={item?.nameRU}
+      duration={getFormatDuration(item?.duration)}
+      thumbnail={`https://api.nomoreparties.co/${item?.image.url}`}
     ></MoviesCard>
   ));
 
@@ -44,7 +56,7 @@ function Movies({ isClickMenu, handleMenu, children }) {
       </Header>
       { children }
       <MoviesCardList>
-        {items}
+        {cards}
         <li>
           <p className="movies-card-list__container movies-card-list__container_empty movies-card-list__container_empty_hidden">
             Без результатов поиска

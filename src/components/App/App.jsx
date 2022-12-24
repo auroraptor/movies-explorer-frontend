@@ -15,6 +15,7 @@ import "./App.css";
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [movies, setMovies] = useState([]);
 
   const handleMenu = () => {
     setClickMenu(!isClickMenu);
@@ -24,7 +25,9 @@ function App() {
     setIsLoading(true);
     
     getBeatfilmMovies()
-      .then((movies) => console.log(movies))
+      .then((movies) => {
+        setMovies(movies);
+      })
       .catch((err) => {
         console.log(
           "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
@@ -41,7 +44,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu}>
+              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies}>
                 <SearchForm onSearch={handleSearch} />
                 {isLoading && <Preloader />}
               </Movies>

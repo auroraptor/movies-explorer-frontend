@@ -13,6 +13,7 @@
   height: 168px;
   border-radius: 6px 6px 0 0;
   color: #8b8b8b;
+  object-fit: contain;
 }
 
 .movies-card__name {
