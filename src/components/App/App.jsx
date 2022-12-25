@@ -9,13 +9,24 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
+import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import getBeatfilmMovies from "../../utils/MoviesApi";
 import "./App.css";
+import useWindowSize from "../../hooks/useWindowSize";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState([]);
+  const { width } = useWindowSize();
+  const visible =  width > 980 ? 12 : width > 520 ? 8 : 5;
+
+  const [movies, setMovies] = useState({
+    items: [],
+    visible: visible,
+    error: false
+  });
+
+  const loadMore = () => setMovies((prev) => ({ ...prev, visible: visible + visible }));
 
 
   const handleMenu = () => {
@@ -27,7 +38,7 @@ function App() {
     
     getBeatfilmMovies()
       .then((movies) => {
-        setMovies(movies);
+        setMovies((prev) => ({ ...prev, items: movies }));
       })
       .catch((err) => {
         console.log(
@@ -45,7 +56,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies}>
+              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore}>
                 <SearchForm onSearch={handleSearch} />
                 {isLoading && <Preloader />}
               </Movies>
@@ -54,9 +65,10 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu}>
+              <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu} loadMore={loadMore}>
                 <SearchForm onSearch={handleSearch}/>
                 {isLoading && <Preloader />}
+                {/* {movies?.visible < movies?.items.length && <MoviesLoadMore/>} */}
               </SavedMovies>
             }
           ></Route>

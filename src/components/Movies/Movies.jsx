@@ -18,14 +18,14 @@ function Movies(props) {
     setLike(like === "♥︎" ? "♡" : "♥︎");
   };
 
-  const getFormatDuration = (minutes) => {
+  const toLocaleDurationString = (minutes) => {
     const hh = Math.floor(minutes / 60);
     const mm = Math.floor(minutes % 60);
 
-    return `${hh > 0 ? (hh + 'ч ') : ''}${mm + 'м'}`
+    return `${hh > 0 ? (hh + 'ч ') : ''}${mm + 'м'}`;
   } 
 
-  const cards = movies.map((item, index) => (
+  const cards = movies?.items?.slice(0, movies?.visible).map((item, index) => (
     <MoviesCard
       key={index}
       icon={`movies-card__button movies-card__button_like`}
@@ -34,7 +34,7 @@ function Movies(props) {
       buttonName="like"
       nameEN={item?.nameEN}
       nameRU={item?.nameRU}
-      duration={getFormatDuration(item?.duration)}
+      duration={toLocaleDurationString(item?.duration)}
       thumbnail={`https://api.nomoreparties.co/${item?.image.url}`}
     ></MoviesCard>
   ));
@@ -61,7 +61,7 @@ function Movies(props) {
           </p>
         </li>
       </MoviesCardList>
-      <MoviesLoadMore></MoviesLoadMore>
+      {movies?.visible < movies?.items?.length && <MoviesLoadMore/>}
       <Footer></Footer>
     </div>
   );
