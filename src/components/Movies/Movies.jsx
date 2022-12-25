@@ -25,8 +25,6 @@ function Movies(props) {
     return `${hh > 0 ? (hh + 'ч ') : ''}${mm + 'м'}`
   } 
 
-  console.log('MOVIES 13:', movies[13]?.image);
-
   const cards = movies.map((item, index) => (
     <MoviesCard
       key={index}

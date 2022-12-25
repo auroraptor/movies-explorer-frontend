@@ -2,8 +2,9 @@ import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({ onSearch }) {
+function SearchForm({onSearch}) {
   const [formValues, setFormValues] = useState({ search: "", switch: false });
+  const [placeholder, setPlaceholder] = useState("Фильм");
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -15,13 +16,22 @@ function SearchForm({ onSearch }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (formValues.search === '') {
+      setPlaceholder('Нужно ввести ключевое слово');
+      return;
+    }
+
     onSearch(formValues);
+    setPlaceholder(formValues?.search || "Фильм");
+    setFormValues({ search: "", switch: false });
     clearForm(event);
   };
 
   const clearForm = (event) => {
-    Array.from(event.target).forEach((input) => input.type === 'checkbox' ? input.checked = false : input.value = "");
+    Array.from(event.target).forEach((input) => input.type === 'checkbox' ? input.checked : input.value = "");
   };
+
 
   return (
     <form
@@ -29,6 +39,8 @@ function SearchForm({ onSearch }) {
       id="search"
       className="search-form"
       onSubmit={handleSubmit}
+      noValidate
+      autoComplete="off"
     >
       <div className="search-form__container">
         <input
@@ -36,7 +48,7 @@ function SearchForm({ onSearch }) {
           className="search-form__input"
           id="site-search"
           name="search"
-          placeholder="Фильм"
+          placeholder={placeholder}
           required
           onChange={handleInputChange}
         ></input>

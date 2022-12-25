@@ -17,11 +17,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
 
+
   const handleMenu = () => {
     setClickMenu(!isClickMenu);
   };
 
-  const handleSearch = (event) => {
+  const handleSearch = (formValues) => {
     setIsLoading(true);
     
     getBeatfilmMovies()
@@ -54,7 +55,7 @@ function App() {
             path="/saved-movies"
             element={
               <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu}>
-                <SearchForm onSearch={handleSearch} />
+                <SearchForm onSearch={handleSearch}/>
                 {isLoading && <Preloader />}
               </SavedMovies>
             }
