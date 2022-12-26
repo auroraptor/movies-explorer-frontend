@@ -10,7 +10,7 @@ import "./Movies.css";
 import Header from "../Header/Header";
 
 function Movies(props) {
-  const { isClickMenu, handleMenu, movies, children } = props;
+  const { isClickMenu, handleMenu, movies, loadMore, children } = props;
   const [like, setLike] = useState("♥︎");
 
   const handleLike = () => {
@@ -61,7 +61,7 @@ function Movies(props) {
           </p>
         </li>
       </MoviesCardList>
-      {movies?.visible < movies?.items?.length && <MoviesLoadMore/>}
+      {movies?.visible < movies?.items?.length && <MoviesLoadMore loadMore={loadMore}/>}
       <Footer></Footer>
     </div>
   );
