@@ -7,6 +7,7 @@
   margin: 40px 10px 26px 10px;
   padding: 0;
   gap: 14px;
+  flex: 1;
 }
 
 .movies-card-list_container {
@@ -16,6 +17,8 @@
 }
 
 .movies-card-list__container_empty {
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
   font-size: 12px;
   line-height: 15px;
   text-align: center;

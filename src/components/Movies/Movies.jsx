@@ -56,7 +56,7 @@ function Movies(props) {
       <MoviesCardList>
         {cards}
         <li>
-          <p className="movies-card-list__container movies-card-list__container_empty movies-card-list__container_empty_hidden">
+          <p className={`movies-card-list__container movies-card-list__container_empty ${cards.length > 0 && 'movies-card-list__container_empty_hidden'}`}>
             Без результатов поиска
           </p>
         </li>
