@@ -7,8 +7,8 @@ function FilterCheckbox({ handleChange }) {
         <label className="filter-checkbox__label">
       <input
         type="checkbox"
-        name="switch"
-        id="switch"
+        name="shortFilm"
+        id="shortFilm"
         className="filter-checkbox__switch"
         aria-label="Показывать только"
         onChange={handleChange}

@@ -3,7 +3,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
 function SearchForm({onSearch}) {
-  const [formValues, setFormValues] = useState({ search: "", switch: false });
+  const [formValues, setFormValues] = useState({ search: "", shortFilm: false });
   const [placeholder, setPlaceholder] = useState("Фильм");
 
   const handleInputChange = (event) => {
@@ -24,7 +24,7 @@ function SearchForm({onSearch}) {
 
     onSearch(formValues);
     setPlaceholder(formValues?.search || "Фильм");
-    setFormValues({ search: "", switch: false });
+    setFormValues({ search: "", shortFilm: false });
     clearForm(event);
   };
 

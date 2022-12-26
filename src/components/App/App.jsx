@@ -16,15 +16,15 @@ import useWindowSize from "../../hooks/useWindowSize";
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [movies, setMovies] = useState({
+    items: [],
+    visible: 0,
+    error: false
+  });
+
   const windowSize = useWindowSize();
   const { width } = windowSize;
   const visible = width > 980 ? 12 : width > 520 ? 8 : 5;
-
-  const [movies, setMovies] = useState({
-    items: [],
-    visible: visible,
-    error: false
-  });
 
   const loadMore = () => {
     setMovies((prev) => ({ ...prev, visible: prev.visible + visible }))
@@ -34,10 +34,23 @@ function App() {
     setClickMenu(!isClickMenu);
   };
 
+  const matched = (str, match) => str.toLowerCase().includes(match.toLowerCase());
+
   const handleSearch = (formValues) => {
     setIsLoading(true);
+
+    const { search, shortFilm } = formValues;
     
     getBeatfilmMovies()
+      .then((res) => {
+        if (shortFilm) {
+          res = res.filter(({ duration }) => duration <= 40);
+        }
+
+        return res.filter(({ nameEN, nameRU }) => 
+          matched(nameRU, search) || matched(nameEN, search)
+        );
+      })
       .then((movies) => {
         setMovies((prev) => ({ ...prev, items: movies, visible: visible }));
       })
