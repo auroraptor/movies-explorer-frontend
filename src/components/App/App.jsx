@@ -24,6 +24,7 @@ function App() {
   });
   const [cardListHelpText, setCardListHelpText] = useState('Введите ключевое слово');
   const [placeholder, setPlaceholder] = useState('Фильм');
+  const [isCheked, setChecked] = useState(false);
 
   const windowSize = useWindowSize();
   const { width } = windowSize;
@@ -34,8 +35,10 @@ function App() {
     if (localStorage.getItem('movies')) {
       setMovies((prev) => ({ ...prev, items: JSON.parse(localStorage.getItem('movies')), visible: visible}));
       setPlaceholder(localStorage.getItem('search'));
+      setChecked(localStorage.getItem('checked'));
     }
   }, [visible]);
+
 
   const loadMore = () => {
     setMovies((prev) => ({ ...prev, visible: prev.visible + loadCount }))
@@ -88,7 +91,7 @@ function App() {
             path="/movies"
             element={
               <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore} cardListHelpText={cardListHelpText}>
-                <SearchForm onSearch={handleSearch} placeholderText={placeholder}/>
+                <SearchForm onSearch={handleSearch} placeholderText={placeholder} isChecked={isCheked}/>
                 {isLoading && <Preloader />}
               </Movies>
             }
