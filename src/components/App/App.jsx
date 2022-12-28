@@ -21,6 +21,7 @@ function App() {
     visible: 0,
     error: false
   });
+  const [cardListHelpText, setCardListHelpText] = useState('Введите ключевое слово');
 
   const windowSize = useWindowSize();
   const { width } = windowSize;
@@ -37,6 +38,7 @@ function App() {
   const matched = (str, match) => str.toLowerCase().includes(match.toLowerCase());
 
   const handleSearch = (formValues) => {
+    setCardListHelpText('');
     setIsLoading(true);
 
     const { search, shortFilm } = formValues;
@@ -57,6 +59,8 @@ function App() {
         localStorage.setItem('search', search);
         localStorage.setItem('movies', JSON.stringify(movies));
 
+        setCardListHelpText(movies.length > 0 ? 'Введите ключевое слово' : 'Ничего не найдено');
+
         return movies;
       })
       .catch((err) => {
@@ -75,7 +79,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore}>
+              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore} cardListHelpText={cardListHelpText}>
                 <SearchForm onSearch={handleSearch} />
                 {isLoading && <Preloader />}
               </Movies>

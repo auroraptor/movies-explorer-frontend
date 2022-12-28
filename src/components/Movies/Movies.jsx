@@ -10,7 +10,7 @@ import "./Movies.css";
 import Header from "../Header/Header";
 
 function Movies(props) {
-  const { isClickMenu, handleMenu, movies, loadMore, children } = props;
+  const { isClickMenu, handleMenu, movies, loadMore, children, cardListHelpText } = props;
   const [like, setLike] = useState("♥︎");
 
   const handleLike = () => {
@@ -53,13 +53,8 @@ function Movies(props) {
         />
       </Header>
       { children }
-      <MoviesCardList>
+      <MoviesCardList cardListHelpText={cardListHelpText}>
         {cards}
-        <li>
-          <p className={`movies-card-list__container movies-card-list__container_empty ${cards.length > 0 && 'movies-card-list__container_empty_hidden'}`}>
-            Без результатов поиска
-          </p>
-        </li>
       </MoviesCardList>
       {movies?.visible < movies?.items?.length && <MoviesLoadMore loadMore={loadMore}/>}
       <Footer></Footer>
