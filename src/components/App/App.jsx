@@ -26,9 +26,10 @@ function App() {
   const windowSize = useWindowSize();
   const { width } = windowSize;
   const visible = width > 980 ? 12 : width > 520 ? 8 : 5;
+  const loadCount = width > 980 ? 3 : 2;
 
   const loadMore = () => {
-    setMovies((prev) => ({ ...prev, visible: prev.visible + visible }))
+    setMovies((prev) => ({ ...prev, visible: prev.visible + loadCount }))
   };
 
   const handleMenu = () => {
