@@ -1,10 +1,17 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({onSearch}) {
-  const [formValues, setFormValues] = useState({ search: "", shortFilm: false });
-  const [placeholder, setPlaceholder] = useState("Фильм");
+function SearchForm({onSearch, placeholderText}) {
+  const [formValues, setFormValues] = useState({ search: "", checked: false });
+  const [placeholder, setPlaceholder] = useState(placeholderText);
+
+
+  useEffect(() => {
+    setPlaceholder(placeholderText);
+  }, [placeholderText])
+
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -13,6 +20,7 @@ function SearchForm({onSearch}) {
 
     setFormValues((prevValue) => ({ ...prevValue, [name]: value }));
   };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,8 +31,8 @@ function SearchForm({onSearch}) {
     }
 
     onSearch(formValues);
-    setPlaceholder(formValues?.search || "Фильм");
-    setFormValues({ search: "", shortFilm: false });
+    setPlaceholder(formValues?.search || placeholder);
+    setFormValues({ search: "", checked: false });
     clearForm(event);
   };
 
@@ -58,7 +66,7 @@ function SearchForm({onSearch}) {
           aria-label="Найти"
         ></button>
       </div>
-      <FilterCheckbox handleChange={handleInputChange} />
+      <FilterCheckbox handleChange={handleInputChange}/>
     </form>
   );
 }

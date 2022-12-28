@@ -10,7 +10,14 @@ import "./Movies.css";
 import Header from "../Header/Header";
 
 function Movies(props) {
-  const { isClickMenu, handleMenu, movies, loadMore, children, cardListHelpText } = props;
+  const {
+    isClickMenu,
+    handleMenu,
+    movies,
+    loadMore,
+    children,
+    cardListHelpText,
+  } = props;
   const [like, setLike] = useState("♥︎");
 
   const handleLike = () => {
@@ -22,8 +29,8 @@ function Movies(props) {
     const hh = Math.floor(minutes / 60);
     const mm = Math.floor(minutes % 60);
 
-    return `${hh > 0 ? (hh + 'ч ') : ''}${mm + 'м'}`;
-  } 
+    return `${hh > 0 ? hh + "ч " : ""}${mm + "м"}`;
+  };
 
   const cards = movies?.items?.slice(0, movies?.visible).map((item, index) => (
     <MoviesCard
@@ -52,11 +59,13 @@ function Movies(props) {
           handleMenu={handleMenu}
         />
       </Header>
-      { children }
+      {children}
       <MoviesCardList cardListHelpText={cardListHelpText}>
         {cards}
       </MoviesCardList>
-      {movies?.visible < movies?.items?.length && <MoviesLoadMore loadMore={loadMore}/>}
+      {movies?.visible < movies?.items?.length && (
+        <MoviesLoadMore loadMore={loadMore} />
+      )}
       <Footer></Footer>
     </div>
   );

@@ -12,6 +12,7 @@ import Preloader from "../Preloader/Preloader";
 import getBeatfilmMovies from "../../utils/MoviesApi";
 import "./App.css";
 import useWindowSize from "../../hooks/useWindowSize";
+import { useEffect } from "react";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
@@ -22,11 +23,19 @@ function App() {
     error: false
   });
   const [cardListHelpText, setCardListHelpText] = useState('Введите ключевое слово');
+  const [placeholder, setPlaceholder] = useState('Фильм');
 
   const windowSize = useWindowSize();
   const { width } = windowSize;
   const visible = width > 980 ? 12 : width > 520 ? 8 : 5;
   const loadCount = width > 980 ? 3 : 2;
+
+  useEffect(() => {
+    if (localStorage.getItem('movies')) {
+      setMovies((prev) => ({ ...prev, items: JSON.parse(localStorage.getItem('movies')), visible: visible}));
+      setPlaceholder(localStorage.getItem('search'));
+    }
+  }, [visible]);
 
   const loadMore = () => {
     setMovies((prev) => ({ ...prev, visible: prev.visible + loadCount }))
@@ -42,11 +51,11 @@ function App() {
     setCardListHelpText('');
     setIsLoading(true);
 
-    const { search, shortFilm } = formValues;
+    const { search, checked } = formValues;
     
     getBeatfilmMovies()
       .then((movies) => {
-        if (shortFilm) {
+        if (checked) {
           movies = movies.filter(({ duration }) => duration <= 40);
         }
 
@@ -56,7 +65,7 @@ function App() {
 
         setMovies((prev) => ({ ...prev, items: movies, visible: visible }));
 
-        localStorage.setItem('isShortFilm', shortFilm);
+        localStorage.setItem('isShortFilm', checked);
         localStorage.setItem('search', search);
         localStorage.setItem('movies', JSON.stringify(movies));
 
@@ -79,7 +88,7 @@ function App() {
             path="/movies"
             element={
               <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore} cardListHelpText={cardListHelpText}>
-                <SearchForm onSearch={handleSearch} />
+                <SearchForm onSearch={handleSearch} placeholderText={placeholder}/>
                 {isLoading && <Preloader />}
               </Movies>
             }
