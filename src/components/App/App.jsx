@@ -42,17 +42,22 @@ function App() {
     const { search, shortFilm } = formValues;
     
     getBeatfilmMovies()
-      .then((res) => {
+      .then((movies) => {
         if (shortFilm) {
-          res = res.filter(({ duration }) => duration <= 40);
+          movies = movies.filter(({ duration }) => duration <= 40);
         }
 
-        return res.filter(({ nameEN, nameRU }) => 
+        movies = movies.filter(({ nameEN, nameRU }) => 
           matched(nameRU, search) || matched(nameEN, search)
         );
-      })
-      .then((movies) => {
+
         setMovies((prev) => ({ ...prev, items: movies, visible: visible }));
+
+        localStorage.setItem('isShortFilm', shortFilm);
+        localStorage.setItem('search', search);
+        localStorage.setItem('movies', JSON.stringify(movies));
+
+        return movies;
       })
       .catch((err) => {
         console.log(
