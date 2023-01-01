@@ -1,11 +1,13 @@
 import "./MoviesCard.css";
 
 function MoviesCard(props) {
-  const {icon, ariaLabel, buttonName, thumbnail, nameEN, nameRU, duration, movie, onMovieClick, savedMovies} = props;
+  const {icon, ariaLabel, buttonName, thumbnail, nameEN, nameRU, duration, movie, onMovieClick, savedMovies } = props;
 
-  const isLiked = savedMovies.some(m => movie.id === m.id);
+  const isLiked = savedMovies.some((i) => i.id === movie.id);
 
-  const handleLikeClick = () => onMovieClick(movie);
+  const handleLikeClick = () => {
+    onMovieClick(movie);
+  };
 
   return (
     <li className="movies-card">

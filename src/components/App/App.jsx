@@ -51,18 +51,14 @@ function App() {
   }
 
   const handleSavedMovie = (movie) => {
-    console.log('MOVIES: ', savedMovies);
-
     const savedMovie = savedMovies.find((m) => m.movieId === movie.id);
-
-    console.log('SAVED MOVIE: ', savedMovie);
 
     if (savedMovie) {
       deleteMovie(savedMovie)
       .then((res) => {
-        setSavedMovies(savedMovies.filter((m) => m.id !== res.id));
+        setSavedMovies(savedMovies.filter((m) => m.id !== savedMovie.id));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
     } else {
       createMovie(movie)
       .then((res) => {
