@@ -33,7 +33,6 @@ function Register() {
           label="Пароль"
           type="password"
           errorText={"This is help text"}
-          isVisible={true}
           isRequired={true}
         ></Input>
       </Form>
