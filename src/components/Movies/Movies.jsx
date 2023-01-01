@@ -17,12 +17,13 @@ function Movies(props) {
     loadMore,
     children,
     cardListHelpText,
+    handleSavedMovie
   } = props;
-  const [like, setLike] = useState("♥︎");
+  const [isLiked, setLiked] = useState(false);
 
-  const handleLike = () => {
-    alert(like);
-    setLike(like === "♥︎" ? "♡" : "♥︎");
+  const handleLike = (movie) => {
+    handleSavedMovie(movie);
+    setLiked(!isLiked);
   };
 
   const toLocaleDurationString = (minutes) => {
@@ -35,9 +36,11 @@ function Movies(props) {
   const cards = movies?.items?.slice(0, movies?.visible).map((item, index) => (
     <MoviesCard
       key={index}
+      movie={item}
       icon={`movies-card__button movies-card__button_like`}
+      isLiked={isLiked}
       ariaLabel="Нравится"
-      onClick={handleLike}
+      onMovieClick={handleLike}
       buttonName="like"
       nameEN={item?.nameEN}
       nameRU={item?.nameRU}

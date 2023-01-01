@@ -1,7 +1,9 @@
 import "./MoviesCard.css";
 
 function MoviesCard(props) {
-  const {icon, ariaLabel, onClick, buttonName, thumbnail, nameEN, nameRU, duration} = props;
+  const {icon, ariaLabel, buttonName, thumbnail, nameEN, nameRU, duration, isLiked, movie, onMovieClick} = props;
+
+  const handleLikeClick = () => onMovieClick(movie);
 
   return (
     <li className="movies-card">
@@ -12,7 +14,7 @@ function MoviesCard(props) {
       ></img>
       <div className="movies-card__container">
         <p className="movies-card__name">{nameEN}</p>
-        <button type="button" name={buttonName} className={icon} aria-label={ariaLabel} onClick={onClick}></button>
+        <button type="button" name={buttonName} className={`${icon} ${isLiked && 'movies-card__button_active'}`} aria-label={ariaLabel} onClick={handleLikeClick}></button>
       </div>
 
       <p className="movies-card__duration">{duration}</p>

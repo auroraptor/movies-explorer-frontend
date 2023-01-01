@@ -13,6 +13,7 @@ import getBeatfilmMovies from "../../utils/MoviesApi";
 import "./App.css";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useEffect } from "react";
+import { createMovie, deleteMovie, getMovies } from "../../utils/MainApi";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
@@ -22,6 +23,7 @@ function App() {
     visible: 0,
     error: false
   });
+  const [savedMovies, setSavedMovies] = useState([]);
   const [cardListHelpText, setCardListHelpText] = useState('Введите ключевое слово');
   const [placeholder, setPlaceholder] = useState('Фильм');
   const [isCheked, setChecked] = useState(false);
@@ -37,7 +39,32 @@ function App() {
       setPlaceholder(localStorage.getItem('search'));
       setChecked(localStorage.getItem('checked'));
     }
+    getSavedMovies();
   }, [visible]);
+
+  const getSavedMovies = () => {
+    getMovies()
+    .then((res) => {
+      setSavedMovies(res);
+    })
+    .catch((err) => console.log('обработай эту ошибку по красоте'));
+  }
+
+  const handleSavedMovie = (movie) => {
+    console.log('MOVIE: ', movie);
+
+    const isLiked = savedMovies.some((m) => m.id === movie.id);
+
+    if (isLiked) {
+      deleteMovie(movie)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    } else {
+      createMovie(movie)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    }
+  };
 
 
   const loadMore = () => {
@@ -90,7 +117,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore} cardListHelpText={cardListHelpText}>
+              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore} cardListHelpText={cardListHelpText} handleSavedMovie={handleSavedMovie}>
                 <SearchForm onSearch={handleSearch} placeholderText={placeholder} isChecked={isCheked}/>
                 {isLoading && <Preloader />}
               </Movies>
@@ -99,7 +126,7 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu} loadMore={loadMore}>
+              <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu} loadMore={loadMore} savedMovies={savedMovies} handleSavedMovie={handleSavedMovie}>
                 <SearchForm onSearch={handleSearch}/>
                 {isLoading && <Preloader />}
               </SavedMovies>

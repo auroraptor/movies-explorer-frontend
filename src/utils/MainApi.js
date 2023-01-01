@@ -72,8 +72,6 @@ const getMovies = async (data) => {
     },
   });
 
-  console.log('MOVIES', movies)
-
   return getResponse(movies);
 };
 
