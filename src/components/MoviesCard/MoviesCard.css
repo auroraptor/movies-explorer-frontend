@@ -75,7 +75,7 @@
 
 .movies-card__button_like:hover {
   cursor: pointer;
-  animation: heartbeat 1s infinite;
+  animation: heartbeat 2s infinite;
 }
 
 .movies-card__button_active {
