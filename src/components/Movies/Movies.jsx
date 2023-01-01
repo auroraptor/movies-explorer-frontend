@@ -1,4 +1,3 @@
-import { useState } from "react";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import Navigation from "../Navigation/Navigation";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -17,13 +16,12 @@ function Movies(props) {
     loadMore,
     children,
     cardListHelpText,
-    handleSavedMovie
+    handleSavedMovie, 
+    savedMovies,
   } = props;
-  const [isLiked, setLiked] = useState(false);
 
   const handleLike = (movie) => {
     handleSavedMovie(movie);
-    setLiked(!isLiked);
   };
 
   const toLocaleDurationString = (minutes) => {
@@ -38,7 +36,6 @@ function Movies(props) {
       key={index}
       movie={item}
       icon={`movies-card__button movies-card__button_like`}
-      isLiked={isLiked}
       ariaLabel="Нравится"
       onMovieClick={handleLike}
       buttonName="like"
@@ -46,6 +43,7 @@ function Movies(props) {
       nameRU={item?.nameRU}
       duration={toLocaleDurationString(item?.duration)}
       thumbnail={`https://api.nomoreparties.co/${item?.image.url}`}
+      savedMovies={savedMovies}
     ></MoviesCard>
   ));
 

@@ -1,8 +1,8 @@
 import getResponse from "./getResponse";
-const baseUrl = "https://hey.nomoredomains.club/api/";
+import { MAIN_API, MOVIES_API } from "../constants/Api";
 
 const signupUser = async (name, email, password) => {
-  const user = await fetch(`${baseUrl}signup`, {
+  const user = await fetch(`${MAIN_API}signup`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -16,7 +16,7 @@ const signupUser = async (name, email, password) => {
 };
 
 const signinUser = async (email, password) => {
-  const user = await fetch(`${baseUrl}signin`, {
+  const user = await fetch(`${MAIN_API}signin`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -30,16 +30,18 @@ const signinUser = async (email, password) => {
 };
 
 const signoutUser = async () => {
-  const clearCookie = await fetch(`${baseUrl}signout`, {
+  const clearCookie = await fetch(`${MAIN_API}signout`, {
     method: "POST",
     credentials: "include",
   });
 
-  return clearCookie.ok ? Promise.resolve() : Promise.reject(clearCookie.status);
+  return clearCookie.ok
+    ? Promise.resolve()
+    : Promise.reject(clearCookie.status);
 };
 
 const getCurrentUser = async () => {
-  const user = await fetch(`${baseUrl}users/me`, {
+  const user = await fetch(`${MAIN_API}users/me`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -51,7 +53,7 @@ const getCurrentUser = async () => {
 };
 
 const updateCurrentUser = async (data) => {
-  const user = await fetch(`${baseUrl}users/me`, {
+  const user = await fetch(`${MAIN_API}users/me`, {
     method: "PATCH",
     credentials: "include",
     headers: {
@@ -64,7 +66,7 @@ const updateCurrentUser = async (data) => {
 };
 
 const getMovies = async (data) => {
-  const movies = await fetch(`${baseUrl}movies`, {
+  const movies = await fetch(`${MAIN_API}movies`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -76,26 +78,52 @@ const getMovies = async (data) => {
 };
 
 const createMovie = async (data) => {
-  const movie = await fetch(`${baseUrl}movies`, {
+  const image = MOVIES_API + data.image.url;
+  const thumbnail = MOVIES_API + data.image.formats.thumbnail.url;
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    nameRU,
+    nameEN,
+    trailerLink,
+    id: movieId,
+  } = data;
+
+  const movie = await fetch(`${MAIN_API}movies`, {
     method: "POST",
     credentials: "include",
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      country,
+      director,
+      duration,
+      year,
+      description,
+      nameRU,
+      nameEN,
+      trailerLink,
+      image,
+      thumbnail,
+      movieId,
+    }),
   });
 
   return getResponse(movie);
 };
 
 const deleteMovie = async ({ id }) => {
-    const movie = await fetch(`${baseUrl}movies/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-    });
+  const movie = await fetch(`${MAIN_API}movies/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
 
-    return getResponse(movie);
-}
+  return getResponse(movie);
+};
 
 export {
   signupUser,
@@ -105,5 +133,5 @@ export {
   updateCurrentUser,
   getMovies,
   createMovie,
-  deleteMovie
+  deleteMovie,
 };

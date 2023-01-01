@@ -51,21 +51,26 @@ function App() {
   }
 
   const handleSavedMovie = (movie) => {
-    console.log('MOVIE: ', movie);
+    console.log('MOVIES: ', savedMovies);
 
-    const isLiked = savedMovies.some((m) => m.id === movie.id);
+    const savedMovie = savedMovies.find((m) => m.movieId === movie.id);
 
-    if (isLiked) {
-      deleteMovie(movie)
-      .then((res) => console.log(res))
+    console.log('SAVED MOVIE: ', savedMovie);
+
+    if (savedMovie) {
+      deleteMovie(savedMovie)
+      .then((res) => {
+        setSavedMovies(savedMovies.filter((m) => m.id !== res.id));
+      })
       .catch((err) => console.log(err));
     } else {
       createMovie(movie)
-      .then((res) => console.log(res))
+      .then((res) => {
+        setSavedMovies(savedMovies.concat(res));
+      })
       .catch((err) => console.log(err))
     }
   };
-
 
   const loadMore = () => {
     setMovies((prev) => ({ ...prev, visible: prev.visible + loadCount }))
@@ -117,7 +122,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} loadMore={loadMore} cardListHelpText={cardListHelpText} handleSavedMovie={handleSavedMovie}>
+              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} savedMovies={savedMovies} loadMore={loadMore} cardListHelpText={cardListHelpText} handleSavedMovie={handleSavedMovie}>
                 <SearchForm onSearch={handleSearch} placeholderText={placeholder} isChecked={isCheked}/>
                 {isLoading && <Preloader />}
               </Movies>
