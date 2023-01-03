@@ -4,9 +4,9 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import Footer from "../Footer/Footer";
-
-import "./Movies.css";
 import Header from "../Header/Header";
+import "./Movies.css";
+import { toLocaleDuration } from "../../utils/toLocaleDuration";
 
 function Movies(props) {
   const {
@@ -24,25 +24,18 @@ function Movies(props) {
     handleSavedMovie(movie);
   };
 
-  const toLocaleDurationString = (minutes) => {
-    const hh = Math.floor(minutes / 60);
-    const mm = Math.floor(minutes % 60);
-
-    return `${hh > 0 ? hh + "ч " : ""}${mm + "м"}`;
-  };
-
-  const cards = movies?.items?.slice(0, movies?.visible).map((item, index) => (
+  const cards = movies?.movies?.slice(0, movies?.visible).map((movie, index) => (
     <MoviesCard
-      key={index}
-      movie={item}
+      key={movie?.id}
+      movie={movie}
       icon={`movies-card__button movies-card__button_like`}
       ariaLabel="Нравится"
       onMovieClick={handleLike}
       buttonName="like"
-      nameEN={item?.nameEN}
-      nameRU={item?.nameRU}
-      duration={toLocaleDurationString(item?.duration)}
-      thumbnail={`https://api.nomoreparties.co/${item?.image.url}`}
+      nameEN={movie?.nameEN}
+      nameRU={movie?.nameRU}
+      duration={toLocaleDuration(movie?.duration)}
+      thumbnail={`https://api.nomoreparties.co/${movie?.image.url}`}
       savedMovies={savedMovies}
     ></MoviesCard>
   ));

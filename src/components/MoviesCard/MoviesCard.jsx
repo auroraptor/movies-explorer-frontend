@@ -3,7 +3,7 @@ import "./MoviesCard.css";
 function MoviesCard(props) {
   const {icon, ariaLabel, buttonName, thumbnail, nameEN, nameRU, duration, movie, onMovieClick, savedMovies } = props;
 
-  const isLiked = savedMovies?.some((i) => i.movieId === movie.id);
+  const isLiked = savedMovies?.movies?.some((i) => i.movieId === movie.id);
 
   const handleLikeClick = (e) => {
     onMovieClick(movie);

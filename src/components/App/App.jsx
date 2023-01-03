@@ -18,14 +18,20 @@ import { createMovie, deleteMovie, getMovies } from "../../utils/MainApi";
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState({
-    items: [],
+  const [searchingMoviesResult, setSearchingMoviesResult] = useState({
+    movies: [],
     visible: 0,
-    error: false
+    error: false,
   });
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [cardListHelpText, setCardListHelpText] = useState('Введите ключевое слово');
-  const [placeholder, setPlaceholder] = useState('Фильм');
+  const [savedMovies, setSavedMovies] = useState({
+    movies: [],
+    visible: 0,
+    error: false,
+  });
+  const [cardListHelpText, setCardListHelpText] = useState(
+    "Введите ключевое слово"
+  );
+  const [placeholder, setPlaceholder] = useState("Фильм");
   const [isCheked, setChecked] = useState(false);
 
   const windowSize = useWindowSize();
@@ -34,78 +40,96 @@ function App() {
   const loadCount = width > 980 ? 3 : 2;
 
   useEffect(() => {
-    if (localStorage.getItem('movies')) {
-      setMovies((prev) => ({ ...prev, items: JSON.parse(localStorage.getItem('movies')), visible: visible}));
-      setPlaceholder(localStorage.getItem('search'));
-      setChecked(localStorage.getItem('checked'));
+    if (localStorage.getItem("movies")) {
+      setSearchingMoviesResult((prev) => ({
+        ...prev,
+        movies: JSON.parse(localStorage.getItem("movies")),
+        visible: visible,
+      }));
+      setPlaceholder(localStorage.getItem("search"));
+      setChecked(localStorage.getItem("checked"));
     }
     getSavedMovies();
   }, [visible]);
 
   const getSavedMovies = () => {
     getMovies()
-    .then((res) => {
-      setSavedMovies(res);
-    })
-    .catch((err) => console.log('обработай эту ошибку по красоте'));
-  }
+      .then((res) => {
+        setSavedMovies((prev) => ({ ...prev, movies: res, visible: visible }));
+      })
+      .catch((err) => console.log("обработай эту ошибку по красоте"));
+  };
 
   const handleSavedMovie = (movie) => {
     const savedMovie = savedMovies.find((m) => m.movieId === movie.id);
 
     if (savedMovie) {
       deleteMovie(savedMovie)
-      .then((res) => {
-        setSavedMovies(savedMovies.filter((m) => m.id !== savedMovie.id));
-      })
-      .catch((err) => console.log(err))
+        .then((res) => {
+          setSavedMovies(savedMovies.filter((m) => m.id !== savedMovie.id));
+        })
+        .catch((err) => console.log(err));
     } else {
       createMovie(movie)
-      .then((res) => {
-        setSavedMovies(savedMovies.concat(res));
-      })
-      .catch((err) => console.log(err))
+        .then((res) => {
+          setSavedMovies(savedMovies.concat(res));
+          console.log("AFTER CREATE: ", savedMovies);
+        })
+        .catch((err) => console.log(err));
     }
   };
 
   const loadMore = () => {
-    setMovies((prev) => ({ ...prev, visible: prev.visible + loadCount }))
+    setSearchingMoviesResult((prev) => ({
+      ...prev,
+      visible: prev.visible + loadCount,
+    }));
   };
 
   const handleMenu = () => {
     setClickMenu(!isClickMenu);
   };
 
-  const matched = (str, match) => str.toLowerCase().includes(match.toLowerCase());
+  const matched = (str, match) =>
+    str.toLowerCase().includes(match.toLowerCase());
 
   const handleSearch = (formValues) => {
-    setCardListHelpText('');
+    setCardListHelpText("");
     setIsLoading(true);
 
     const { search, checked } = formValues;
-    
+
     getBeatfilmMovies()
       .then((movies) => {
         if (checked) {
           movies = movies.filter(({ duration }) => duration <= 40);
         }
 
-        movies = movies.filter(({ nameEN, nameRU }) => 
-          matched(nameRU, search) || matched(nameEN, search)
+        movies = movies.filter(
+          ({ nameEN, nameRU }) =>
+            matched(nameRU, search) || matched(nameEN, search)
         );
 
-        setMovies((prev) => ({ ...prev, items: movies, visible: visible }));
+        setSearchingMoviesResult((prev) => ({
+          ...prev,
+          items: movies,
+          visible: visible,
+        }));
 
-        localStorage.setItem('isShortFilm', checked);
-        localStorage.setItem('search', search);
-        localStorage.setItem('movies', JSON.stringify(movies));
+        localStorage.setItem("isShortFilm", checked);
+        localStorage.setItem("search", search);
+        localStorage.setItem("movies", JSON.stringify(movies));
 
-        setCardListHelpText(movies.length > 0 ? 'Введите ключевое слово' : 'Ничего не найдено');
+        setCardListHelpText(
+          movies.length > 0 ? "Введите ключевое слово" : "Ничего не найдено"
+        );
 
         return movies;
       })
       .catch((err) => {
-        setCardListHelpText("Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз.");
+        setCardListHelpText(
+          "Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз."
+        );
       })
       .finally(() => setIsLoading(false));
   };
@@ -118,8 +142,20 @@ function App() {
           <Route
             path="/movies"
             element={
-              <Movies isClickMenu={isClickMenu} handleMenu={handleMenu} movies={movies} savedMovies={savedMovies} loadMore={loadMore} cardListHelpText={cardListHelpText} handleSavedMovie={handleSavedMovie}>
-                <SearchForm onSearch={handleSearch} placeholderText={placeholder} isChecked={isCheked}/>
+              <Movies
+                isClickMenu={isClickMenu}
+                handleMenu={handleMenu}
+                movies={searchingMoviesResult}
+                savedMovies={savedMovies}
+                loadMore={loadMore}
+                cardListHelpText={cardListHelpText}
+                handleSavedMovie={handleSavedMovie}
+              >
+                <SearchForm
+                  onSearch={handleSearch}
+                  placeholderText={placeholder}
+                  isChecked={isCheked}
+                />
                 {isLoading && <Preloader />}
               </Movies>
             }
@@ -127,8 +163,14 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies isClickMenu={isClickMenu} handleMenu={handleMenu} loadMore={loadMore} savedMovies={savedMovies} handleSavedMovie={handleSavedMovie}>
-                <SearchForm onSearch={handleSearch}/>
+              <SavedMovies
+                isClickMenu={isClickMenu}
+                handleMenu={handleMenu}
+                loadMore={loadMore}
+                savedMovies={savedMovies}
+                handleSavedMovie={handleSavedMovie}
+              >
+                <SearchForm onSearch={handleSearch} />
                 {isLoading && <Preloader />}
               </SavedMovies>
             }

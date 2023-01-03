@@ -6,17 +6,35 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import Footer from "../Footer/Footer";
 import "./SavedMovies.css";
+import { toLocaleDuration } from "../../utils/toLocaleDuration";
 
-function SavedMovies({ isClickMenu, handleMenu, children }) {
-  const items = [...Array(8)].map((item, index) => (
-    <MoviesCard
-      key={index}
-      icon={"movies-card__button movies-card__button_remove"}
-      ariaLabel="Удалить"
-      onClick={() => console.log("remove")}
-      buttonName="remove"
-    ></MoviesCard>
-  ));
+function SavedMovies(props) {
+  const { isClickMenu, handleMenu, children, savedMovies, handleSavedMovie } =
+    props;
+
+  const handleLike = (movie) => {
+    handleSavedMovie(movie);
+  };
+
+  const cards = savedMovies?.movies
+    ?.slice(0, savedMovies?.visible)
+    .map((movie) => (
+      <MoviesCard
+        key={movie?.id}
+        movie={movie}
+        icon={`movies-card__button movies-card__button_remove`}
+        ariaLabel="Нравится"
+        onMovieClick={handleLike}
+        buttonName="delete"
+        nameEN={movie?.nameEN}
+        nameRU={movie?.nameRU}
+        duration={toLocaleDuration(movie?.duration)}
+        thumbnail={`https://api.nomoreparties.co/${movie?.image.url}`}
+        savedMovies={savedMovies}
+      ></MoviesCard>
+    ));
+
+  console.log("CARDS", cards);
 
   return (
     <section className="saved-movies">
@@ -32,7 +50,7 @@ function SavedMovies({ isClickMenu, handleMenu, children }) {
         />
       </Header>
       {children}
-      <MoviesCardList>{items}</MoviesCardList>
+      <MoviesCardList>{cards}</MoviesCardList>
       <MoviesLoadMore></MoviesLoadMore>
       <Footer></Footer>
     </section>
