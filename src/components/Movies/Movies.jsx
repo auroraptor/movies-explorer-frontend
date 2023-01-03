@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./Movies.css";
 import { toLocaleDuration } from "../../utils/toLocaleDuration";
+import { useEffect } from "react";
 
 function Movies(props) {
   const {
@@ -24,7 +25,7 @@ function Movies(props) {
     handleSavedMovie(movie);
   };
 
-  const cards = movies?.movies?.slice(0, movies?.visible).map((movie, index) => (
+  const cards = movies?.movies?.slice(0, movies?.visible).map((movie) => (
     <MoviesCard
       key={movie?.id}
       movie={movie}
@@ -57,7 +58,7 @@ function Movies(props) {
       <MoviesCardList cardListHelpText={cardListHelpText}>
         {cards}
       </MoviesCardList>
-      {movies?.movies?.visible < movies?.movies?.length && (
+      {movies?.visible < movies?.movies?.length && (
         <MoviesLoadMore loadMore={loadMore} />
       )}
       <Footer></Footer>
