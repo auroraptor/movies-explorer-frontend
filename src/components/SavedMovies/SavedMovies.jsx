@@ -9,12 +9,14 @@ import "./SavedMovies.css";
 import { toLocaleDuration } from "../../utils/toLocaleDuration";
 
 function SavedMovies(props) {
-  const { isClickMenu, handleMenu, children, savedMovies, handleSavedMovie } =
+  const { isClickMenu, handleMenu, children, savedMovies, handleSavedMovie, loadMore } =
     props;
 
   const handleLike = (movie) => {
     handleSavedMovie(movie);
   };
+
+  console.log('LENGTH', savedMovies.movies.length, savedMovies.visible);
 
   const cards = savedMovies?.movies
     ?.slice(0, savedMovies?.visible)
@@ -23,18 +25,16 @@ function SavedMovies(props) {
         key={movie?.id}
         movie={movie}
         icon={`movies-card__button movies-card__button_remove`}
-        ariaLabel="Нравится"
+        ariaLabel="Удалить"
         onMovieClick={handleLike}
         buttonName="delete"
         nameEN={movie?.nameEN}
         nameRU={movie?.nameRU}
         duration={toLocaleDuration(movie?.duration)}
-        thumbnail={`https://api.nomoreparties.co/${movie?.image.url}`}
+        thumbnail={movie?.image}
         savedMovies={savedMovies}
       ></MoviesCard>
     ));
-
-  console.log("CARDS", cards);
 
   return (
     <section className="saved-movies">
@@ -51,7 +51,9 @@ function SavedMovies(props) {
       </Header>
       {children}
       <MoviesCardList>{cards}</MoviesCardList>
-      <MoviesLoadMore></MoviesLoadMore>
+      {savedMovies?.visible < savedMovies?.movies.length && (
+        <MoviesLoadMore loadMore={loadMore} />
+      )}
       <Footer></Footer>
     </section>
   );

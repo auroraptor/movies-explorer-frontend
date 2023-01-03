@@ -61,26 +61,38 @@ function App() {
   };
 
   const handleSavedMovie = (movie) => {
-    const savedMovie = savedMovies.find((m) => m.movieId === movie.id);
+    const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
 
     if (savedMovie) {
       deleteMovie(savedMovie)
         .then((res) => {
-          setSavedMovies(savedMovies.filter((m) => m.id !== savedMovie.id));
+          setSavedMovies((prev) => ({
+            ...prev,
+            movies: savedMovies.movies.filter((m) => m.id !== savedMovie.id),
+          }));
         })
         .catch((err) => console.log(err));
     } else {
       createMovie(movie)
-        .then((res) => {
-          setSavedMovies(savedMovies.concat(res));
-          console.log("AFTER CREATE: ", savedMovies);
-        })
+        .then((res) =>
+          setSavedMovies((prev) => ({
+            ...prev,
+            movies: savedMovies.movies.concat(res),
+          }))
+        )
         .catch((err) => console.log(err));
     }
   };
 
   const loadMore = () => {
     setSearchingMoviesResult((prev) => ({
+      ...prev,
+      visible: prev.visible + loadCount,
+    }));
+  };
+
+  const loadMoreSavedMovies = () => {
+    setSavedMovies((prev) => ({
       ...prev,
       visible: prev.visible + loadCount,
     }));
@@ -166,7 +178,7 @@ function App() {
               <SavedMovies
                 isClickMenu={isClickMenu}
                 handleMenu={handleMenu}
-                loadMore={loadMore}
+                loadMore={loadMoreSavedMovies}
                 savedMovies={savedMovies}
                 handleSavedMovie={handleSavedMovie}
               >

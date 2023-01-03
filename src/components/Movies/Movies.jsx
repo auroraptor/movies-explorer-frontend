@@ -57,7 +57,7 @@ function Movies(props) {
       <MoviesCardList cardListHelpText={cardListHelpText}>
         {cards}
       </MoviesCardList>
-      {movies?.visible < movies?.items?.length && (
+      {movies?.movies?.visible < movies?.movies?.length && (
         <MoviesLoadMore loadMore={loadMore} />
       )}
       <Footer></Footer>
