@@ -9,6 +9,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getBeatfilmMovies from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
@@ -51,11 +52,15 @@ function App() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   getCurrentUser()
-  //   .then((res) => setCurrentUser(res))
-  //   .catch((err) => console.log(err));
-  // }, [])
+  useEffect(() => {
+    getCurrentUser()
+      .then((res) => {
+        setCurrentUser(res);
+        setLoggedIn(true);
+        navigate("/movies");
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("movies")) {
@@ -72,17 +77,17 @@ function App() {
   useEffect(() => {
     if (!loggedIn) return;
 
-    console.log('USE EFFECT');
-
     Promise.all([getCurrentUser(), getMovies()])
-    .then(([user, movies]) => {
-      setCurrentUser(user);
-      setSavedMovies(movies);
-    })
-    .catch((err) => console.log(err));
-  }, [loggedIn]);
-
-  console.log('CURRENT USER: ', currentUser);
+      .then(([user, movies]) => {
+        setCurrentUser(user);
+        setSavedMovies((prev) => ({
+            ...prev,
+            movies: movies,
+            visible: visible,
+        }));
+      })
+      .catch((err) => console.log(err));
+  }, [loggedIn, visible]);
 
   const handleRegister = (data) => {
     signupUser(data)
@@ -105,17 +110,10 @@ function App() {
         setCurrentUser({ name: "", email: "" });
         localStorage.removeItem("movies");
         setLoggedIn(false);
+        navigate('/signin');
       })
       .catch((err) => console.log(err));
   };
-
-  // const getSavedMovies = () => {
-  //   getMovies()
-  //     .then((res) => {
-  //       setSavedMovies((prev) => ({ ...prev, movies: res, visible: visible }));
-  //     })
-  //     .catch((err) => console.log("обработай эту ошибку по красоте"));
-  // };
 
   const handleSavedMovie = (movie) => {
     const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
@@ -207,60 +205,62 @@ function App() {
     <div className="app">
       <div className="app__container">
         <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route
-            path="/movies"
-            element={
-              <CurrentUserContext.Provider value={currentUser}>
-                <Movies
-                  isClickMenu={isClickMenu}
-                  handleMenu={handleMenu}
-                  movies={searchingMoviesResult}
-                  savedMovies={savedMovies}
-                  loadMore={loadMore}
-                  cardListHelpText={cardListHelpText}
-                  handleSavedMovie={handleSavedMovie}
-                >
-                  <SearchForm
-                    onSearch={handleSearch}
-                    placeholderText={placeholder}
-                    isChecked={isCheked}
+        <Route path="/" element={<Main />}></Route>
+          <Route element={<ProtectedRoute onLogin={loggedIn}/>}>
+            <Route
+              path="/movies"
+              element={
+                <CurrentUserContext.Provider value={currentUser}>
+                  <Movies
+                    isClickMenu={isClickMenu}
+                    handleMenu={handleMenu}
+                    movies={searchingMoviesResult}
+                    savedMovies={savedMovies}
+                    loadMore={loadMore}
+                    cardListHelpText={cardListHelpText}
+                    handleSavedMovie={handleSavedMovie}
+                  >
+                    <SearchForm
+                      onSearch={handleSearch}
+                      placeholderText={placeholder}
+                      isChecked={isCheked}
+                    />
+                    {isLoading && <Preloader />}
+                  </Movies>
+                </CurrentUserContext.Provider>
+              }
+            ></Route>
+            <Route
+              path="/saved-movies"
+              element={
+                <CurrentUserContext.Provider value={currentUser}>
+                  <SavedMovies
+                    isClickMenu={isClickMenu}
+                    handleMenu={handleMenu}
+                    loadMore={loadMoreSavedMovies}
+                    savedMovies={savedMovies}
+                    handleSavedMovie={handleSavedMovie}
+                  >
+                    <SearchForm onSearch={handleSearch} />
+                    {isLoading && <Preloader />}
+                  </SavedMovies>
+                </CurrentUserContext.Provider>
+              }
+            ></Route>
+            <Route
+              path="/profile"
+              element={
+                <CurrentUserContext.Provider value={currentUser}>
+                  <Profile
+                    isClickMenu={isClickMenu}
+                    handleMenu={handleMenu}
+                    onLogout={handleLogout}
+                    user={currentUser}
                   />
-                  {isLoading && <Preloader />}
-                </Movies>
-              </CurrentUserContext.Provider>
-            }
-          ></Route>
-          <Route
-            path="/saved-movies"
-            element={
-              <CurrentUserContext.Provider value={currentUser}>
-                <SavedMovies
-                  isClickMenu={isClickMenu}
-                  handleMenu={handleMenu}
-                  loadMore={loadMoreSavedMovies}
-                  savedMovies={savedMovies}
-                  handleSavedMovie={handleSavedMovie}
-                >
-                  <SearchForm onSearch={handleSearch} />
-                  {isLoading && <Preloader />}
-                </SavedMovies>
-              </CurrentUserContext.Provider>
-            }
-          ></Route>
-          <Route
-            path="/profile"
-            element={
-              <CurrentUserContext.Provider value={currentUser}>
-                <Profile
-                  isClickMenu={isClickMenu}
-                  handleMenu={handleMenu}
-                  onLogout={handleLogout}
-                  user={currentUser}
-                />
-              </CurrentUserContext.Provider>
-            }
-          ></Route>
+                </CurrentUserContext.Provider>
+              }
+            ></Route>
+          </Route>
           <Route
             path="/signin"
             element={<Login onLogin={handleLogin} />}

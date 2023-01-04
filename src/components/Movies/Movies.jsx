@@ -7,7 +7,6 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./Movies.css";
 import { toLocaleDuration } from "../../utils/toLocaleDuration";
-import { useEffect } from "react";
 
 function Movies(props) {
   const {

@@ -34,6 +34,8 @@ function SavedMovies(props) {
       ></MoviesCard>
     ));
 
+    console.log('CARDS', cards);
+
   return (
     <section className="saved-movies">
       <Header className={"header"} click={isClickMenu}>
@@ -48,8 +50,8 @@ function SavedMovies(props) {
         />
       </Header>
       {children}
-      <MoviesCardList cardListHelpText={'Все понравившиеся фильмы будут здесь'}>{cards}</MoviesCardList>
-      {savedMovies?.visible < savedMovies?.movies.length && (
+      <MoviesCardList cardListHelpText={'Все понравившиеся фильмы будут здесь'}>{cards || ''}</MoviesCardList>
+      {savedMovies?.visible < savedMovies?.movies?.length && (
         <MoviesLoadMore loadMore={loadMore} />
       )}
       <Footer></Footer>
