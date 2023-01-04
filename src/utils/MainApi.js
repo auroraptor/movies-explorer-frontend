@@ -15,7 +15,7 @@ const signupUser = async ({name, email, password}) => {
   return getResponse(user);
 };
 
-const signinUser = async (email, password) => {
+const signinUser = async ({email, password}) => {
   const user = await fetch(`${MAIN_API}signin`, {
     method: "POST",
     credentials: "include",
