@@ -13,7 +13,7 @@ import getBeatfilmMovies from "../../utils/MoviesApi";
 import "./App.css";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useEffect } from "react";
-import { createMovie, deleteMovie, getMovies, signinUser, signupUser } from "../../utils/MainApi";
+import { createMovie, deleteMovie, getMovies, signinUser, signoutUser, signupUser } from "../../utils/MainApi";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
@@ -62,6 +62,15 @@ function App() {
   const handleLogin = (data) => {
     signinUser(data)
     .then((res) => navigate('movies'))
+    .catch((err) => console.log(err));
+  }
+
+  const handleLogout = () => {
+    signoutUser()
+    .then(() => {
+      localStorage.removeItem('movies');
+      // navigate('signin')
+    })
     .catch((err) => console.log(err));
   }
   
@@ -203,7 +212,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <Profile isClickMenu={isClickMenu} handleMenu={handleMenu} />
+              <Profile isClickMenu={isClickMenu} handleMenu={handleMenu} onLogout={handleLogout}/>
             }
           ></Route>
           <Route path="/signin" element={<Login onLogin={handleLogin}/>}></Route>

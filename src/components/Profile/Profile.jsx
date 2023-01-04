@@ -9,6 +9,7 @@ function Profile({
   handleMenu,
   name = "useR",
   email = "love@eda.jp",
+  onLogout
 }) {
   const firstName = name[0].toUpperCase() + name.slice(1).toLowerCase();
 
@@ -44,7 +45,7 @@ function Profile({
           >
             Редактировать
           </button>
-          <Link to="/signin" className="profile__logout">
+          <Link to="/signin" onClick={onLogout} className="profile__logout">
             Выйти из аккаунта
           </Link>
         </div>
