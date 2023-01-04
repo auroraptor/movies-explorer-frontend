@@ -16,8 +16,6 @@ function SavedMovies(props) {
     handleSavedMovie(movie);
   };
 
-  console.log('LENGTH', savedMovies.movies.length, savedMovies.visible);
-
   const cards = savedMovies?.movies
     ?.slice(0, savedMovies?.visible)
     .map((movie) => (
@@ -50,7 +48,7 @@ function SavedMovies(props) {
         />
       </Header>
       {children}
-      <MoviesCardList>{cards}</MoviesCardList>
+      <MoviesCardList cardListHelpText={'Все понравившиеся фильмы будут здесь'}>{cards || ''}</MoviesCardList>
       {savedMovies?.visible < savedMovies?.movies.length && (
         <MoviesLoadMore loadMore={loadMore} />
       )}
