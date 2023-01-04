@@ -16,6 +16,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import {
   createMovie,
   deleteMovie,
+  getCurrentUser,
   getMovies,
   signinUser,
   signoutUser,
@@ -46,8 +47,15 @@ function App() {
   const visible = width > 980 ? 12 : width > 520 ? 8 : 5;
   const loadCount = width > 980 ? 3 : 2;
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   getCurrentUser()
+  //   .then((res) => setCurrentUser(res))
+  //   .catch((err) => console.log(err));
+  // }, [])
 
   useEffect(() => {
     if (localStorage.getItem("movies")) {
@@ -59,8 +67,22 @@ function App() {
       setPlaceholder(localStorage.getItem("search"));
       setChecked(localStorage.getItem("checked"));
     }
-    getSavedMovies();
   }, [visible]);
+
+  useEffect(() => {
+    if (!loggedIn) return;
+
+    console.log('USE EFFECT');
+
+    Promise.all([getCurrentUser(), getMovies()])
+    .then(([user, movies]) => {
+      setCurrentUser(user);
+      setSavedMovies(movies);
+    })
+    .catch((err) => console.log(err));
+  }, [loggedIn]);
+
+  console.log('CURRENT USER: ', currentUser);
 
   const handleRegister = (data) => {
     signupUser(data)
@@ -70,25 +92,30 @@ function App() {
 
   const handleLogin = (data) => {
     signinUser(data)
-      .then((res) => navigate("movies"))
+      .then((res) => {
+        setLoggedIn(true);
+        navigate("movies");
+      })
       .catch((err) => console.log(err));
   };
 
   const handleLogout = () => {
     signoutUser()
       .then(() => {
+        setCurrentUser({ name: "", email: "" });
         localStorage.removeItem("movies");
+        setLoggedIn(false);
       })
       .catch((err) => console.log(err));
   };
 
-  const getSavedMovies = () => {
-    getMovies()
-      .then((res) => {
-        setSavedMovies((prev) => ({ ...prev, movies: res, visible: visible }));
-      })
-      .catch((err) => console.log("обработай эту ошибку по красоте"));
-  };
+  // const getSavedMovies = () => {
+  //   getMovies()
+  //     .then((res) => {
+  //       setSavedMovies((prev) => ({ ...prev, movies: res, visible: visible }));
+  //     })
+  //     .catch((err) => console.log("обработай эту ошибку по красоте"));
+  // };
 
   const handleSavedMovie = (movie) => {
     const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
@@ -229,6 +256,7 @@ function App() {
                   isClickMenu={isClickMenu}
                   handleMenu={handleMenu}
                   onLogout={handleLogout}
+                  user={currentUser}
                 />
               </CurrentUserContext.Provider>
             }

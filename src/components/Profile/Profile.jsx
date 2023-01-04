@@ -7,11 +7,11 @@ import "./Profile.css";
 function Profile({
   isClickMenu,
   handleMenu,
-  name = "useR",
-  email = "love@eda.jp",
+  user,
   onLogout
 }) {
-  const firstName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+
+  const firstName = user?.name[0]?.toUpperCase() + user?.name?.slice(1).toLowerCase();
 
   return (
     <article className="profile">
@@ -33,7 +33,7 @@ function Profile({
             </li>
             <li className="profile__list-item_email profile__list-item">
               <p className="profile__text">E-mail</p>
-              <p className="profile__text">{email}</p>
+              <p className="profile__text">{user?.email}</p>
             </li>
           </ul>
         </div>

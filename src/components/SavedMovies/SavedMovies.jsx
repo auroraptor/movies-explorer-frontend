@@ -48,7 +48,7 @@ function SavedMovies(props) {
         />
       </Header>
       {children}
-      <MoviesCardList cardListHelpText={'Все понравившиеся фильмы будут здесь'}>{cards || ''}</MoviesCardList>
+      <MoviesCardList cardListHelpText={'Все понравившиеся фильмы будут здесь'}>{cards}</MoviesCardList>
       {savedMovies?.visible < savedMovies?.movies.length && (
         <MoviesLoadMore loadMore={loadMore} />
       )}
