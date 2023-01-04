@@ -13,7 +13,7 @@ import getBeatfilmMovies from "../../utils/MoviesApi";
 import "./App.css";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useEffect } from "react";
-import { createMovie, deleteMovie, getMovies, signupUser } from "../../utils/MainApi";
+import { createMovie, deleteMovie, getMovies, signinUser, signupUser } from "../../utils/MainApi";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
@@ -53,28 +53,18 @@ function App() {
     getSavedMovies();
   }, [visible]);
 
-// {  const handleRegister = (email, password) => {
-//   setIsLoading(true);
-//   api
-//     .register(password, email)
-//     .then(() => setSuccess(true))
-//     .catch((err) => {
-//       setSuccess(false);
-//       console.log("error", err);
-//     })
-//     .finally(() => {
-//       closeAllPopups();
-//       setIsLoading(false);
-//     });
-// };}
-
   const handleRegister = (data) => {
     signupUser(data)
     .then((res) => navigate('signin'))
     .catch((err) => console.log(err));
   }
-  
 
+  const handleLogin = (data) => {
+    signinUser(data)
+    .then((res) => navigate('movies'))
+    .catch((err) => console.log(err));
+  }
+  
   const getSavedMovies = () => {
     getMovies()
       .then((res) => {
@@ -216,7 +206,7 @@ function App() {
               <Profile isClickMenu={isClickMenu} handleMenu={handleMenu} />
             }
           ></Route>
-          <Route path="/signin" element={<Login />}></Route>
+          <Route path="/signin" element={<Login onLogin={handleLogin}/>}></Route>
           <Route path="/signup" element={<Register onRegister={handleRegister}/>}></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
