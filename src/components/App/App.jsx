@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Main from "../Main/Main";
 import Login from "../Login/Login";
@@ -13,7 +13,7 @@ import getBeatfilmMovies from "../../utils/MoviesApi";
 import "./App.css";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useEffect } from "react";
-import { createMovie, deleteMovie, getMovies } from "../../utils/MainApi";
+import { createMovie, deleteMovie, getMovies, signupUser } from "../../utils/MainApi";
 
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
@@ -38,6 +38,7 @@ function App() {
   const { width } = windowSize;
   const visible = width > 980 ? 12 : width > 520 ? 8 : 5;
   const loadCount = width > 980 ? 3 : 2;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("movies")) {
@@ -51,6 +52,28 @@ function App() {
     }
     getSavedMovies();
   }, [visible]);
+
+// {  const handleRegister = (email, password) => {
+//   setIsLoading(true);
+//   api
+//     .register(password, email)
+//     .then(() => setSuccess(true))
+//     .catch((err) => {
+//       setSuccess(false);
+//       console.log("error", err);
+//     })
+//     .finally(() => {
+//       closeAllPopups();
+//       setIsLoading(false);
+//     });
+// };}
+
+  const handleRegister = (data) => {
+    signupUser(data)
+    .then((res) => navigate('signin'))
+    .catch((err) => console.log(err));
+  }
+  
 
   const getSavedMovies = () => {
     getMovies()
@@ -194,7 +217,7 @@ function App() {
             }
           ></Route>
           <Route path="/signin" element={<Login />}></Route>
-          <Route path="/signup" element={<Register />}></Route>
+          <Route path="/signup" element={<Register onRegister={handleRegister}/>}></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
       </div>

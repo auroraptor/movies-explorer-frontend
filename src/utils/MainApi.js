@@ -1,7 +1,7 @@
 import getResponse from "./getResponse";
 import { MAIN_API, MOVIES_API } from "../constants/Api";
 
-const signupUser = async (name, email, password) => {
+const signupUser = async ({name, email, password}) => {
   const user = await fetch(`${MAIN_API}signup`, {
     method: "POST",
     credentials: "include",
