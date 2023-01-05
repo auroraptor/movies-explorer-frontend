@@ -55,10 +55,16 @@
   margin: 0;
   background-color: transparent;
   border: none;
-  border-radius: 8px;
+  border-radius: 40px;
   color: white;
   text-align: end;
   padding: 16px 0 18px;
+  width: 80%;
+}
+
+.profile__input:focus {
+  text-align: start;
+  padding-left: 9px;
 }
 
 .profile__button_edit {

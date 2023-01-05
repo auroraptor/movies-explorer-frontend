@@ -8,6 +8,11 @@ function Profile({ isClickMenu, handleMenu, user, onLogout }) {
   const firstName =
     user?.name[0]?.toUpperCase() + user?.name?.slice(1).toLowerCase();
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    alert('SUBMIT!');
+  }
+
   return (
     <article className="profile">
       <Header className={"header"} click={isClickMenu}>
@@ -21,16 +26,16 @@ function Profile({ isClickMenu, handleMenu, user, onLogout }) {
           handleMenu={handleMenu}
         />
       </Header>
-      <form className="profile__form" name="profile" id="profile">
+      <form className="profile__form" name="profile" id="profile" onSubmit={handleSubmit}>
         <label
-          for="profile"
+          htmlFor="profile"
           className="profile__hello-name"
         >{`Привет, ${firstName}!`}</label>
         <ul className="profile__user">
           <li>
             <label className="profile__text profile__text_border">
               Имя
-              <input type="text" className="profile__input" value={firstName} />
+              <input type="text" className="profile__input"  />
             </label>
           </li>
 
@@ -40,7 +45,7 @@ function Profile({ isClickMenu, handleMenu, user, onLogout }) {
               <input
                 type="text"
                 className="profile__input"
-                value={user?.email}
+                
               />
             </label>
           </li>
@@ -48,8 +53,8 @@ function Profile({ isClickMenu, handleMenu, user, onLogout }) {
         <div className="profile__settings">
           <button
             className="profile__button profile__button_edit"
-            type="button"
-            onClick={() => alert("not really button")} disabled={true}
+            type="submit"
+            disabled={false}
           >
             Редактировать
           </button>
