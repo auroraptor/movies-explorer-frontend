@@ -22,6 +22,7 @@ import {
   signinUser,
   signoutUser,
   signupUser,
+  updateCurrentUser
 } from "../../utils/MainApi";
 
 function App() {
@@ -116,6 +117,12 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleUpdateUser = (data) => {
+    updateCurrentUser(data)
+    .then((user) => setCurrentUser(user))
+    .catch((err) => console.log(err.statusCode))
+  }
 
   const handleSavedMovie = (movie) => {
     const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
@@ -258,6 +265,7 @@ function App() {
                     handleMenu={handleMenu}
                     onLogout={handleLogout}
                     user={currentUser}
+                    onUpdateUser={handleUpdateUser}
                   />
                 </CurrentUserContext.Provider>
               }

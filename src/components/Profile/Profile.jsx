@@ -1,15 +1,36 @@
 import { Link } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import "./Profile.css";
 
-function Profile({ isClickMenu, handleMenu, user, onLogout }) {
+function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
   const firstName =
     user?.name[0]?.toUpperCase() + user?.name?.slice(1).toLowerCase();
 
+  const currentUser = useContext(CurrentUserContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
+
+  function handleNameChange(evt) {
+    setName(evt.target.value);
+  }
+
+  function handleEmailChange(evt) {
+    setEmail(evt.target.value);
+  }
+
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    onUpdateUser({name, email})
     alert('SUBMIT!');
   }
 
@@ -35,7 +56,7 @@ function Profile({ isClickMenu, handleMenu, user, onLogout }) {
           <li>
             <label className="profile__text profile__text_border">
               Имя
-              <input type="text" className="profile__input"  />
+              <input type="text" className="profile__input" value={name} onChange={handleNameChange} />
             </label>
           </li>
 
@@ -45,7 +66,7 @@ function Profile({ isClickMenu, handleMenu, user, onLogout }) {
               <input
                 type="text"
                 className="profile__input"
-                
+                value={email} onChange={handleEmailChange}
               />
             </label>
           </li>
