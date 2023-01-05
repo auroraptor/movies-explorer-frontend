@@ -22,7 +22,7 @@ import {
   signinUser,
   signoutUser,
   signupUser,
-  updateCurrentUser
+  updateCurrentUser,
 } from "../../utils/MainApi";
 
 function App() {
@@ -82,9 +82,9 @@ function App() {
       .then(([user, movies]) => {
         setCurrentUser(user);
         setSavedMovies((prev) => ({
-            ...prev,
-            movies: movies,
-            visible: visible,
+          ...prev,
+          movies: movies,
+          visible: visible,
         }));
       })
       .catch((err) => console.log(err));
@@ -113,16 +113,16 @@ function App() {
         localStorage.removeItem("search");
         localStorage.removeItem("isShortFilm");
         setLoggedIn(false);
-        navigate('/signin');
+        navigate("/signin");
       })
       .catch((err) => console.log(err));
   };
 
   const handleUpdateUser = (data) => {
     updateCurrentUser(data)
-    .then((user) => setCurrentUser(user))
-    .catch((err) => console.log(err.statusCode))
-  }
+      .then((user) => setCurrentUser(user))
+      .catch((err) => console.log(err.statusCode));
+  };
 
   const handleSavedMovie = (movie) => {
     const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
@@ -214,8 +214,15 @@ function App() {
     <div className="app">
       <div className="app__container">
         <Routes>
-        <Route path="/" element={<Main />}></Route>
-          <Route element={<ProtectedRoute onLogin={loggedIn}/>}>
+          <Route
+            path="/"
+            element={
+              <CurrentUserContext.Provider value={currentUser}>
+                <Main isClickMenu={isClickMenu} handleMenu={handleMenu} />
+              </CurrentUserContext.Provider>
+            }
+          ></Route>
+          <Route element={<ProtectedRoute onLogin={loggedIn} />}>
             <Route
               path="/movies"
               element={
