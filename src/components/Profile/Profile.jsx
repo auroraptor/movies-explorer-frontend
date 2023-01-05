@@ -4,14 +4,9 @@ import Navigation from "../Navigation/Navigation";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import "./Profile.css";
 
-function Profile({
-  isClickMenu,
-  handleMenu,
-  user,
-  onLogout
-}) {
-
-  const firstName = user?.name[0]?.toUpperCase() + user?.name?.slice(1).toLowerCase();
+function Profile({ isClickMenu, handleMenu, user, onLogout }) {
+  const firstName =
+    user?.name[0]?.toUpperCase() + user?.name?.slice(1).toLowerCase();
 
   return (
     <article className="profile">
@@ -21,27 +16,40 @@ function Profile({
           handleMenu={handleMenu}
         ></HamburgerMenu>
         {isClickMenu && <div className="background"></div>}
-        <Navigation className={`menu menu_desktop ${isClickMenu && "menu_active"}`} handleMenu={handleMenu}/>
+        <Navigation
+          className={`menu menu_desktop ${isClickMenu && "menu_active"}`}
+          handleMenu={handleMenu}
+        />
       </Header>
-      <div className="profile__container">
-        <div className="profile__info">
-          <p className="profile__hello-name">{`Привет, ${firstName}!`}</p>
-          <ul className="profile__user">
-            <li className="profile__list-item_name profile__list-item">
-              <p className="profile__text">Имя</p>
-              <p className="profile__text">{firstName}</p>
-            </li>
-            <li className="profile__list-item_email profile__list-item">
-              <p className="profile__text">E-mail</p>
-              <p className="profile__text">{user?.email}</p>
-            </li>
-          </ul>
-        </div>
+      <form className="profile__form" name="profile" id="profile">
+        <label
+          for="profile"
+          className="profile__hello-name"
+        >{`Привет, ${firstName}!`}</label>
+        <ul className="profile__user">
+          <li>
+            <label className="profile__text profile__text_border">
+              Имя
+              <input type="text" className="profile__input" value={firstName} />
+            </label>
+          </li>
+
+          <li>
+            <label className="profile__text">
+              E-mail
+              <input
+                type="text"
+                className="profile__input"
+                value={user?.email}
+              />
+            </label>
+          </li>
+        </ul>
         <div className="profile__settings">
           <button
             className="profile__button profile__button_edit"
             type="button"
-            onClick={() => alert("not really button")}
+            onClick={() => alert("not really button")} disabled={true}
           >
             Редактировать
           </button>
@@ -49,7 +57,7 @@ function Profile({
             Выйти из аккаунта
           </Link>
         </div>
-      </div>
+      </form>
     </article>
   );
 }

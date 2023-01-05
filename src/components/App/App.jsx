@@ -70,7 +70,7 @@ function App() {
         visible: visible,
       }));
       setPlaceholder(localStorage.getItem("search"));
-      setChecked(localStorage.getItem("checked"));
+      setChecked(JSON.parse(localStorage.getItem("isShortFilm")));
     }
   }, [visible]);
 
@@ -109,6 +109,8 @@ function App() {
       .then(() => {
         setCurrentUser({ name: "", email: "" });
         localStorage.removeItem("movies");
+        localStorage.removeItem("search");
+        localStorage.removeItem("isShortFilm");
         setLoggedIn(false);
         navigate('/signin');
       })
