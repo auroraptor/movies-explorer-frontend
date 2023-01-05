@@ -16,7 +16,7 @@ const signupUser = async ({name, email, password}) => {
 };
 
 const signinUser = async ({email, password}) => {
-  const user = await fetch(`${MAIN_API}signin`, {
+  const res = await fetch(`${MAIN_API}signin`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -26,7 +26,9 @@ const signinUser = async ({email, password}) => {
     body: JSON.stringify({ email, password }),
   });
 
-  return getResponse(user);
+  return res.ok
+    ? Promise.resolve()
+    : Promise.reject(res.status);
 };
 
 const signoutUser = async () => {
