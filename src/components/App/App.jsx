@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Main from "../Main/Main";
 import Login from "../Login/Login";
@@ -52,13 +52,14 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
+  let path = useParams();
 
   useEffect(() => {
     getCurrentUser()
       .then((res) => {
         setCurrentUser(res);
         setLoggedIn(true);
-        navigate("/movies");
+        navigate(path);
       })
       .catch((err) => console.log(err));
   }, []);
