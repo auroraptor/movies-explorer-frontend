@@ -5,26 +5,27 @@ import Form from "../Form/Form";
 import "./Register.css";
 
 function Register(props) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-  });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors },
+  // } = useForm({
+  //   defaultValues: {
+  //     name: "",
+  //     email: "",
+  //     password: "",
+  //   },
+  // });
 
-  const onSubmit = (data, e) => {
-    console.log(data, e);
-    props.onRegister(data);
-  };
-  const onError = (errors, e) => console.log(errors, e);
+  // const onSubmit = (data, e) => {
+  //   console.log(data, e);
+  //   props.onRegister(data);
+  // };
+  // const onError = (errors, e) => console.log(errors, e);
 
-  console.log(watch("name"));
+  // console.log(watch("name"));
+  // console.log(onError);
 
   return (
     <div className="register">
@@ -32,7 +33,7 @@ function Register(props) {
         <p className="register__text">Добро пожаловать!</p>
       </Header>
       <Form
-        onSubmit={handleSubmit(onSubmit, onError)}
+        // onSubmit={handleSubmit(onSubmit, onError)}
         name={"register"}
         id={"register"}
         buttonText={"Зарегистрироваться"}
@@ -44,24 +45,18 @@ function Register(props) {
         <input
           type="text"
           className="input-group__input"
-          aria-invalid={errors.name ? "true" : "false"}
-          {...register("name", {
-            required: (
-              <span className="input-group__help-text input-group__error_visible">
-                Заполните имя
-              </span>
-            ),
-            pattern: {
-              value: /[A-Za-z_А-Яа-яёЁ]+/,
-              message: (
-                <span className="input-group__help-text input-group__error_visible">
-                  Имя содержит только латиницу, кириллицу, пробел или дефис
-                </span>
-              ),
-            },
-          })}
+          // aria-invalid={errors.name ? "true" : "false"}
+          // onChange={onError}
+          // {...register("name", {
+          //   required: (
+          //     <span className="input-group__help-text input-group__error_visible">
+          //       Заполните имя
+          //     </span>
+          //   ),
+          //   validate: value => value === '1' || 'error message',
+          // })}
         ></input>
-        <ErrorMessage
+       {/* { errors.name && <ErrorMessage
           errors={errors}
           name="name"
           message={"name"}
@@ -70,25 +65,25 @@ function Register(props) {
               {message}
             </span>
           )}
-        />
+        />} */}
 
         <label className="input-group__label">Почта</label>
 
         <input
           type="email"
           className="input-group__input"
-          aria-invalid={errors.email ? "true" : "false"}
-          {...register("email", {
-            required: (
-              <span className="input-group__help-text input-group__error_visible">
-                Заполните Почту
-              </span>
-            ),
-          })}
+          // aria-invalid={errors.email ? "true" : "false"}
+          // {...register("email", {
+          //   required: (
+          //     <span className="input-group__help-text input-group__error_visible">
+          //       Заполните Почту
+          //     </span>
+          //   ),
+          // })}
         ></input>
 
-        <ErrorMessage
-          errors={errors}
+        {/* <ErrorMessage
+          // errors={errors}
           name="email"
           message={"email"}
           render={({ message }) => (
@@ -96,22 +91,24 @@ function Register(props) {
               {message}
             </span>
           )}
-        />
+        /> */}
 
         <label className="input-group__label">Пароль</label>
 
         <input
           type="password"
           className="input-group__input"
-          aria-invalid={errors.password ? "true" : "false"}
-          {...register("password", { required: (
-            <span className="input-group__help-text input-group__error_visible">
-              Заполните Пароль
-            </span>
-          ), })}
+          // aria-invalid={errors.password ? "true" : "false"}
+          // {...register("password", {
+          //   required: (
+          //     <span className="input-group__help-text input-group__error_visible">
+          //       Заполните Пароль
+          //     </span>
+          //   ),
+          // })}
         ></input>
-        <ErrorMessage
-          errors={errors}
+        {/* <ErrorMessage
+          // errors={errors}
           name="password"
           message={"password"}
           render={({ message }) => (
@@ -119,7 +116,7 @@ function Register(props) {
               {message}
             </span>
           )}
-        />
+        /> */}
       </Form>
     </div>
   );
