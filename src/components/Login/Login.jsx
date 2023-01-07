@@ -2,16 +2,17 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Header from "../Header/Header";
 import Form from "../Form/Form";
-import Input from "../Input/Input";
+import { VALID_EMAIL_REGEX } from "../../constants/regex";
 import "./Login.css";
+import "../Input/Input.css";
 
 function Login({ onLogin }) {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -19,12 +20,8 @@ function Login({ onLogin }) {
   });
 
   const onSubmit = (data, e) => {
-    console.log(data, e);
     onLogin(data);
   };
-  const onError = (errors, e) => console.log(errors, e);
-
-  console.log(watch("email"));
 
   return (
     <div className="login">
@@ -35,7 +32,8 @@ function Login({ onLogin }) {
         name="login"
         id="login"
         buttonText={"Войти"}
-        onSubmit={handleSubmit(onSubmit, onError)}
+        isButtonDisabled={!isValid}
+        onSubmit={handleSubmit(onSubmit)}
         label={"Ещё не зарегистрированы?"}
         link={"/signup"}
         linkText={"Регистрация"}
@@ -46,59 +44,45 @@ function Login({ onLogin }) {
           className="input-group__input"
           aria-invalid={errors.email ? "true" : "false"}
           {...register("email", {
-            required: (
-              <span className="input-group__help-text input-group__error_visible">
-                Заполните Почту
-              </span>
-            ),
+            required: "Заполните Почту",
+            validate: (value) =>
+              !!value.match(VALID_EMAIL_REGEX) ||
+              "email не соответствует шаблону электронной почты",
           })}
         ></input>
-        <ErrorMessage
-          errors={errors}
-          name="email"
-          message={"email"}
-          render={({ message }) => (
-            <span className="input-group__help-text input-group__error_visible">
-              {message}
-            </span>
-          )}
-        />
+        <span className="input-group__error-message">
+          <ErrorMessage
+            errors={errors}
+            name="email"
+            message={"email"}
+            render={({ message }) => (
+              <span className="input-group__help-text input-group__error_visible">
+                {message}
+              </span>
+            )}
+          />
+        </span>
         <label className="input-group__label">Пароль</label>
         <input
           type="password"
           className="input-group__input"
           aria-invalid={errors.password ? "true" : "false"}
           {...register("password", {
-            required: (
-              <span className="input-group__help-text input-group__error_visible">
-                Заполните Пароль
-              </span>
-            ),
+            required: "Введите пароль",
           })}
         ></input>
-        <ErrorMessage
-          errors={errors}
-          name="password"
-          message={"password"}
-          render={({ message }) => (
-            <span className="input-group__help-text input-group__error_visible">
-              {message}
-            </span>
-          )}
-        />
-        {/* ƒ */}
-        {/* <Input
-          label="E-mail"
-          type="email"
-          errorText={"This is help text"}
-          isRequired={true}
-        ></Input>
-        <Input
-          label="Пароль"
-          type="password"
-          errorText={"This is help text"}
-          isRequired={true}
-        ></Input> */}
+        <span className="input-group__error-message">
+          <ErrorMessage
+            errors={errors}
+            name="password"
+            message={"password"}
+            render={({ message }) => (
+              <span className="input-group__help-text input-group__error_visible">
+                {message}
+              </span>
+            )}
+          />
+        </span>
       </Form>
     </div>
   );
