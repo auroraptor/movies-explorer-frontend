@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import "./Form.css";
 
-function Form({ name, id, children, buttonText, label, link, linkText, onSubmit}) {
+function Form({ name, id, children, buttonText, label, link, linkText, onSubmit, isButtonDisabled}) {
   return (
     <form className="form" name={name} id={id} noValidate onSubmit={onSubmit}>
       {children}
       <div className="form__container">
-        <button className="form__button" type="submit">
+        <button className="form__button" type="submit" disabled={isButtonDisabled}>
           {buttonText}
         </button>
         <label className="form__label">

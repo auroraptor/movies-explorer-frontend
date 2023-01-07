@@ -3,29 +3,29 @@ import { ErrorMessage } from "@hookform/error-message";
 import Header from "../Header/Header";
 import Form from "../Form/Form";
 import "./Register.css";
+import { VALID_EMAIL_REGEX, VALID_NAME_REGEX } from "../../constants/regex";
 
 function Register(props) {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm({
-  //   defaultValues: {
-  //     name: "",
-  //     email: "",
-  //     password: "",
-  //   },
-  // });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isDirty, isValid },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
 
-  // const onSubmit = (data, e) => {
-  //   console.log(data, e);
-  //   props.onRegister(data);
-  // };
-  // const onError = (errors, e) => console.log(errors, e);
+  console.log("is valid", isValid);
+  console.log("is dirty", isDirty);
 
-  // console.log(watch("name"));
-  // console.log(onError);
+  const onSubmit = (data, e) => {
+    props.onRegister(data);
+  };
+  const onError = (errors, e) => console.log(errors, e);
 
   return (
     <div className="register">
@@ -33,90 +33,94 @@ function Register(props) {
         <p className="register__text">Добро пожаловать!</p>
       </Header>
       <Form
-        // onSubmit={handleSubmit(onSubmit, onError)}
+        onSubmit={handleSubmit(onSubmit, onError)}
         name={"register"}
         id={"register"}
         buttonText={"Зарегистрироваться"}
+        isButtonDisabled={!isValid}
         label={"Уже зарегистрированы?"}
         link={"/signin"}
         linkText="Войти"
       >
-        <label className="input-group__label">Имя</label>
+        <label htmlFor="name" className="input-group__label">
+          Имя
+        </label>
         <input
           type="text"
           className="input-group__input"
-          // aria-invalid={errors.name ? "true" : "false"}
-          // onChange={onError}
-          // {...register("name", {
-          //   required: (
-          //     <span className="input-group__help-text input-group__error_visible">
-          //       Заполните имя
-          //     </span>
-          //   ),
-          //   validate: value => value === '1' || 'error message',
-          // })}
+          aria-invalid={errors.name ? "true" : "false"}
+          onChange={onError}
+          {...register("name", {
+            required: 
+                "Введите имя"
+            ,
+            validate: (value) =>
+              !!value.match(VALID_NAME_REGEX) ||
+              "Только латиница, кириллица, пробел или дефис",
+          })}
         ></input>
-       {/* { errors.name && <ErrorMessage
-          errors={errors}
-          name="name"
-          message={"name"}
-          render={({ message }) => (
-            <span className="input-group__help-text input-group__error_visible">
-              {message}
-            </span>
-          )}
-        />} */}
+        <span className="input-group__error-message">
+          <ErrorMessage
+            errors={errors}
+            name="name"
+            message={"name"}
+            render={({ message }) => (
+              <span className="input-group__help-text input-group__error_visible">
+                {message}
+              </span>
+            )}
+          />
+        </span>
 
-        <label className="input-group__label">Почта</label>
+        <label htmlFor="email" className="input-group__label">
+          Почта
+        </label>
 
         <input
           type="email"
           className="input-group__input"
-          // aria-invalid={errors.email ? "true" : "false"}
-          // {...register("email", {
-          //   required: (
-          //     <span className="input-group__help-text input-group__error_visible">
-          //       Заполните Почту
-          //     </span>
-          //   ),
-          // })}
+          aria-invalid={errors.email ? "true" : "false"}
+          {...register("email", {
+            required: "Введите email",
+            validate: (value) =>
+              !!value.match(VALID_EMAIL_REGEX) ||
+              "email не соответствует шаблону электронной почты",
+          })}
         ></input>
-
-        {/* <ErrorMessage
-          // errors={errors}
-          name="email"
-          message={"email"}
-          render={({ message }) => (
-            <span className="input-group__help-text input-group__error_visible">
-              {message}
-            </span>
-          )}
-        /> */}
-
+        <span className="input-group__error-message">
+          <ErrorMessage
+            errors={errors}
+            name="email"
+            message={"email"}
+            render={({ message }) => (
+              <span role="alert" className="input-group__help-text input-group__error_visible">
+                {message}
+              </span>
+            )}
+          />
+        </span>
         <label className="input-group__label">Пароль</label>
-
         <input
+          htmlFor="password"
           type="password"
           className="input-group__input"
-          // aria-invalid={errors.password ? "true" : "false"}
-          // {...register("password", {
-          //   required: (
-          //     <span className="input-group__help-text input-group__error_visible">
-          //       Заполните Пароль
-          //     </span>
-          //   ),
-          // })}
+          aria-invalid={errors.password ? "true" : "false"}
+          {...register("password", {
+            required: "Введите пароль",
+          })}
         ></input>
-        {/* <ErrorMessage
-          // errors={errors}
-          name="password"
-          message={"password"}
-          render={({ message }) => (
-            <span className="input-group__help-text input-group__error_visible">
-              {message}
-            </span>
-          )}
-        /> */}
+        <span className="input_test">
+          <ErrorMessage
+            errors={errors}
+            name="password"
+            message={"password"}
+            render={({ message }) => (
+              <span role="alert" className="input-group__help-text input-group__error_visible">
+                {message}
+              </span>
+            )}
+          />
+        </span>
       </Form>
     </div>
   );
