@@ -9,7 +9,7 @@ function Register(props) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -19,13 +19,9 @@ function Register(props) {
     },
   });
 
-  console.log("is valid", isValid);
-  console.log("is dirty", isDirty);
-
   const onSubmit = (data, e) => {
     props.onRegister(data);
   };
-  const onError = (errors, e) => console.log(errors, e);
 
   return (
     <div className="register">
@@ -33,7 +29,7 @@ function Register(props) {
         <p className="register__text">Добро пожаловать!</p>
       </Header>
       <Form
-        onSubmit={handleSubmit(onSubmit, onError)}
+        onSubmit={handleSubmit(onSubmit)}
         name={"register"}
         id={"register"}
         buttonText={"Зарегистрироваться"}
