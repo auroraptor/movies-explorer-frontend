@@ -40,6 +40,10 @@
   flex: 1;
 }
 
+.profile__info {
+  border-bottom: 1px solid #424242;
+}
+
 .profile__text_border {
   border-bottom: 1px solid #424242;
 }
@@ -49,6 +53,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* padding-bottom: 10px; */
+  padding-top: 11px;
+}
+
+.profile__error-message {
+  display: block;
+  height: 12px;
+  margin: 0;
+  text-align: end;
 }
 
 .profile__input {
@@ -58,13 +71,25 @@
   border-radius: 40px;
   color: white;
   text-align: end;
-  padding: 16px 0 18px;
-  width: 80%;
+  padding: 4px 0;
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+
 }
 
 .profile__input:focus {
   text-align: start;
   padding-left: 9px;
+}
+
+.profile__input::placeholder {
+  color:#ffffff;
+}
+
+.profile__input:focus::placeholder {
+  color: transparent;
 }
 
 .profile__button_edit {

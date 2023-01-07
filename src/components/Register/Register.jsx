@@ -19,7 +19,7 @@ function Register(props) {
     },
   });
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data) => {
     props.onRegister(data);
   };
 
@@ -45,7 +45,6 @@ function Register(props) {
           type="text"
           className="input-group__input"
           aria-invalid={errors.name ? "true" : "false"}
-          onChange={onError}
           {...register("name", {
             required: 
                 "Введите имя"
