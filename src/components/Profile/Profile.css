@@ -89,7 +89,7 @@
 }
 
 .profile__input:focus::placeholder {
-  color: transparent;
+  color: rgb(170, 170, 170);
 }
 
 .profile__button_edit {

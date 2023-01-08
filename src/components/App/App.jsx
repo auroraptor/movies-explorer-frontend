@@ -27,8 +27,13 @@ import {
 } from "../../utils/MainApi";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isClickMenu, setClickMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [placeholder, setPlaceholder] = useState("Фильм");
+  const [isCheked, setChecked] = useState(false);
+
   const [searchResult, setSearchResult] = useState({
     movies: [],
     visible: 0,
@@ -42,15 +47,10 @@ function App() {
   const [cardListHelpText, setCardListHelpText] = useState(
     "Введите ключевое слово"
   );
-  const [placeholder, setPlaceholder] = useState("Фильм");
-  const [isCheked, setChecked] = useState(false);
 
-  const windowSize = useWindowSize();
-  const { width } = windowSize;
-  const numberOfItemsPerPage = displayItemsPerPage(width);
-  const numberOfNextItems = displayNextItems(width);
-  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
-  const [loggedIn, setLoggedIn] = useState(false);
+  const windowWidth = useWindowSize().width;
+  const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
+  const numberOfNextItems = displayNextItems(windowWidth);
 
   const navigate = useNavigate();
   let path = useParams();

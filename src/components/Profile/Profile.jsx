@@ -14,24 +14,20 @@ function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
     user?.name[0]?.toUpperCase() + user?.name?.slice(1).toLowerCase();
 
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(currentUser.name);
+  const [email, setEmail] = useState(currentUser.email);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      name: name,
-      email: email,
+      name: `${name}`,
+      email: `${email}`,
     },
   });
-
-  console.log("IS VALID", isValid);
-  console.log(watch("name"));
 
   useEffect(() => {
     setName(currentUser.name);
@@ -136,7 +132,7 @@ function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
           <button
             className="profile__button profile__button_edit"
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid }
           >
             Редактировать
           </button>
