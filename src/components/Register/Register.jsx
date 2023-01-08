@@ -104,7 +104,7 @@ function Register(props) {
             required: "Введите пароль",
           })}
         ></input>
-        <span className="input_test">
+        <span className="input-group__error-message">
           <ErrorMessage
             errors={errors}
             name="password"
@@ -116,6 +116,9 @@ function Register(props) {
             )}
           />
         </span>
+        {(<span className="input-group__help-text input-group__error_visible">
+         {props.errorMessage}
+        </span>)}
       </Form>
     </div>
   );

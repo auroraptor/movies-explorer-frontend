@@ -46,6 +46,7 @@ function App() {
   const [cardListHelpText, setCardListHelpText] = useState(
     "Введите ключевое слово"
   );
+  const [success, setSuccess] = useState(true);
   const [errorMessage, setErrorMessage] = useState('Что-то пошло не так');
   const windowWidth = useWindowSize().width;
   const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
@@ -93,8 +94,14 @@ function App() {
 
   const handleRegister = (data) => {
     signupUser(data)
-      .then((res) => navigate("signin"))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        navigate("signin");
+        setSuccess(true);
+      })
+      .catch((err) => {
+        setErrorMessage(err);
+        setSuccess(false);
+      });
   };
 
   const handleLogin = (data) => {
@@ -130,17 +137,17 @@ function App() {
         .then((res) => {
           setSavedMovies((prev) => ({
             ...prev,
-            movies: savedMovies.movies.filter((m) => m.id !== movie.id),
+            movies: savedMovies.movies.filter((m) => m.movieId !== movie.id),
           }));
         })
         .catch((err) => console.log(err));
   }
 
   const handleSavedMovie = (movie) => {
-    const isSavedMovie = savedMovies?.movies?.some((m) => m.movieId === movie.id);
+    const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
 
-    if (isSavedMovie) {
-      handleDeleteMovie(movie);
+    if (savedMovie) {
+       handleDeleteMovie(savedMovie);
     } else {
       createMovie(movie)
         .then((res) =>
@@ -193,7 +200,7 @@ function App() {
 
         setSearchResult((prev) => ({
           ...prev,
-          items: movies,
+          movies: movies,
           visible: numberOfItemsPerPage,
         }));
 
@@ -235,7 +242,7 @@ function App() {
                   <Movies
                     isClickMenu={isClickMenu}
                     handleMenu={handleMenu}
-                    movies={searchResult}
+                    searchResult={searchResult}
                     savedMovies={savedMovies}
                     loadMore={loadMoreSearchResults}
                     cardListHelpText={cardListHelpText}
@@ -288,7 +295,7 @@ function App() {
           ></Route>
           <Route
             path="/signup"
-            element={<Register onRegister={handleRegister} errorMessage={errorMessage}/>}
+            element={<Register onRegister={handleRegister} errorMessage={errorMessage} success={success} />}
           ></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>

@@ -79,8 +79,7 @@
 }
 
 .profile__input:focus {
-  text-align: start;
-  padding-left: 9px;
+  padding-right: 9px;
 }
 
 .profile__input::placeholder {

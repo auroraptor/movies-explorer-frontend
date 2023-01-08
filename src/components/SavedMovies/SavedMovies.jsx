@@ -9,32 +9,18 @@ import "./SavedMovies.css";
 import { toLocaleDuration } from "../../utils/toLocaleDuration";
 
 function SavedMovies(props) {
-  const { isClickMenu, handleMenu, children, savedMovies, handleSavedMovie, loadMore } =
-    props;
+  const {
+    isClickMenu,
+    handleMenu,
+    children,
+    savedMovies,
+    handleSavedMovie,
+    loadMore,
+  } = props;
 
   const handleLike = (movie) => {
-    handleSavedMovie(movie);
+    handleSavedMovie(movie, savedMovies);
   };
-
-  const cards = savedMovies?.movies
-    ?.slice(0, savedMovies?.visible)
-    .map((movie) => (
-      <MoviesCard
-        key={movie?.id}
-        movie={movie}
-        icon={`movies-card__button movies-card__button_remove`}
-        ariaLabel="Удалить"
-        onMovieClick={handleLike}
-        buttonName="delete"
-        nameEN={movie?.nameEN}
-        nameRU={movie?.nameRU}
-        duration={toLocaleDuration(movie?.duration)}
-        thumbnail={movie?.image}
-        savedMovies={savedMovies}
-      ></MoviesCard>
-    ));
-
-    console.log('CARDS', cards);
 
   return (
     <section className="saved-movies">
@@ -50,7 +36,23 @@ function SavedMovies(props) {
         />
       </Header>
       {children}
-      <MoviesCardList cardListHelpText={'Все понравившиеся фильмы будут здесь'}>{cards || ''}</MoviesCardList>
+      <MoviesCardList cardListHelpText={"Все понравившиеся фильмы будут здесь"}>
+        {savedMovies?.movies?.slice(0, savedMovies?.visible).map((movie) => (
+          <MoviesCard
+            key={movie?.id}
+            movie={movie}
+            icon={`movies-card__button movies-card__button_remove`}
+            ariaLabel="Удалить"
+            onMovieClick={handleLike}
+            buttonName="delete"
+            nameEN={movie?.nameEN}
+            nameRU={movie?.nameRU}
+            duration={toLocaleDuration(movie?.duration)}
+            thumbnail={movie?.image}
+            savedMovies={savedMovies}
+          ></MoviesCard>
+        ))}
+      </MoviesCardList>
       {savedMovies?.visible < savedMovies?.movies?.length && (
         <MoviesLoadMore loadMore={loadMore} />
       )}

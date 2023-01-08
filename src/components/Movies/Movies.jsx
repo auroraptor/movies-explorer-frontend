@@ -12,7 +12,7 @@ function Movies(props) {
   const {
     isClickMenu,
     handleMenu,
-    movies,
+    searchResult,
     loadMore,
     children,
     cardListHelpText,
@@ -23,8 +23,6 @@ function Movies(props) {
   const handleLike = (movie) => {
     handleSavedMovie(movie);
   };
-
-  console.log('MOVIES', movies);
 
   return (
     <div className="movies">
@@ -41,7 +39,7 @@ function Movies(props) {
       </Header>
       {children}
       <MoviesCardList cardListHelpText={cardListHelpText}>
-        {movies?.items?.slice(0, movies?.visible).map((movie) => (
+        {searchResult?.movies?.slice(0, searchResult?.visible).map((movie) => (
           <MoviesCard
             key={movie?.id}
             movie={movie}
@@ -57,7 +55,7 @@ function Movies(props) {
           ></MoviesCard>
         ))}
       </MoviesCardList>
-      {movies?.visible < movies?.movies?.length && (
+      {searchResult?.visible < searchResult?.movies?.length && (
         <MoviesLoadMore loadMore={loadMore} />
       )}
       <Footer></Footer>
