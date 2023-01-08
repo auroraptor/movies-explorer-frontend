@@ -11,6 +11,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getBeatfilmMovies from "../../utils/MoviesApi";
+import { displayItemsPerPage, displayNextItems } from "../../constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
 import useWindowSize from "../../hooks/useWindowSize";
@@ -28,7 +29,7 @@ import {
 function App() {
   const [isClickMenu, setClickMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchingMoviesResult, setSearchingMoviesResult] = useState({
+  const [searchResult, setSearchResult] = useState({
     movies: [],
     visible: 0,
     error: false,
@@ -46,8 +47,8 @@ function App() {
 
   const windowSize = useWindowSize();
   const { width } = windowSize;
-  const visible = width > 980 ? 12 : width > 520 ? 8 : 5;
-  const loadCount = width > 980 ? 3 : 2;
+  const numberOfItemsPerPage = displayItemsPerPage(width);
+  const numberOfNextItems = displayNextItems(width);
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -66,15 +67,15 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("movies")) {
-      setSearchingMoviesResult((prev) => ({
+      setSearchResult((prev) => ({
         ...prev,
         movies: JSON.parse(localStorage.getItem("movies")),
-        visible: visible,
+        visible: numberOfItemsPerPage,
       }));
       setPlaceholder(localStorage.getItem("search"));
       setChecked(JSON.parse(localStorage.getItem("isShortFilm")));
     }
-  }, [visible]);
+  }, [numberOfItemsPerPage]);
 
   useEffect(() => {
     if (!loggedIn) return;
@@ -85,11 +86,11 @@ function App() {
         setSavedMovies((prev) => ({
           ...prev,
           movies: movies,
-          visible: visible,
+          visible: numberOfItemsPerPage,
         }));
       })
       .catch((err) => console.log(err));
-  }, [loggedIn, visible]);
+  }, [loggedIn, numberOfItemsPerPage]);
 
   const handleRegister = (data) => {
     signupUser(data)
@@ -149,17 +150,17 @@ function App() {
     }
   };
 
-  const loadMore = () => {
-    setSearchingMoviesResult((prev) => ({
+  const loadMoreSearchResults = () => {
+    setSearchResult((prev) => ({
       ...prev,
-      visible: prev.visible + loadCount,
+      visible: prev.visible + numberOfNextItems,
     }));
   };
 
   const loadMoreSavedMovies = () => {
     setSavedMovies((prev) => ({
       ...prev,
-      visible: prev.visible + loadCount,
+      visible: prev.visible + numberOfNextItems,
     }));
   };
 
@@ -187,10 +188,10 @@ function App() {
             matched(nameRU, search) || matched(nameEN, search)
         );
 
-        setSearchingMoviesResult((prev) => ({
+        setSearchResult((prev) => ({
           ...prev,
           items: movies,
-          visible: visible,
+          visible: numberOfItemsPerPage,
         }));
 
         localStorage.setItem("isShortFilm", checked);
@@ -231,9 +232,9 @@ function App() {
                   <Movies
                     isClickMenu={isClickMenu}
                     handleMenu={handleMenu}
-                    movies={searchingMoviesResult}
+                    movies={searchResult}
                     savedMovies={savedMovies}
-                    loadMore={loadMore}
+                    loadMore={loadMoreSearchResults}
                     cardListHelpText={cardListHelpText}
                     handleSavedMovie={handleSavedMovie}
                   >
