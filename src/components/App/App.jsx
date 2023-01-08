@@ -33,7 +33,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState("Фильм");
   const [isCheked, setChecked] = useState(false);
-
   const [searchResult, setSearchResult] = useState({
     movies: [],
     visible: 0,
@@ -47,12 +46,12 @@ function App() {
   const [cardListHelpText, setCardListHelpText] = useState(
     "Введите ключевое слово"
   );
-
+  const [errorMessage, setErrorMessage] = useState('Что-то пошло не так');
   const windowWidth = useWindowSize().width;
   const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
   const numberOfNextItems = displayNextItems(windowWidth);
-
   const navigate = useNavigate();
+
   let path = useParams();
 
   useEffect(() => {
@@ -126,18 +125,22 @@ function App() {
       .catch((err) => console.log(err.statusCode));
   };
 
-  const handleSavedMovie = (movie) => {
-    const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
-
-    if (savedMovie) {
-      deleteMovie(savedMovie)
+  const handleDeleteMovie = (movie) => {
+    deleteMovie(movie)
         .then((res) => {
           setSavedMovies((prev) => ({
             ...prev,
-            movies: savedMovies.movies.filter((m) => m.id !== savedMovie.id),
+            movies: savedMovies.movies.filter((m) => m.id !== movie.id),
           }));
         })
         .catch((err) => console.log(err));
+  }
+
+  const handleSavedMovie = (movie) => {
+    const isSavedMovie = savedMovies?.movies?.some((m) => m.movieId === movie.id);
+
+    if (isSavedMovie) {
+      handleDeleteMovie(movie);
     } else {
       createMovie(movie)
         .then((res) =>
@@ -257,7 +260,7 @@ function App() {
                     handleMenu={handleMenu}
                     loadMore={loadMoreSavedMovies}
                     savedMovies={savedMovies}
-                    handleSavedMovie={handleSavedMovie}
+                    handleSavedMovie={handleDeleteMovie}
                   >
                     <SearchForm onSearch={handleSearch} />
                     {isLoading && <Preloader />}
@@ -285,7 +288,7 @@ function App() {
           ></Route>
           <Route
             path="/signup"
-            element={<Register onRegister={handleRegister} />}
+            element={<Register onRegister={handleRegister} errorMessage={errorMessage}/>}
           ></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>

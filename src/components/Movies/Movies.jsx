@@ -16,7 +16,7 @@ function Movies(props) {
     loadMore,
     children,
     cardListHelpText,
-    handleSavedMovie, 
+    handleSavedMovie,
     savedMovies,
   } = props;
 
@@ -24,21 +24,7 @@ function Movies(props) {
     handleSavedMovie(movie);
   };
 
-  const cards = movies?.movies?.slice(0, movies?.visible).map((movie) => (
-    <MoviesCard
-      key={movie?.id}
-      movie={movie}
-      icon={`movies-card__button movies-card__button_like`}
-      ariaLabel="Нравится"
-      onMovieClick={handleLike}
-      buttonName="like"
-      nameEN={movie?.nameEN}
-      nameRU={movie?.nameRU}
-      duration={toLocaleDuration(movie?.duration)}
-      thumbnail={`https://api.nomoreparties.co/${movie?.image.url}`}
-      savedMovies={savedMovies}
-    ></MoviesCard>
-  ));
+  console.log('MOVIES', movies);
 
   return (
     <div className="movies">
@@ -55,7 +41,21 @@ function Movies(props) {
       </Header>
       {children}
       <MoviesCardList cardListHelpText={cardListHelpText}>
-        {cards}
+        {movies?.items?.slice(0, movies?.visible).map((movie) => (
+          <MoviesCard
+            key={movie?.id}
+            movie={movie}
+            icon={`movies-card__button movies-card__button_like`}
+            ariaLabel="Нравится"
+            onMovieClick={handleLike}
+            buttonName="like"
+            nameEN={movie?.nameEN}
+            nameRU={movie?.nameRU}
+            duration={toLocaleDuration(movie?.duration)}
+            thumbnail={`https://api.nomoreparties.co/${movie?.image.url}`}
+            savedMovies={savedMovies}
+          ></MoviesCard>
+        ))}
       </MoviesCardList>
       {movies?.visible < movies?.movies?.length && (
         <MoviesLoadMore loadMore={loadMore} />
