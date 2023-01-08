@@ -9,10 +9,7 @@ import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import { VALID_EMAIL_REGEX, VALID_NAME_REGEX } from "../../constants/regex";
 import "./Profile.css";
 
-function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
-  const firstName =
-    user?.name[0]?.toUpperCase() + user?.name?.slice(1).toLowerCase();
-
+function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
@@ -21,6 +18,7 @@ function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    watch
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -60,7 +58,7 @@ function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
         <label
           htmlFor="profile"
           className="profile__hello-name"
-        >{`Привет, ${firstName}!`}</label>
+        >{`Привет, ${name}!`}</label>
         <ul className="profile__user">
           <li className="profile__info">
             <label className="profile__text">
@@ -105,13 +103,11 @@ function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
                 {...register("email", {
                   validate: (value) =>
                     !!value.match(VALID_EMAIL_REGEX) ||
-                    "email не соответствует шаблону электронной почты",
+                    "Не соответствует шаблону электронной почты",
                 })}
               ></input>
             </label>
-          </li>
-          <li>
-            <span className="input-group__error-message">
+            <span className="profile__error-message">
               <ErrorMessage
                 errors={errors}
                 name="email"
@@ -132,7 +128,7 @@ function Profile({ isClickMenu, handleMenu, user, onLogout, onUpdateUser }) {
           <button
             className="profile__button profile__button_edit"
             type="submit"
-            disabled={!isValid }
+            disabled={!(((watch('name') !== name) || (watch('email') !== email)) && isValid)}
           >
             Редактировать
           </button>

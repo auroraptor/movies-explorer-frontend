@@ -53,7 +53,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding-bottom: 10px; */
   padding-top: 11px;
 }
 
@@ -61,7 +60,7 @@
   display: block;
   height: 12px;
   margin: 0;
-  text-align: end;
+  text-align: start;
 }
 
 .profile__input {
@@ -100,7 +99,7 @@
   border: none;
   color: #ffffff;
   padding: 7px;
-  border: 2px solid rgba(170, 170, 170, 1);
+  border: 1px solid rgba(170, 170, 170, 1);
   border-radius: 50px;
 }
 
@@ -111,7 +110,7 @@
 }
 
 button:disabled {
-  border: none;
+  border: 1px solid rgba(170, 170, 170, 0);
 }
 
 button:disabled:hover {
@@ -141,8 +140,20 @@ button:disabled:hover {
 }
 
 @media (min-width: 520px) {
-  .profile__container {
-    justify-content: space-around;
+  .profile__form {
+    justify-content: flex-start;
+  }
+
+  .profile__hello-name {
+    margin-top: 236px;
+  }
+
+  .profile__user {
+    flex: none;
+  }
+
+  .profile__settings {
+    margin-top: 269px;
   }
 
   .profile__logout {

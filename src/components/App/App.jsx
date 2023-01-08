@@ -273,7 +273,6 @@ function App() {
                     isClickMenu={isClickMenu}
                     handleMenu={handleMenu}
                     onLogout={handleLogout}
-                    user={currentUser}
                     onUpdateUser={handleUpdateUser}
                   />
                 </CurrentUserContext.Provider>

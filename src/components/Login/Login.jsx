@@ -47,7 +47,7 @@ function Login({ onLogin }) {
             required: "Заполните Почту",
             validate: (value) =>
               !!value.match(VALID_EMAIL_REGEX) ||
-              "email не соответствует шаблону электронной почты",
+              "Не соответствует шаблону электронной почты",
           })}
         ></input>
         <span className="input-group__error-message">
