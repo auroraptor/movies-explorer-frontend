@@ -9,6 +9,12 @@
   flex-direction: column;
 }
 
+.movies-card__trailer-link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
 .movies-card__thumbnail {
   height: 168px;
   border-radius: 6px 6px 0 0;

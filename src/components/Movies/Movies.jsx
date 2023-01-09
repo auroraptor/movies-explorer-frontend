@@ -49,6 +49,7 @@ function Movies(props) {
             buttonName="like"
             nameEN={movie?.nameEN}
             nameRU={movie?.nameRU}
+            trailerLink={movie?.trailerLink}
             duration={toLocaleDuration(movie?.duration)}
             thumbnail={`https://api.nomoreparties.co/${movie?.image.url}`}
             savedMovies={savedMovies}

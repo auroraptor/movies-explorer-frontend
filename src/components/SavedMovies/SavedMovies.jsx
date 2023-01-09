@@ -47,6 +47,7 @@ function SavedMovies(props) {
             buttonName="delete"
             nameEN={movie?.nameEN}
             nameRU={movie?.nameRU}
+            trailerLink={movie?.trailerLink}
             duration={toLocaleDuration(movie?.duration)}
             thumbnail={movie?.image}
             savedMovies={savedMovies}
