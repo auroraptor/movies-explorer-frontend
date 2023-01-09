@@ -46,8 +46,7 @@ function App() {
   const [cardListHelpText, setCardListHelpText] = useState(
     "Введите ключевое слово"
   );
-  const [success, setSuccess] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('Что-то пошло не так');
+  const [errorMessage, setErrorMessage] = useState(null);
   const windowWidth = useWindowSize().width;
   const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
   const numberOfNextItems = displayNextItems(windowWidth);
@@ -55,7 +54,7 @@ function App() {
 
   let path = useParams();
 
-  useEffect(() => {
+  useEffect(() => {  
     getCurrentUser()
       .then((res) => {
         setCurrentUser(res);
@@ -96,11 +95,10 @@ function App() {
     signupUser(data)
       .then((res) => {
         navigate("signin");
-        setSuccess(true);
+        setErrorMessage(null);
       })
       .catch((err) => {
-        setErrorMessage(err);
-        setSuccess(false);
+        setErrorMessage('Что-то пошло не так...');
       });
   };
 
@@ -128,8 +126,11 @@ function App() {
 
   const handleUpdateUser = (data) => {
     updateCurrentUser(data)
-      .then((user) => setCurrentUser(user))
-      .catch((err) => console.log(err.statusCode));
+      .then((user) => {
+        setCurrentUser(user);
+        setErrorMessage(null);
+      })
+      .catch((err) => setErrorMessage("Что-то пошло не так..."));
   };
 
   const handleDeleteMovie = (movie) => {
@@ -291,6 +292,7 @@ function App() {
                     handleMenu={handleMenu}
                     onLogout={handleLogout}
                     onUpdateUser={handleUpdateUser}
+                    errorMessage={errorMessage}
                   />
                 </CurrentUserContext.Provider>
               }
@@ -302,7 +304,7 @@ function App() {
           ></Route>
           <Route
             path="/signup"
-            element={<Register onRegister={handleRegister} errorMessage={errorMessage} success={success} />}
+            element={<Register onRegister={handleRegister} errorMessage={errorMessage} />}
           ></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>

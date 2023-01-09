@@ -44,3 +44,16 @@
   visibility: visible;
   color: #ee3465;
 }
+
+.input-group__input:-webkit-autofill,
+.input-group__input:-webkit-autofill:hover,
+.input-group__input:-webkit-autofill:focus,
+.input-group__input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #2f2f2f inset !important;
+  -webkit-text-fill-color: white;
+}
+
+.input-group__input:-webkit-autofill {
+  border: none;
+  -webkit-text-fill-color: white;
+}

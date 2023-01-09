@@ -9,7 +9,7 @@ import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import { VALID_EMAIL_REGEX, VALID_NAME_REGEX } from "../../constants/regex";
 import "./Profile.css";
 
-function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
+function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser, errorMessage }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
@@ -26,6 +26,8 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
       profile_email: `${email}`,
     },
   });
+
+  console.log(errorMessage, 'error');
 
   useEffect(() => {
     setName(currentUser.name);
@@ -125,6 +127,9 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
             </span>
           </li>
         </ul>
+        {(<span className="input-group__help-text input-group__error_visible">
+         {errorMessage}
+        </span>)}
         <div className="profile__settings">
           <button
             className="profile__button profile__button_edit"
