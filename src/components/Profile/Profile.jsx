@@ -18,12 +18,12 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    watch
+    watch,
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      name: `${name}`,
-      email: `${email}`,
+      profile_name: `${name}`,
+      profile_email: `${email}`,
     },
   });
 
@@ -33,7 +33,8 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
   }, [currentUser]);
 
   const onSubmit = (data) => {
-    onUpdateUser(data);
+    const { profile_name: name, profile_email: email } = data;
+    onUpdateUser({name, email});
   };
 
   return (
@@ -64,12 +65,12 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
             <label className="profile__text">
               Имя
               <input
-                autoComplete="off"
                 type="text"
                 className="profile__input"
                 aria-invalid={errors.name ? "true" : "false"}
                 placeholder={name}
-                {...register("name", {
+                {...register("profile_name", {
+                  required: false,
                   validate: (value) =>
                     !!value.match(VALID_NAME_REGEX) ||
                     "Только латиница, кириллица, пробел или дефис",
@@ -80,8 +81,8 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
               {
                 <ErrorMessage
                   errors={errors}
-                  name="name"
-                  message={"name"}
+                  name="profile_name"
+                  message={"profile_name"}
                   render={({ message }) => (
                     <span className="input-group__help-text input-group__error_visible">
                       {message}
@@ -95,12 +96,12 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
             <label className="profile__text">
               E-mail
               <input
-                autoComplete="off"
                 type="email"
                 className="profile__input"
                 aria-invalid={errors.email ? "true" : "false"}
                 placeholder={email}
-                {...register("email", {
+                {...register("profile_email", {
+                  required: false,
                   validate: (value) =>
                     !!value.match(VALID_EMAIL_REGEX) ||
                     "Не соответствует шаблону электронной почты",
@@ -110,8 +111,8 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
             <span className="profile__error-message">
               <ErrorMessage
                 errors={errors}
-                name="email"
-                message={"email"}
+                name="profile_email"
+                message={"profile_email"}
                 render={({ message }) => (
                   <span
                     role="alert"
@@ -128,7 +129,7 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
           <button
             className="profile__button profile__button_edit"
             type="submit"
-            disabled={!(((watch('name') !== name) || (watch('email') !== email)) && isValid)}
+            disabled={!(((watch('profile_name') !== name) || (watch('profile_email') !== email)) && isValid)}
           >
             Редактировать
           </button>
