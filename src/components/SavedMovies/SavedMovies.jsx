@@ -18,8 +18,8 @@ function SavedMovies(props) {
     loadMore,
   } = props;
 
-  const handleLike = (movie) => {
-    handleSavedMovie(movie, savedMovies);
+  const handleDelete = (movie) => {
+    handleSavedMovie(movie);
   };
 
   return (
@@ -43,7 +43,7 @@ function SavedMovies(props) {
             movie={movie}
             icon={`movies-card__button movies-card__button_remove`}
             ariaLabel="Удалить"
-            onMovieClick={handleLike}
+            onMovieClick={handleDelete}
             buttonName="delete"
             nameEN={movie?.nameEN}
             nameRU={movie?.nameRU}

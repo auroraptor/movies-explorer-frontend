@@ -17,7 +17,7 @@ function MoviesCard(props) {
 
   let isLiked = savedMovies?.movies?.some((i) => i.movieId === movie.id);
 
-  const handleLikeClick = (e) => {
+  const handleClick = (e) => {
     onMovieClick(movie);
   };
 
@@ -37,7 +37,7 @@ function MoviesCard(props) {
           name={buttonName}
           className={`${icon} ${isLiked && "movies-card__button_active"}`}
           aria-label={ariaLabel}
-          onClick={handleLikeClick}
+          onClick={handleClick}
         ></button>
       </div>
 

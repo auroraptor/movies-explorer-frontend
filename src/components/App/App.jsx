@@ -137,7 +137,7 @@ function App() {
         .then((res) => {
           setSavedMovies((prev) => ({
             ...prev,
-            movies: savedMovies.movies.filter((m) => m.movieId !== movie.id),
+            movies: savedMovies.movies.filter((m) => m.movieId !== movie.movieId),
           }));
         })
         .catch((err) => console.log(err));
@@ -147,7 +147,14 @@ function App() {
     const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
 
     if (savedMovie) {
-       handleDeleteMovie(savedMovie);
+      deleteMovie(savedMovie)
+        .then((res) => {
+          setSavedMovies((prev) => ({
+            ...prev,
+            movies: savedMovies.movies.filter((m) => m.movieId !== movie.id),
+          }));
+        })
+        .catch((err) => console.log(err));
     } else {
       createMovie(movie)
         .then((res) =>
