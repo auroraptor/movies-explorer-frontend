@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 40px 10px 26px 10px;
+  margin: 40px auto 26px auto;
   padding: 0;
   gap: 14px;
   flex: 1;
@@ -23,6 +23,7 @@
   line-height: 15px;
   text-align: center;
   color: #8b8b8b;
+  margin: 0 auto;
 }
 
 .movies-card-list__container_empty_hidden {
@@ -43,8 +44,7 @@
   .movies-card-list {
     gap: 24px;
     max-width: 1140px;
-    margin: 70px 70px 10px;
-
+    margin: 70px auto 10px;
   }
 }
 

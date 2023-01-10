@@ -57,7 +57,7 @@ function App() {
 
   let path = useParams();
 
-  useEffect(() => {  
+  useEffect(() => {
     getCurrentUser()
       .then((res) => {
         setCurrentUser(res);
@@ -101,7 +101,7 @@ function App() {
         setErrorMessageRegister(null);
       })
       .catch((err) => {
-        setErrorMessageRegister('Что-то пошло не так...');
+        setErrorMessageRegister("Что-то пошло не так...");
       });
   };
 
@@ -113,9 +113,11 @@ function App() {
         setErrorMessageLogin(null);
       })
       .catch((err) => {
-        err === HttpStatusCode.UNAUTHORIZED ?
-        setErrorMessageLogin("Неправильные почта или пароль") :
-        setErrorMessageLogin("Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз.");
+        err === HttpStatusCode.UNAUTHORIZED
+          ? setErrorMessageLogin("Неправильные почта или пароль")
+          : setErrorMessageLogin(
+              "Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз."
+            );
       });
   };
 
@@ -131,7 +133,9 @@ function App() {
         setErrorMessageProfile(null);
       })
       .catch((err) => {
-        setErrorMessageProfile("Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз.");
+        setErrorMessageProfile(
+          "Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз."
+        );
       });
   };
 
@@ -142,20 +146,20 @@ function App() {
         setErrorMessageProfile(null);
       })
       .catch((err) => {
-        setErrorMessageProfile()
+        setErrorMessageProfile();
       });
   };
 
   const handleDeleteMovie = (movie) => {
     deleteMovie(movie)
-        .then((res) => {
-          setSavedMovies((prev) => ({
-            ...prev,
-            movies: savedMovies.movies.filter((m) => m.movieId !== movie.movieId),
-          }));
-        })
-        .catch((err) => console.log(err));
-  }
+      .then((res) => {
+        setSavedMovies((prev) => ({
+          ...prev,
+          movies: savedMovies.movies.filter((m) => m.movieId !== movie.movieId),
+        }));
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleSavedMovie = (movie) => {
     const savedMovie = savedMovies?.movies?.find((m) => m.movieId === movie.id);
@@ -243,7 +247,7 @@ function App() {
           movies: [],
           visible: 0,
           error: false,
-        })
+        });
       })
       .finally(() => setIsLoading(false));
   };
@@ -295,7 +299,9 @@ function App() {
                     savedMovies={savedMovies}
                     handleSavedMovie={handleDeleteMovie}
                   >
-                    <SearchForm onSearch={handleSearch} />
+                    <SearchForm
+                      onSearch={handleSearch}
+                    />
                     {isLoading && <Preloader />}
                   </SavedMovies>
                 </CurrentUserContext.Provider>
@@ -318,11 +324,18 @@ function App() {
           </Route>
           <Route
             path="/signin"
-            element={<Login onLogin={handleLogin} errorMessage={errorMessageLogin}/>}
+            element={
+              <Login onLogin={handleLogin} errorMessage={errorMessageLogin} />
+            }
           ></Route>
           <Route
             path="/signup"
-            element={<Register onRegister={handleRegister} errorMessage={errorMessageRegister} />}
+            element={
+              <Register
+                onRegister={handleRegister}
+                errorMessage={errorMessageRegister}
+              />
+            }
           ></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
