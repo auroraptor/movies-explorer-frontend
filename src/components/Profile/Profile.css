@@ -1,7 +1,7 @@
 .profile {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: space-between;
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
@@ -167,9 +167,5 @@
 
   .profile__settings {
     margin-top: 40%;
-  }
-
-  .profile__logout {
-    margin-bottom: 0;
   }
 }
