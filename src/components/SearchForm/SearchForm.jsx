@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
@@ -7,11 +6,6 @@ function SearchForm({onSearch, placeholderText, isChecked }) {
   const [formValues, setFormValues] = useState({ search: "", checked: false });
   const [placeholder, setPlaceholder] = useState(placeholderText);
   const [checked, setChecked] = useState(isChecked);
-
-  useEffect(() => {
-    setPlaceholder(placeholderText);
-    setChecked(localStorage.getItem('isShortFilm') === 'true');
-  }, [placeholderText])
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -34,7 +28,6 @@ function SearchForm({onSearch, placeholderText, isChecked }) {
     }
 
     onSearch(formValues);
-    setPlaceholder(formValues?.search || placeholder);
     setChecked(formValues?.checked);
     setFormValues({ search: "", checked: false });
     clearForm(event);

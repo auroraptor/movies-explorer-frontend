@@ -252,6 +252,27 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  const handleSearchSavedMovies = (formValues) => {
+    const { search, checked } = formValues;
+    let items = savedMovies.movies;
+    
+
+    if (checked) {
+      items = items.filter(({ duration }) => duration <= 40);
+    }
+
+    items = items.filter(
+      ({ nameEN, nameRU }) =>
+        matched(nameRU, search) || matched(nameEN, search)
+    );
+
+    setSavedMovies((prev) => ({
+      ...prev,
+      movies: items,
+      visible: numberOfItemsPerPage,
+    }));
+  };
+
   return (
     <div className="app">
       <div className="app__container">
@@ -298,10 +319,8 @@ function App() {
                     loadMore={loadMoreSavedMovies}
                     savedMovies={savedMovies}
                     handleSavedMovie={handleDeleteMovie}
+                    onSearch={handleSearchSavedMovies}
                   >
-                    <SearchForm
-                      onSearch={handleSearch}
-                    />
                     {isLoading && <Preloader />}
                   </SavedMovies>
                 </CurrentUserContext.Provider>

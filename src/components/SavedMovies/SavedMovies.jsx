@@ -5,6 +5,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import Footer from "../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
 import "./SavedMovies.css";
 import { toLocaleDuration } from "../../utils/toLocaleDuration";
 
@@ -12,15 +13,19 @@ function SavedMovies(props) {
   const {
     isClickMenu,
     handleMenu,
-    children,
     savedMovies,
     handleSavedMovie,
     loadMore,
+    onSearch
   } = props;
 
   const handleDelete = (movie) => {
     handleSavedMovie(movie);
   };
+
+  const handleSearch = (formValues) => {
+    onSearch(formValues);
+  }
 
   return (
     <section className="saved-movies">
@@ -35,7 +40,7 @@ function SavedMovies(props) {
           handleMenu={handleMenu}
         />
       </Header>
-      {children}
+      <SearchForm placeholderText={"Фильм"} onSearch={handleSearch} isChecked={false}/>
       <MoviesCardList cardListHelpText={"Все понравившиеся фильмы будут здесь"}>
         {savedMovies?.movies?.slice(0, savedMovies?.visible).map((movie) => (
           <MoviesCard
