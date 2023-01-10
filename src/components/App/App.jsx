@@ -11,6 +11,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getBeatfilmMovies from "../../utils/MoviesApi";
+import { filter } from "../../utils/filterResult";
 import { displayItemsPerPage, displayNextItems } from "../../constants";
 import { HttpStatusCode } from "../../constants/HttpStatusCode";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -116,7 +117,7 @@ function App() {
         err === HttpStatusCode.UNAUTHORIZED
           ? setErrorMessageLogin("Неправильные почта или пароль")
           : setErrorMessageLogin(
-              "Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз."
+              "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
             );
       });
   };
@@ -134,7 +135,7 @@ function App() {
       })
       .catch((err) => {
         setErrorMessageProfile(
-          "Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз."
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
         );
       });
   };
@@ -196,25 +197,13 @@ function App() {
     setClickMenu(!isClickMenu);
   };
 
-  const matched = (str, match) =>
-    str.toLowerCase().includes(match.toLowerCase());
-
   const handleSearch = (formValues) => {
     setCardListHelpText("");
     setIsLoading(true);
 
-    const { search, checked } = formValues;
-
     getBeatfilmMovies()
-      .then((movies) => {
-        if (checked) {
-          movies = movies.filter(({ duration }) => duration <= 40);
-        }
-
-        movies = movies.filter(
-          ({ nameEN, nameRU }) =>
-            matched(nameRU, search) || matched(nameEN, search)
-        );
+      .then((res) => {
+        const movies = filter(res, formValues);
 
         setSearchResult((prev) => ({
           ...prev,
@@ -222,8 +211,8 @@ function App() {
           visible: numberOfItemsPerPage,
         }));
 
-        localStorage.setItem("isShortFilm", checked);
-        localStorage.setItem("search", search);
+        localStorage.setItem("isShortFilm", formValues.checked);
+        localStorage.setItem("search", formValues.search);
         localStorage.setItem("movies", JSON.stringify(movies));
 
         setCardListHelpText(
@@ -234,7 +223,7 @@ function App() {
       })
       .catch((err) => {
         setCardListHelpText(
-          "Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз."
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
         );
         setSearchResult({
           movies: [],
@@ -246,22 +235,11 @@ function App() {
   };
 
   const handleSearchSavedMovies = (formValues) => {
-    const { search, checked } = formValues;
-    let items = savedMovies.movies;
-    
-
-    if (checked) {
-      items = items.filter(({ duration }) => duration <= 40);
-    }
-
-    items = items.filter(
-      ({ nameEN, nameRU }) =>
-        matched(nameRU, search) || matched(nameEN, search)
-    );
+    const movies = filter(savedMovies.movies, formValues);
 
     setSavedMovies((prev) => ({
       ...prev,
-      movies: items,
+      movies: movies,
       visible: numberOfItemsPerPage,
     }));
   };
