@@ -34,7 +34,7 @@ function SearchForm({onSearch, placeholderText, isChecked }) {
   };
 
   const clearForm = (event) => {
-    Array.from(event.target).forEach((input) => input.type === 'checkbox' ? input.checked && console.log('input checked: ', input.checked): input.value = "");
+    Array.from(event.target).forEach((input) => input.type === 'checkbox' ? input.checked : input.value = "");
   };
 
 
