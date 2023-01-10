@@ -3,7 +3,6 @@ import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import Navigation from "../Navigation/Navigation";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import "./SavedMovies.css";
@@ -15,7 +14,6 @@ function SavedMovies(props) {
     handleMenu,
     savedMovies,
     handleSavedMovie,
-    loadMore,
     onSearch
   } = props;
 
@@ -42,7 +40,7 @@ function SavedMovies(props) {
       </Header>
       <SearchForm placeholderText={"Фильм"} onSearch={handleSearch} isChecked={false}/>
       <MoviesCardList cardListHelpText={"Все понравившиеся фильмы будут здесь"}>
-        {savedMovies?.movies?.slice(0, savedMovies?.visible).map((movie) => (
+        {savedMovies?.movies?.map((movie) => (
           <MoviesCard
             key={movie?.id}
             movie={movie}
@@ -59,9 +57,6 @@ function SavedMovies(props) {
           ></MoviesCard>
         ))}
       </MoviesCardList>
-      {savedMovies?.visible < savedMovies?.movies?.length && (
-        <MoviesLoadMore loadMore={loadMore} />
-      )}
       <Footer></Footer>
     </section>
   );
