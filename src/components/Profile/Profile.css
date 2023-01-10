@@ -138,6 +138,8 @@
   line-height: 15px;
   text-align: center;
   color: #ee3465;
+  background-color: transparent;
+  border: none;
 }
 
 .profile__settings {

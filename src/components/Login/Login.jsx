@@ -6,7 +6,7 @@ import { VALID_EMAIL_REGEX } from "../../constants/regex";
 import "./Login.css";
 import "../Input/Input.css";
 
-function Login({ onLogin }) {
+function Login({ onLogin, errorMessage }) {
   const {
     register,
     handleSubmit,
@@ -83,6 +83,9 @@ function Login({ onLogin }) {
             )}
           />
         </span>
+        {(<span className="input-group__help-text input-group__error_visible">
+         {errorMessage}
+        </span>)}
       </Form>
     </div>
   );

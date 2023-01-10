@@ -12,6 +12,7 @@ import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getBeatfilmMovies from "../../utils/MoviesApi";
 import { displayItemsPerPage, displayNextItems } from "../../constants";
+import { HttpStatusCode } from "../../constants/HttpStatusCode";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
 import useWindowSize from "../../hooks/useWindowSize";
@@ -46,7 +47,9 @@ function App() {
   const [cardListHelpText, setCardListHelpText] = useState(
     "Введите ключевое слово"
   );
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessageRegister, setErrorMessageRegister] = useState(null);
+  const [errorMessageLogin, setErrorMessageLogin] = useState(null);
+  const [errorMessageProfile, setErrorMessageProfile] = useState(null);
   const windowWidth = useWindowSize().width;
   const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
   const numberOfNextItems = displayNextItems(windowWidth);
@@ -95,10 +98,10 @@ function App() {
     signupUser(data)
       .then((res) => {
         navigate("signin");
-        setErrorMessage(null);
+        setErrorMessageRegister(null);
       })
       .catch((err) => {
-        setErrorMessage('Что-то пошло не так...');
+        setErrorMessageRegister('Что-то пошло не так...');
       });
   };
 
@@ -107,8 +110,13 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         navigate("movies");
+        setErrorMessageLogin(null);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        err === HttpStatusCode.UNAUTHORIZED ?
+        setErrorMessageLogin("Неправильные почта или пароль") :
+        setErrorMessageLogin("Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз.");
+      });
   };
 
   const handleLogout = () => {
@@ -120,17 +128,22 @@ function App() {
         localStorage.removeItem("isShortFilm");
         setLoggedIn(false);
         navigate("/signin");
+        setErrorMessageProfile(null);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessageProfile("Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз.");
+      });
   };
 
   const handleUpdateUser = (data) => {
     updateCurrentUser(data)
       .then((user) => {
         setCurrentUser(user);
-        setErrorMessage(null);
+        setErrorMessageProfile(null);
       })
-      .catch((err) => setErrorMessage("Что-то пошло не так..."));
+      .catch((err) => {
+        setErrorMessageProfile()
+      });
   };
 
   const handleDeleteMovie = (movie) => {
@@ -226,6 +239,11 @@ function App() {
         setCardListHelpText(
           "Во время запроса произошла ошибка.\n \n \nВозможно, проблема с соединением или сервер недоступен.\n \n \nПодождите немного и попробуйте ещё раз."
         );
+        setSearchResult({
+          movies: [],
+          visible: 0,
+          error: false,
+        })
       })
       .finally(() => setIsLoading(false));
   };
@@ -292,7 +310,7 @@ function App() {
                     handleMenu={handleMenu}
                     onLogout={handleLogout}
                     onUpdateUser={handleUpdateUser}
-                    errorMessage={errorMessage}
+                    errorMessage={errorMessageProfile}
                   />
                 </CurrentUserContext.Provider>
               }
@@ -300,11 +318,11 @@ function App() {
           </Route>
           <Route
             path="/signin"
-            element={<Login onLogin={handleLogin} />}
+            element={<Login onLogin={handleLogin} errorMessage={errorMessageLogin}/>}
           ></Route>
           <Route
             path="/signup"
-            element={<Register onRegister={handleRegister} errorMessage={errorMessage} />}
+            element={<Register onRegister={handleRegister} errorMessage={errorMessageRegister} />}
           ></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
