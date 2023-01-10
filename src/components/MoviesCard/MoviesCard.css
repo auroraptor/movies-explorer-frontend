@@ -46,37 +46,35 @@
   margin: 7px 10px 0 0;
   background-color: transparent;
   border: none;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(0.75);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.75);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(0.75);
+  }
+}
+
+.movies-card__button_like {
   background-image: url("../../images/icon-like.svg");
   background-repeat: no-repeat;
   background-position: center center;
-}
-
-@keyframes heartbeat
-{
-  0%
-  {
-    transform: scale( .75 );
-  }
-  20%
-  {
-    transform: scale( 1 );
-  }
-  40%
-  {
-    transform: scale( .75 );
-  }
-  60%
-  {
-    transform: scale( 1 );
-  }
-  80%
-  {
-    transform: scale( .75 );
-  }
-  100%
-  {
-    transform: scale( .75 );
-  }
+  width: 14px;
+  height: 12px;
 }
 
 .movies-card__button_like:hover {
@@ -88,12 +86,16 @@
   background-image: url("../../images/icon-like_active.svg");
   background-repeat: no-repeat;
   background-position: center center;
+  width: 14px;
+  height: 12px;
 }
 
 .movies-card__button_remove {
   background-image: url("../../images/icon-remove.svg");
   background-repeat: no-repeat;
   background-position: center center;
+  width: 6.84px;
+  height: 6.72px;
 }
 
 .movies-card__button_remove:hover {
@@ -137,7 +139,6 @@
   .movies-card:hover .movies-card__button_remove {
     visibility: visible;
   }
-
 }
 
 @media (min-width: 980px) {
