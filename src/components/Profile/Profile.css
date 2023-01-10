@@ -161,11 +161,7 @@
     margin-top: 236px;
   }
 
-  .profile__user {
-    flex: none;
-  }
-
   .profile__settings {
-    margin-top: 40%;
+    margin-bottom: 20%;
   }
 }
