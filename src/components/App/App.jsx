@@ -127,7 +127,7 @@ function App() {
         localStorage.removeItem("search");
         localStorage.removeItem("isShortFilm");
         setLoggedIn(false);
-        navigate("/signin");
+        navigate("/");
         setErrorMessageProfile(null);
       })
       .catch((err) => {
