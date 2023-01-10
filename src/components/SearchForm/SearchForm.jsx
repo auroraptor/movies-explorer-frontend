@@ -2,17 +2,17 @@ import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({onSearch, placeholderText, isChecked }) {
+function SearchForm({ onSearch, placeholderText, isChecked }) {
   const [formValues, setFormValues] = useState({ search: "", checked: false });
   const [placeholder, setPlaceholder] = useState(placeholderText);
   const [checked, setChecked] = useState(isChecked);
 
   const handleInputChange = (event) => {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    if (target.type === 'checkbox') {
+    if (target.type === "checkbox") {
       setChecked(target.checked);
     }
 
@@ -22,8 +22,8 @@ function SearchForm({onSearch, placeholderText, isChecked }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formValues.search === '') {
-      setPlaceholder('Нужно ввести ключевое слово');
+    if (formValues.search === "") {
+      setPlaceholder("Нужно ввести ключевое слово");
       return;
     }
 
@@ -34,9 +34,10 @@ function SearchForm({onSearch, placeholderText, isChecked }) {
   };
 
   const clearForm = (event) => {
-    Array.from(event.target).forEach((input) => input.type === 'checkbox' ? input.checked : input.value = "");
+    Array.from(event.target).forEach((input) =>
+      input.type === "checkbox" ? input.checked : (input.value = "")
+    );
   };
-
 
   return (
     <form
@@ -63,7 +64,7 @@ function SearchForm({onSearch, placeholderText, isChecked }) {
           aria-label="Найти"
         ></button>
       </div>
-      <FilterCheckbox handleChange={handleInputChange} checked={checked}/>
+      <FilterCheckbox handleChange={handleInputChange} checked={checked} />
     </form>
   );
 }
