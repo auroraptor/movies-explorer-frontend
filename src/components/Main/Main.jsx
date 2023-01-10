@@ -17,8 +17,6 @@ function Main(props) {
   const { isClickMenu, handleMenu } = props;
   const currentUser = useContext(CurrentUserContext);
 
-  console.log("current USER CONTEXT", currentUser);
-
   return (
     <>
       {currentUser.name.length > 0 ? (

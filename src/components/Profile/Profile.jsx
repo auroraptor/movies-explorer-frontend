@@ -27,8 +27,6 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser, errorMessage
     },
   });
 
-  console.log(errorMessage, 'error');
-
   useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
