@@ -28,6 +28,7 @@ function SearchForm({ onSearch, placeholderText, isChecked }) {
     }
 
     onSearch(formValues);
+    setPlaceholder(formValues?.search);
     setChecked(formValues?.checked);
     setFormValues({ search: "", checked: false });
     clearForm(event);

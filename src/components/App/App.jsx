@@ -218,6 +218,8 @@ function App() {
         setCardListHelpText(
           movies.length > 0 ? "Введите ключевое слово" : "Ничего не найдено"
         );
+        setPlaceholder(formValues.search);
+        setChecked(formValues.checked);
 
         return movies;
       })
