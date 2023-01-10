@@ -96,9 +96,12 @@ function App() {
   }, [loggedIn, numberOfItemsPerPage]);
 
   const handleRegister = (data) => {
+    const {email, password} = data;
+
     signupUser(data)
       .then((res) => {
-        navigate("signin");
+        handleLogin({email, password});
+        navigate("movies");
         setErrorMessageRegister(null);
       })
       .catch((err) => {
