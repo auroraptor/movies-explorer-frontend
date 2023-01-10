@@ -70,7 +70,7 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser, errorMessage
                 aria-invalid={errors.name ? "true" : "false"}
                 placeholder={name}
                 {...register("profile_name", {
-                  required: false,
+                  required: 'Заполните поле',
                   validate: (value) =>
                     !!value.match(VALID_NAME_REGEX) ||
                     "Только латиница, кириллица, пробел или дефис",
