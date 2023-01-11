@@ -74,10 +74,11 @@ function App() {
         ...prev,
         movies: filter(JSON.parse(localStorage.getItem("movies")), {
           search: localStorage.getItem("search"),
-          checked: localStorage.getItem("isShortFilm"),
+          checked: JSON.parse(localStorage.getItem("isShortFilm")),
         }),
         visible: numberOfItemsPerPage,
       }));
+
       setPlaceholder(localStorage.getItem("search"));
       setChecked(JSON.parse(localStorage.getItem("isShortFilm")) || false);
     }
@@ -209,13 +210,6 @@ function App() {
     }));
   };
 
-  const loadMoreSavedMovies = () => {
-    setSavedMovies((prev) => ({
-      ...prev,
-      visible: prev.visible + numberOfNextItems,
-    }));
-  };
-
   const handleMenu = () => {
     setClickMenu(!isClickMenu);
   };
@@ -276,15 +270,11 @@ function App() {
           search: localStorage.getItem("search"),
         }),
       }));
-      setChecked(false);
-      localStorage.setItem("isShortFilm", isCheked);
     } else {
       setSearchResult((prev) => ({
         ...prev,
         movies: filterShortFilm(searchResult.movies),
       }));
-      setChecked(true);
-      localStorage.setItem("isShortFilm", isCheked);
     }
   };
 
@@ -348,7 +338,6 @@ function App() {
                   <SavedMovies
                     isClickMenu={isClickMenu}
                     handleMenu={handleMenu}
-                    loadMore={loadMoreSavedMovies}
                     savedMovies={savedMovies}
                     handleSavedMovie={handleDeleteMovie}
                     onSearch={handleSearchSavedMovies}
