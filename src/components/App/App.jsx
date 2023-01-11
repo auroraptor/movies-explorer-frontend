@@ -99,6 +99,14 @@ function App() {
       .catch((err) => console.log(err));
   }, [loggedIn, numberOfItemsPerPage]);
 
+  useEffect(() => {
+    setCardListHelpText(
+      searchResult.movies.length > 0
+        ? "Введите ключевое слово"
+        : "Ничего не найдено"
+    );
+  }, [searchResult])
+
   const handleRegister = (data) => {
     const { email, password } = data;
 
@@ -240,11 +248,6 @@ function App() {
         visible: numberOfItemsPerPage,
       }));
     }
-    setCardListHelpText(
-      searchResult.movies.length > 0
-        ? "Введите ключевое слово"
-        : "Ничего не найдено"
-    );
 
     localStorage.setItem("isShortFilm", formValues.checked || false);
     localStorage.setItem("search", formValues.search);
@@ -255,8 +258,6 @@ function App() {
 
   const handleSearchSavedMovies = (formValues) => {
     const movies = filter(JSON.parse(localStorage.getItem("savedMovies")), formValues);
-
-    console.log(formValues);
 
     setSavedMovies((prev) => ({
       ...prev,
@@ -275,11 +276,15 @@ function App() {
           search: localStorage.getItem("search"),
         }),
       }));
+      setChecked(false);
+      localStorage.setItem("isShortFilm", isCheked);
     } else {
       setSearchResult((prev) => ({
         ...prev,
         movies: filterShortFilm(searchResult.movies),
       }));
+      setChecked(true);
+      localStorage.setItem("isShortFilm", isCheked);
     }
   };
 
