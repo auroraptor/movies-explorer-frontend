@@ -2,7 +2,7 @@ import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({ onSearch, placeholderText, isChecked }) {
+function SearchForm({ onSearch, placeholderText, isChecked, onFilter }) {
   const [formValues, setFormValues] = useState({ search: "", checked: false });
   const [placeholder, setPlaceholder] = useState(placeholderText);
   const [checked, setChecked] = useState(isChecked);
@@ -14,6 +14,8 @@ function SearchForm({ onSearch, placeholderText, isChecked }) {
 
     if (target.type === "checkbox") {
       setChecked(target.checked);
+      console.log('CHECK!');
+      onFilter(checked);
     }
 
     setFormValues((prevValue) => ({ ...prevValue, [name]: value }));

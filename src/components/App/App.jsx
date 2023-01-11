@@ -11,7 +11,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getBeatfilmMovies from "../../utils/MoviesApi";
-import { filter } from "../../utils/filterResult";
+import { filter, filterShortFilm } from "../../utils/filterResult";
 import { displayItemsPerPage, displayNextItems } from "../../constants";
 import { HttpStatusCode } from "../../constants/HttpStatusCode";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -72,7 +72,10 @@ function App() {
     if (localStorage.getItem("movies")) {
       setSearchResult((prev) => ({
         ...prev,
-        movies: JSON.parse(localStorage.getItem("movies")),
+        movies: filter(
+          JSON.parse(localStorage.getItem("movies")),
+          localStorage
+        ),
         visible: numberOfItemsPerPage,
       }));
       setPlaceholder(localStorage.getItem("search"));
@@ -96,11 +99,11 @@ function App() {
   }, [loggedIn, numberOfItemsPerPage]);
 
   const handleRegister = (data) => {
-    const {email, password} = data;
+    const { email, password } = data;
 
     signupUser(data)
       .then((res) => {
-        handleLogin({email, password});
+        handleLogin({ email, password });
         navigate("movies");
         setErrorMessageRegister(null);
       })
@@ -204,39 +207,40 @@ function App() {
     setCardListHelpText("");
     setIsLoading(true);
 
-    getBeatfilmMovies()
-      .then((res) => {
-        const movies = filter(res, formValues);
+    if (!localStorage.getItem("movies")) {
+      getBeatfilmMovies()
+        .then((res) => {
+          setSearchResult((prev) => ({
+            ...prev,
+            movies: filter(res, formValues),
+            visible: numberOfItemsPerPage,
+          }));
 
-        setSearchResult((prev) => ({
-          ...prev,
-          movies: movies,
-          visible: numberOfItemsPerPage,
-        }));
-
-        localStorage.setItem("isShortFilm", formValues.checked);
-        localStorage.setItem("search", formValues.search);
-        localStorage.setItem("movies", JSON.stringify(movies));
-
-        setCardListHelpText(
-          movies.length > 0 ? "Введите ключевое слово" : "Ничего не найдено"
-        );
-        setPlaceholder(formValues.search);
-        setChecked(formValues.checked);
-
-        return movies;
-      })
-      .catch((err) => {
-        setCardListHelpText(
-          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
-        );
-        setSearchResult({
-          movies: [],
-          visible: 0,
-          error: false,
-        });
-      })
-      .finally(() => setIsLoading(false));
+          localStorage.setItem("movies", JSON.stringify(res));
+        })
+        .catch((err) => {
+          setCardListHelpText(
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+          );
+        })
+        .finally(() => setIsLoading(false));
+    } else {
+      setSearchResult((prev) => ({
+        ...prev,
+        movies: filter(JSON.parse(localStorage.getItem("movies")), formValues),
+        visible: numberOfItemsPerPage,
+      }));
+    }
+    setCardListHelpText(
+      searchResult.movies.length > 0
+        ? "Введите ключевое слово"
+        : "Ничего не найдено"
+    );
+    localStorage.setItem("isShortFilm", formValues.checked);
+    localStorage.setItem("search", formValues.search);
+    setPlaceholder(formValues.search);
+    setChecked(formValues.checked);
+    setIsLoading(false);
   };
 
   const handleSearchSavedMovies = (formValues) => {
@@ -247,6 +251,24 @@ function App() {
       movies: movies,
       visible: numberOfItemsPerPage,
     }));
+  };
+
+  const handleFilter = (checked) => {
+    if (!localStorage.getItem("movies")) return;
+
+    if (checked) {
+      setSearchResult((prev) => ({
+        ...prev,
+        movies: filter(JSON.parse(localStorage.getItem("movies")), {
+          search: localStorage.getItem("search"),
+        }),
+      }));
+    } else {
+      setSearchResult((prev) => ({
+        ...prev,
+        movies: filterShortFilm(searchResult.movies),
+      }));
+    }
   };
 
   return (
@@ -279,6 +301,7 @@ function App() {
                       onSearch={handleSearch}
                       placeholderText={placeholder}
                       isChecked={isCheked}
+                      onFilter={handleFilter}
                     />
                     {isLoading && <Preloader />}
                   </Movies>
