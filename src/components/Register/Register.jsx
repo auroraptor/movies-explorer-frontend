@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Header from "../Header/Header";
@@ -6,6 +7,9 @@ import "./Register.css";
 import { VALID_EMAIL_REGEX, VALID_NAME_REGEX } from "../../constants/regex";
 
 function Register(props) {
+  const navigate = useNavigate();
+  if (props.isLoggedIn) navigate("/");
+
   const {
     register,
     handleSubmit,
@@ -46,9 +50,7 @@ function Register(props) {
           className="input-group__input"
           aria-invalid={errors.name ? "true" : "false"}
           {...register("name", {
-            required: 
-                "Введите имя"
-            ,
+            required: "Введите имя",
             validate: (value) =>
               !!value.match(VALID_NAME_REGEX) ||
               "Только латиница, кириллица, пробел или дефис",
@@ -88,7 +90,10 @@ function Register(props) {
             name="email"
             message={"email"}
             render={({ message }) => (
-              <span role="alert" className="input-group__help-text input-group__error_visible">
+              <span
+                role="alert"
+                className="input-group__help-text input-group__error_visible"
+              >
                 {message}
               </span>
             )}
@@ -110,15 +115,20 @@ function Register(props) {
             name="password"
             message={"password"}
             render={({ message }) => (
-              <span role="alert" className="input-group__help-text input-group__error_visible">
+              <span
+                role="alert"
+                className="input-group__help-text input-group__error_visible"
+              >
                 {message}
               </span>
             )}
           />
         </span>
-        {(<span className="input-group__help-text input-group__error_visible">
-         {props?.errorMessage}
-        </span>)}
+        {
+          <span className="input-group__help-text input-group__error_visible">
+            {props?.errorMessage}
+          </span>
+        }
       </Form>
     </div>
   );

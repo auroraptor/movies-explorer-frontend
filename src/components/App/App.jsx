@@ -366,13 +366,14 @@ function App() {
           <Route
             path="/signin"
             element={
-              <Login onLogin={handleLogin} errorMessage={errorMessageLogin} />
+              <Login isLoggedIn={loggedIn} onLogin={handleLogin} errorMessage={errorMessageLogin} />
             }
           ></Route>
           <Route
             path="/signup"
             element={
               <Register
+                isLoggedIn={loggedIn}
                 onRegister={handleRegister}
                 errorMessage={errorMessageRegister}
               />

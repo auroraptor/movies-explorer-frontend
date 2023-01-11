@@ -17,6 +17,8 @@ function Main(props) {
   const { isClickMenu, handleMenu } = props;
   const currentUser = useContext(CurrentUserContext);
 
+  console.log(isClickMenu);
+
   return (
     <>
       {currentUser.name.length > 0 ? (
@@ -27,7 +29,7 @@ function Main(props) {
           ></HamburgerMenu>
           {isClickMenu && <div className="background"></div>}
           <Navigation
-            className={`menu menu_desktop ${isClickMenu && "menu_active"}`}
+            className={`menu menu_desktop menu_place_main ${isClickMenu && "menu_active"}`}
             handleMenu={handleMenu}
           />
         </Header>
