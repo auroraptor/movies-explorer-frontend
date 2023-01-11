@@ -72,10 +72,10 @@ function App() {
     if (localStorage.getItem("movies")) {
       setSearchResult((prev) => ({
         ...prev,
-        movies: filter(
-          JSON.parse(localStorage.getItem("movies")),
-          { search: localStorage.getItem("search"), checked: localStorage.getItem("isShortFilm")}
-        ),
+        movies: filter(JSON.parse(localStorage.getItem("movies")), {
+          search: localStorage.getItem("search"),
+          checked: localStorage.getItem("isShortFilm"),
+        }),
         visible: numberOfItemsPerPage,
       }));
       setPlaceholder(localStorage.getItem("search"));
@@ -94,6 +94,7 @@ function App() {
           movies: movies,
           visible: numberOfItemsPerPage,
         }));
+        localStorage.setItem('savedMovies', JSON.stringify(movies));
       })
       .catch((err) => console.log(err));
   }, [loggedIn, numberOfItemsPerPage]);
@@ -135,6 +136,7 @@ function App() {
         localStorage.removeItem("movies");
         localStorage.removeItem("search");
         localStorage.removeItem("isShortFilm");
+        localStorage.removeItem("savedMovies");
         setLoggedIn(false);
         navigate("/");
         setErrorMessageProfile(null);
@@ -160,10 +162,13 @@ function App() {
   const handleDeleteMovie = (movie) => {
     deleteMovie(movie)
       .then((res) => {
+        const updateSavedMovies = savedMovies.movies.filter((m) => m.movieId !== res.movieId);
+
         setSavedMovies((prev) => ({
           ...prev,
-          movies: savedMovies.movies.filter((m) => m.movieId !== res.movieId),
+          movies: updateSavedMovies,
         }));
+        localStorage.setItem('savedMovies', JSON.stringify(updateSavedMovies));
       })
       .catch((err) => console.log(err));
   };
@@ -175,11 +180,15 @@ function App() {
       handleDeleteMovie(savedMovie);
     } else {
       createMovie(movie)
-        .then((res) =>
+        .then((res) => {
+          const updateSavedMovies = savedMovies.movies.concat(res);
           setSavedMovies((prev) => ({
             ...prev,
-            movies: savedMovies.movies.concat(res),
-          }))
+            movies: updateSavedMovies,
+          }));
+          localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
+        }
+          
         )
         .catch((err) => console.log(err));
     }
@@ -236,8 +245,8 @@ function App() {
         ? "Введите ключевое слово"
         : "Ничего не найдено"
     );
-    console.log(formValues.checked);
-    localStorage.setItem("isShortFilm", (formValues.checked || false));
+
+    localStorage.setItem("isShortFilm", formValues.checked || false);
     localStorage.setItem("search", formValues.search);
     setPlaceholder(formValues.search);
     setChecked(formValues.checked);
@@ -245,7 +254,9 @@ function App() {
   };
 
   const handleSearchSavedMovies = (formValues) => {
-    const movies = filter(savedMovies.movies, formValues);
+    const movies = filter(JSON.parse(localStorage.getItem("savedMovies")), formValues);
+
+    console.log(formValues);
 
     setSavedMovies((prev) => ({
       ...prev,
@@ -254,7 +265,7 @@ function App() {
     }));
   };
 
-  const handleFilter = (checked) => {
+  const handleFilterSearchResult = (checked) => {
     if (!localStorage.getItem("movies")) return;
 
     if (checked) {
@@ -271,6 +282,22 @@ function App() {
       }));
     }
   };
+
+  const handleFilterSavedMovies = (checked) => {
+    if (!localStorage.getItem("savedMovies")) return;
+
+    if (checked) {
+      setSavedMovies((prev) => ({
+        ...prev,
+        movies: JSON.parse(localStorage.getItem("savedMovies"))
+      }))
+    } else {
+      setSavedMovies((prev) => ({
+        ...prev,
+        movies: filterShortFilm(savedMovies.movies)
+      }))
+    }
+  }
 
   return (
     <div className="app">
@@ -302,7 +329,7 @@ function App() {
                       onSearch={handleSearch}
                       placeholderText={placeholder}
                       isChecked={isCheked}
-                      onFilter={handleFilter}
+                      onFilter={handleFilterSearchResult}
                     />
                     {isLoading && <Preloader />}
                   </Movies>
@@ -320,6 +347,7 @@ function App() {
                     savedMovies={savedMovies}
                     handleSavedMovie={handleDeleteMovie}
                     onSearch={handleSearchSavedMovies}
+                    onFilter={handleFilterSavedMovies}
                   >
                     {isLoading && <Preloader />}
                   </SavedMovies>

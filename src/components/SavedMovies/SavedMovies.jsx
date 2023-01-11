@@ -14,7 +14,8 @@ function SavedMovies(props) {
     handleMenu,
     savedMovies,
     handleSavedMovie,
-    onSearch
+    onSearch,
+    onFilter
   } = props;
 
   const handleDelete = (movie) => {
@@ -38,9 +39,9 @@ function SavedMovies(props) {
           handleMenu={handleMenu}
         />
       </Header>
-      <SearchForm placeholderText={"Фильм"} onSearch={handleSearch} isChecked={false}/>
+      <SearchForm placeholderText={"Фильм"} onSearch={handleSearch} isChecked={false} onFilter={onFilter}/>
       <MoviesCardList cardListHelpText={"Все понравившиеся фильмы будут здесь"}>
-        {savedMovies?.movies?.map((movie) => (
+        {savedMovies?.movies.map((movie) => (
           <MoviesCard
             key={movie?.id}
             movie={movie}

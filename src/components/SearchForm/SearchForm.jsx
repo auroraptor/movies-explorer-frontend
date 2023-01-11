@@ -14,7 +14,6 @@ function SearchForm({ onSearch, placeholderText, isChecked, onFilter }) {
 
     if (target.type === "checkbox") {
       setChecked(target.checked);
-      console.log('CHECK!');
       onFilter(checked);
     }
 
