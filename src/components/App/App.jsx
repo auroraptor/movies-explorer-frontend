@@ -74,12 +74,12 @@ function App() {
         ...prev,
         movies: filter(
           JSON.parse(localStorage.getItem("movies")),
-          localStorage
+          { search: localStorage.getItem("search"), checked: localStorage.getItem("isShortFilm")}
         ),
         visible: numberOfItemsPerPage,
       }));
       setPlaceholder(localStorage.getItem("search"));
-      setChecked(JSON.parse(localStorage.getItem("isShortFilm")));
+      setChecked(JSON.parse(localStorage.getItem("isShortFilm")) || false);
     }
   }, [numberOfItemsPerPage]);
 
@@ -236,7 +236,8 @@ function App() {
         ? "Введите ключевое слово"
         : "Ничего не найдено"
     );
-    localStorage.setItem("isShortFilm", formValues.checked);
+    console.log(formValues.checked);
+    localStorage.setItem("isShortFilm", (formValues.checked || false));
     localStorage.setItem("search", formValues.search);
     setPlaceholder(formValues.search);
     setChecked(formValues.checked);
