@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Form.css";
 
 function Form({ name, id, children, buttonText, label, link, linkText, onSubmit, isButtonDisabled}) {
+  
   return (
     <form className="form" name={name} id={id} noValidate onSubmit={onSubmit}>
       {children}

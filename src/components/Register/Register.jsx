@@ -33,7 +33,7 @@ function Register(props) {
         name={"register"}
         id={"register"}
         buttonText={"Зарегистрироваться"}
-        isButtonDisabled={!isValid}
+        isButtonDisabled={!isValid || props.isButtonDisabled}
         label={"Уже зарегистрированы?"}
         link={"/signin"}
         linkText="Войти"

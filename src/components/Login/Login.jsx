@@ -6,7 +6,7 @@ import { VALID_EMAIL_REGEX } from "../../constants/regex";
 import "./Login.css";
 import "../Input/Input.css";
 
-function Login({ onLogin, errorMessage }) {
+function Login({ onLogin, errorMessage, isButtonDisabled }) {
   const {
     register,
     handleSubmit,
@@ -32,7 +32,7 @@ function Login({ onLogin, errorMessage }) {
         name="login"
         id="login"
         buttonText={"Войти"}
-        isButtonDisabled={!isValid}
+        isButtonDisabled={!isValid || isButtonDisabled}
         onSubmit={handleSubmit(onSubmit)}
         label={"Ещё не зарегистрированы?"}
         link={"/signup"}

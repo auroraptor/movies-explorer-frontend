@@ -51,6 +51,7 @@ function App() {
   const [errorMessageRegister, setErrorMessageRegister] = useState(null);
   const [errorMessageLogin, setErrorMessageLogin] = useState(null);
   const [errorMessageProfile, setErrorMessageProfile] = useState(null);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
   const windowWidth = useWindowSize().width;
   const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
   const numberOfNextItems = displayNextItems(windowWidth);
@@ -115,6 +116,7 @@ function App() {
 
   const handleRegister = (data) => {
     const { email, password } = data;
+    setButtonDisabled(true);
 
     signupUser(data)
       .then((res) => {
@@ -124,10 +126,13 @@ function App() {
       })
       .catch((err) => {
         setErrorMessageRegister("Что-то пошло не так...");
-      });
+      })
+      .finally(() => setButtonDisabled(false));
   };
 
   const handleLogin = (data) => {
+    setButtonDisabled(true);
+
     signinUser(data)
       .then((res) => {
         setLoggedIn(true);
@@ -140,7 +145,8 @@ function App() {
           : setErrorMessageLogin(
               "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
             );
-      });
+      })
+      .finally(() => setButtonDisabled(false));
   };
 
   const handleLogout = () => {
@@ -371,7 +377,7 @@ function App() {
           <Route
             path="/signin"
             element={
-              <Login isLoggedIn={loggedIn} onLogin={handleLogin} errorMessage={errorMessageLogin} />
+              <Login isLoggedIn={loggedIn} onLogin={handleLogin} errorMessage={errorMessageLogin} isButtonDisabled={isButtonDisabled}/>
             }
           ></Route>
           <Route
@@ -380,6 +386,7 @@ function App() {
               <Register
                 isLoggedIn={loggedIn}
                 onRegister={handleRegister}
+                isButtonDisabled={isButtonDisabled}
                 errorMessage={errorMessageRegister}
               />
             }
