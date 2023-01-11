@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Header from "../Header/Header";
@@ -7,10 +6,7 @@ import { VALID_EMAIL_REGEX } from "../../constants/regex";
 import "./Login.css";
 import "../Input/Input.css";
 
-function Login({ onLogin, errorMessage, isLoggedIn }) {
-  const navigate = useNavigate();
-  if (isLoggedIn) navigate("/");
-
+function Login({ onLogin, errorMessage }) {
   const {
     register,
     handleSubmit,

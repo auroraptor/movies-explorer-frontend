@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Main from "../Main/Main";
 import Login from "../Login/Login";
@@ -54,9 +54,14 @@ function App() {
   const windowWidth = useWindowSize().width;
   const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
   const numberOfNextItems = displayNextItems(windowWidth);
-  const navigate = useNavigate();
 
-  let path = useParams();
+  const navigate = useNavigate();
+  const path = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === `/${'signin' || 'signup'}` && loggedIn) navigate('/');
+  }, [location.pathname, loggedIn, navigate])  
 
   useEffect(() => {
     getCurrentUser()

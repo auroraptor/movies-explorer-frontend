@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Header from "../Header/Header";
@@ -7,9 +6,6 @@ import "./Register.css";
 import { VALID_EMAIL_REGEX, VALID_NAME_REGEX } from "../../constants/regex";
 
 function Register(props) {
-  const navigate = useNavigate();
-  if (props.isLoggedIn) navigate("/");
-
   const {
     register,
     handleSubmit,
