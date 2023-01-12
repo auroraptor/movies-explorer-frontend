@@ -1,15 +1,17 @@
 import "./FilterCheckbox.css";
 
-function FilterCheckbox() {
+function FilterCheckbox({ handleChange, checked }) {
   return (
     <div className="filter-checkbox">
         <label className="filter-checkbox__label">
       <input
         type="checkbox"
-        name="switch"
-        id="switch"
+        name="checked"
+        id="checked"
         className="filter-checkbox__switch"
         aria-label="Показывать только"
+        onChange={handleChange}
+        checked={checked}
       />
       <i className="filter-checkbox__container"></i>Короткометражки</label>
     </div>
