@@ -4,7 +4,7 @@ import "./SearchForm.css";
 import "../FilterCheckbox/FilterCheckbox.css";
 import "../Input/Input.css";
 
-function SearchForm({ onSearch, isChecked, onFilter }) {
+function SearchForm({ onSearch, isChecked, onFilter, searchKeyWord }) {
   const {
     register,
     handleSubmit,
@@ -13,7 +13,7 @@ function SearchForm({ onSearch, isChecked, onFilter }) {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      search: localStorage.getItem("search") || "",
+      search: searchKeyWord || "",
       checked: isChecked,
     },
   });

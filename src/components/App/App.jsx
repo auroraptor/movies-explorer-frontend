@@ -343,9 +343,10 @@ function App() {
                   >
                     <SearchForm
                       onSearch={handleSearch}
-                      placeholderText="Фильм"
+                      // placeholderText="Фильм"
                       isChecked={isCheked}
                       onFilter={handleFilterSearchResult}
+                      searchKeyWord={localStorage.getItem("search")}
                     />
                     {isLoading && <Preloader />}
                   </Movies>
