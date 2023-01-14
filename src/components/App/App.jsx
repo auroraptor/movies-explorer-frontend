@@ -181,10 +181,7 @@ function App() {
     signoutUser()
       .then((res) => {
         setCurrentUser({ name: "", email: "" });
-        localStorage.removeItem("beatFilmMovies");
-        localStorage.removeItem("search");
-        localStorage.removeItem("isShortFilm");
-        localStorage.removeItem("savedMovies");
+        localStorage.clear();
         setSearchResult({
           movies: [],
           visible: 0,
