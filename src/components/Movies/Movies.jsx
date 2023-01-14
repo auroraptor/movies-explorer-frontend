@@ -5,6 +5,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import { MOVIES_API } from "../../constants/Api";
 import "./Movies.css";
 import { toLocaleDuration } from "../../utils/toLocaleDuration";
 
@@ -51,7 +52,7 @@ function Movies(props) {
             nameRU={movie?.nameRU}
             trailerLink={movie?.trailerLink}
             duration={toLocaleDuration(movie?.duration)}
-            thumbnail={`https://api.nomoreparties.co/${movie?.image.url}`}
+            thumbnail={`${MOVIES_API}${movie?.image.url}`}
             savedMovies={savedMovies}
           ></MoviesCard>
         ))}
