@@ -311,6 +311,7 @@ function App() {
         ),
         visible: numberOfItemsPerPage,
       }));
+      localStorage.setItem("searchResult", JSON.stringify(searchResult));
     }
 
     localStorage.setItem("isShortFilm", formValues.checked || false);
