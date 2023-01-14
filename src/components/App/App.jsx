@@ -33,6 +33,7 @@ import {
   signupUser,
   updateCurrentUser,
 } from "../../utils/MainApi";
+import PopupWithErrorMessage from "../PopupWithErrorMessage/PopupWithErrorMessage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
@@ -53,9 +54,8 @@ function App() {
   const [cardListHelpText, setCardListHelpText] = useState(
     "Введите ключевое слово"
   );
-  const [errorMessageRegister, setErrorMessageRegister] = useState(null);
-  const [errorMessageLogin, setErrorMessageLogin] = useState(null);
-  const [errorMessageProfile, setErrorMessageProfile] = useState(null);
+  const [errorMessagePopup, setErrorMessagePopup] = useState("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+  const [isPopupOpened, setPopupOpened] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const windowWidth = useWindowSize().width;
   const numberOfItemsPerPage = displayItemsPerPage(windowWidth);
@@ -77,7 +77,10 @@ function App() {
         setLoggedIn(true);
         navigate(path);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+        setPopupOpened(true);
+      });
   }, []);
 
   useEffect(() => {
@@ -108,7 +111,10 @@ function App() {
         }));
         localStorage.setItem("savedMovies", JSON.stringify(movies));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+        setPopupOpened(true);
+      });
   }, [loggedIn, numberOfItemsPerPage]);
 
   useEffect(() => {
@@ -119,6 +125,9 @@ function App() {
     );
   }, [searchResult]);
 
+  const handlePopupOpened = () => setPopupOpened(true);
+  const handlePopupClosed = () => setPopupOpened(false);
+
   const handleRegister = (data) => {
     const { email, password } = data;
     setButtonDisabled(true);
@@ -127,10 +136,10 @@ function App() {
       .then((res) => {
         handleLogin({ email, password });
         navigate("movies");
-        setErrorMessageRegister(null);
       })
       .catch((err) => {
-        setErrorMessageRegister("Что-то пошло не так...");
+        if (err === HttpStatusCode.UNAUTHORIZED) setErrorMessagePopup("Неправильные почта или пароль");
+        setPopupOpened(true);
       })
       .finally(() => setButtonDisabled(false));
   };
@@ -142,21 +151,17 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         navigate("movies");
-        setErrorMessageLogin(null);
       })
       .catch((err) => {
-        err === HttpStatusCode.UNAUTHORIZED
-          ? setErrorMessageLogin("Неправильные почта или пароль")
-          : setErrorMessageLogin(
-              "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
-            );
+        if (err === HttpStatusCode.UNAUTHORIZED) setErrorMessagePopup("Неправильные почта или пароль");
+        setPopupOpened(true);
       })
       .finally(() => setButtonDisabled(false));
   };
 
   const handleLogout = () => {
     signoutUser()
-      .then(() => {
+      .then((res) => {
         setCurrentUser({ name: "", email: "" });
         localStorage.removeItem("beatFilmMovies");
         localStorage.removeItem("search");
@@ -174,12 +179,10 @@ function App() {
         });
         setLoggedIn(false);
         navigate("/");
-        setErrorMessageProfile(null);
       })
       .catch((err) => {
-        setErrorMessageProfile(
-          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
-        );
+        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+        setPopupOpened(true);
       });
   };
 
@@ -187,10 +190,12 @@ function App() {
     updateCurrentUser(data)
       .then((user) => {
         setCurrentUser(user);
-        setErrorMessageProfile(null);
       })
       .catch((err) => {
-        setErrorMessageProfile();
+        if (err === HttpStatusCode.BAD_REQUEST) {
+          setErrorMessagePopup('Стоит проверить данные. Поле Имя должно быть длиной от 2 до 30 символов. Поле email содержит валидный почтовый адрес.');
+        }
+        handlePopupOpened();
       });
   };
 
@@ -207,7 +212,10 @@ function App() {
         }));
         localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+        setPopupOpened(true);
+      });
   };
 
   const handleSavedMovie = (movie) => {
@@ -228,7 +236,10 @@ function App() {
             JSON.stringify(updateSavedMovies)
           );
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+          setPopupOpened(true);
+        });
     }
   };
 
@@ -262,9 +273,8 @@ function App() {
           localStorage.setItem("searchResult", JSON.stringify(searchResult));
         })
         .catch((err) => {
-          setCardListHelpText(
-            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
-          );
+          setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+          setPopupOpened(true);
         })
         .finally(() => setIsLoading(false));
     } else {
@@ -363,7 +373,6 @@ function App() {
                     handleMenu={handleMenu}
                     onLogout={handleLogout}
                     onUpdateUser={handleUpdateUser}
-                    errorMessage={errorMessageProfile}
                   />
                 </CurrentUserContext.Provider>
               }
@@ -375,7 +384,6 @@ function App() {
               <Login
                 isLoggedIn={loggedIn}
                 onLogin={handleLogin}
-                errorMessage={errorMessageLogin}
                 isButtonDisabled={isButtonDisabled}
               />
             }
@@ -387,12 +395,12 @@ function App() {
                 isLoggedIn={loggedIn}
                 onRegister={handleRegister}
                 isButtonDisabled={isButtonDisabled}
-                errorMessage={errorMessageRegister}
               />
             }
           ></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
+        <PopupWithErrorMessage message={errorMessagePopup} onOpened={isPopupOpened} onClick={handlePopupClosed}/>
       </div>
     </div>
   );

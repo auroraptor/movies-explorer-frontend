@@ -120,11 +120,6 @@ function Register(props) {
             )}
           />
         </span>
-        {
-          <span className="input-group__help-text input-group__error_visible">
-            {props?.errorMessage}
-          </span>
-        }
       </Form>
     </div>
   );
