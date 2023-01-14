@@ -1,4 +1,10 @@
-import { Routes, Route, useNavigate, useParams, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useParams,
+  useLocation,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import Main from "../Main/Main";
 import Login from "../Login/Login";
@@ -60,8 +66,8 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/signin' && loggedIn) navigate('/');
-    if (location.pathname === '/signup' && loggedIn) navigate('/');
+    if (location.pathname === "/signin" && loggedIn) navigate("/");
+    if (location.pathname === "/signup" && loggedIn) navigate("/");
   }, [location.pathname, loggedIn, navigate]);
 
   useEffect(() => {
@@ -100,7 +106,7 @@ function App() {
           movies: movies,
           visible: numberOfItemsPerPage,
         }));
-        localStorage.setItem('savedMovies', JSON.stringify(movies));
+        localStorage.setItem("savedMovies", JSON.stringify(movies));
       })
       .catch((err) => console.log(err));
   }, [loggedIn, numberOfItemsPerPage]);
@@ -111,7 +117,7 @@ function App() {
         ? "Ничего не найдено"
         : "Введите ключевое слово"
     );
-  }, [searchResult])
+  }, [searchResult]);
 
   const handleRegister = (data) => {
     const { email, password } = data;
@@ -191,13 +197,15 @@ function App() {
   const handleDeleteMovie = (movie) => {
     deleteMovie(movie)
       .then((res) => {
-        const updateSavedMovies = savedMovies.movies.filter((m) => m.movieId !== res.movieId);
+        const updateSavedMovies = savedMovies.movies.filter(
+          (m) => m.movieId !== res.movieId
+        );
 
         setSavedMovies((prev) => ({
           ...prev,
           movies: updateSavedMovies,
         }));
-        localStorage.setItem('savedMovies', JSON.stringify(updateSavedMovies));
+        localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
       })
       .catch((err) => console.log(err));
   };
@@ -215,10 +223,11 @@ function App() {
             ...prev,
             movies: updateSavedMovies,
           }));
-          localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
-        }
-          
-        )
+          localStorage.setItem(
+            "savedMovies",
+            JSON.stringify(updateSavedMovies)
+          );
+        })
         .catch((err) => console.log(err));
     }
   };
@@ -261,7 +270,10 @@ function App() {
     } else {
       setSearchResult((prev) => ({
         ...prev,
-        movies: filter(JSON.parse(localStorage.getItem("beatFilmMovies")), formValues),
+        movies: filter(
+          JSON.parse(localStorage.getItem("beatFilmMovies")),
+          formValues
+        ),
         visible: numberOfItemsPerPage,
       }));
     }
@@ -360,7 +372,12 @@ function App() {
           <Route
             path="/signin"
             element={
-              <Login isLoggedIn={loggedIn} onLogin={handleLogin} errorMessage={errorMessageLogin} isButtonDisabled={isButtonDisabled}/>
+              <Login
+                isLoggedIn={loggedIn}
+                onLogin={handleLogin}
+                errorMessage={errorMessageLogin}
+                isButtonDisabled={isButtonDisabled}
+              />
             }
           ></Route>
           <Route
