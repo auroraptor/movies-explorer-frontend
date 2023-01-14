@@ -60,7 +60,8 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === `/${'signin' || 'signup'}` && loggedIn) navigate('/');
+    if (location.pathname === '/signin' && loggedIn) navigate('/');
+    if (location.pathname === '/signup' && loggedIn) navigate('/');
   }, [location.pathname, loggedIn, navigate])  
 
   useEffect(() => {
