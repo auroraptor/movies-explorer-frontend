@@ -9,7 +9,7 @@ function SearchForm({ onSearch, isChecked, onFilter, searchKeyWord }) {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -20,7 +20,7 @@ function SearchForm({ onSearch, isChecked, onFilter, searchKeyWord }) {
 
   const onSubmit = (data) => {
     onSearch(data);
-  }
+  };
 
   return (
     <form
@@ -43,7 +43,7 @@ function SearchForm({ onSearch, isChecked, onFilter, searchKeyWord }) {
             required: "Нужно ввести ключевое слово",
           })}
         ></input>
-        
+
         <button
           type="submit"
           className="search-form__button search-form__icon"
@@ -51,31 +51,32 @@ function SearchForm({ onSearch, isChecked, onFilter, searchKeyWord }) {
         ></button>
       </div>
       <span className="input-group__error-message input-group__error-message_place_search-form">
-          <ErrorMessage
-            errors={errors}
-            name="search"
-            message={"search"}
-            render={({ message }) => (
-              <span className="input-group__help-text input-group__error_visible">
-                {message}
-              </span>
-            )}
-          />
-        </span>
+        <ErrorMessage
+          errors={errors}
+          name="search"
+          message={"search"}
+          render={({ message }) => (
+            <span className="input-group__help-text input-group__error_visible">
+              {message}
+            </span>
+          )}
+        />
+      </span>
       <div className="filter-checkbox">
         <label className="filter-checkbox__label">
-      <input
-        type="checkbox"
-        name="checked"
-        id="checked"
-        className="filter-checkbox__switch"
-        aria-label="Показывать только"
-        {...register("checked", {
-          onChange: () => onFilter(!watch("checked"))
-        })}
-      />
-      <i className="filter-checkbox__container"></i>Короткометражки</label>
-    </div>
+          <input
+            type="checkbox"
+            name="checked"
+            id="checked"
+            className="filter-checkbox__switch"
+            aria-label="Показывать только"
+            {...register("checked", {
+              onChange: () => onFilter(!watch("checked")),
+            })}
+          />
+          <i className="filter-checkbox__container"></i>Короткометражки
+        </label>
+      </div>
     </form>
   );
 }

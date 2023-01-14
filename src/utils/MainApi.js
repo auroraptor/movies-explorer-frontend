@@ -1,7 +1,7 @@
 import getResponse from "./getResponse";
 import { MAIN_API, MOVIES_API } from "../constants/Api";
 
-const signupUser = async ({name, email, password}) => {
+const signupUser = async ({ name, email, password }) => {
   const user = await fetch(`${MAIN_API}signup`, {
     method: "POST",
     credentials: "include",
@@ -15,7 +15,7 @@ const signupUser = async ({name, email, password}) => {
   return getResponse(user);
 };
 
-const signinUser = async ({email, password}) => {
+const signinUser = async ({ email, password }) => {
   const res = await fetch(`${MAIN_API}signin`, {
     method: "POST",
     credentials: "include",
@@ -26,9 +26,7 @@ const signinUser = async ({email, password}) => {
     body: JSON.stringify({ email, password }),
   });
 
-  return res.ok
-    ? Promise.resolve()
-    : Promise.reject(res.status);
+  return res.ok ? Promise.resolve() : Promise.reject(res.status);
 };
 
 const signoutUser = async () => {

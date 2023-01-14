@@ -23,7 +23,12 @@ function MoviesCard(props) {
 
   return (
     <li className="movies-card">
-      <a className="movies-card__trailer-link" target="_blank" href={trailerLink} rel="noreferrer">
+      <a
+        className="movies-card__trailer-link"
+        target="_blank"
+        href={trailerLink}
+        rel="noreferrer"
+      >
         <img
           src={thumbnail}
           alt={`Миниатюрное изображение постера к фильму ${nameRU}`}

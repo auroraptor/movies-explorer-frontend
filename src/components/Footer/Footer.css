@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   margin: 0 10px;
 }
@@ -62,7 +62,6 @@
 @media (min-width: 520px) {
   .footer {
     margin: 0 30px;
-
   }
 
   .footer__collab {
@@ -99,7 +98,7 @@
   .footer__copyright {
     margin: 0;
     order: 0;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 13px;
     line-height: 16px;
   }

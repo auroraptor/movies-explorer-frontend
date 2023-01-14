@@ -34,7 +34,7 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
 
   const onSubmit = (data) => {
     const { profile_name: name, profile_email: email } = data;
-    onUpdateUser({name, email});
+    onUpdateUser({ name, email });
   };
 
   return (
@@ -70,7 +70,7 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
                 aria-invalid={errors.name ? "true" : "false"}
                 placeholder={name}
                 {...register("profile_name", {
-                  required: 'Заполните поле',
+                  required: "Заполните поле",
                   validate: (value) =>
                     !!value.match(VALID_NAME_REGEX) ||
                     "Только латиница, кириллица, пробел или дефис",
@@ -129,7 +129,13 @@ function Profile({ isClickMenu, handleMenu, onLogout, onUpdateUser }) {
           <button
             className="profile__button profile__button_edit"
             type="submit"
-            disabled={!(((watch('profile_name') !== name) || (watch('profile_email') !== email)) && isValid)}
+            disabled={
+              !(
+                (watch("profile_name") !== name ||
+                  watch("profile_email") !== email) &&
+                isValid
+              )
+            }
           >
             Редактировать
           </button>
