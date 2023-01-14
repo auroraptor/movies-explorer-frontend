@@ -74,10 +74,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("movies")) {
+    if (localStorage.getItem("beatFilmMovies")) {
       setSearchResult((prev) => ({
         ...prev,
-        movies: filter(JSON.parse(localStorage.getItem("movies")), {
+        movies: filter(JSON.parse(localStorage.getItem("beatFilmMovies")), {
           search: localStorage.getItem("search"),
           checked: JSON.parse(localStorage.getItem("isShortFilm")),
         }),
@@ -106,7 +106,7 @@ function App() {
 
   useEffect(() => {
     setCardListHelpText(
-      localStorage.getItem("movies")
+      localStorage.getItem("beatFilmMovies")
         ? "Ничего не найдено"
         : "Введите ключевое слово"
     );
@@ -151,7 +151,7 @@ function App() {
     signoutUser()
       .then(() => {
         setCurrentUser({ name: "", email: "" });
-        localStorage.removeItem("movies");
+        localStorage.removeItem("beatFilmMovies");
         localStorage.removeItem("search");
         localStorage.removeItem("isShortFilm");
         localStorage.removeItem("savedMovies");
@@ -237,16 +237,19 @@ function App() {
     setCardListHelpText("");
     setIsLoading(true);
 
-    if (!localStorage.getItem("movies")) {
+    if (!localStorage.getItem("beatFilmMovies")) {
       getBeatfilmMovies()
         .then((res) => {
+          const searchResult = filter(res, formValues);
+
           setSearchResult((prev) => ({
             ...prev,
-            movies: filter(res, formValues),
+            movies: searchResult,
             visible: numberOfItemsPerPage,
           }));
 
-          localStorage.setItem("movies", JSON.stringify(res));
+          localStorage.setItem("beatFilmMovies", JSON.stringify(res));
+          localStorage.setItem("searchResult", JSON.stringify(searchResult));
         })
         .catch((err) => {
           setCardListHelpText(
@@ -257,7 +260,7 @@ function App() {
     } else {
       setSearchResult((prev) => ({
         ...prev,
-        movies: filter(JSON.parse(localStorage.getItem("movies")), formValues),
+        movies: filter(JSON.parse(localStorage.getItem("beatFilmMovies")), formValues),
         visible: numberOfItemsPerPage,
       }));
     }
@@ -279,12 +282,12 @@ function App() {
   };
 
   const handleFilterSearchResult = (checked) => {
-    if (!localStorage.getItem("movies")) return;
+    if (!localStorage.getItem("beatFilmMovies")) return;
 
     if (checked) {
       setSearchResult((prev) => ({
         ...prev,
-        movies: filter(JSON.parse(localStorage.getItem("movies")), {
+        movies: filter(JSON.parse(localStorage.getItem("beatFilmMovies")), {
           search: localStorage.getItem("search"),
         }),
       }));
