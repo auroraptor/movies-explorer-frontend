@@ -19,6 +19,14 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getBeatfilmMovies from "../../utils/MoviesApi";
 import { filter, filterShortFilm } from "../../utils/filterResult";
 import { displayItemsPerPage, displayNextItems } from "../../constants";
+import {
+  PAGE_BASE,
+  PAGE_SIGNIN,
+  PAGE_SIGNUP,
+  PRIVATE_PAGE_MOVIES,
+  PRIVATE_PAGE_PROFILE,
+  PRIVATE_PAGE_SAVED_MOVIES,
+} from "../../constants/Api";
 import { HttpStatusCode } from "../../constants/HttpStatusCode";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
@@ -68,8 +76,8 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/signin" && loggedIn) navigate("/");
-    if (location.pathname === "/signup" && loggedIn) navigate("/");
+    if (location.pathname === "/signin" && loggedIn) navigate(PAGE_BASE);
+    if (location.pathname === "/signup" && loggedIn) navigate(PAGE_BASE);
   }, [location.pathname, loggedIn, navigate]);
 
   useEffect(() => {
@@ -151,7 +159,7 @@ function App() {
     signupUser(data)
       .then((res) => {
         handleLogin({ email, password });
-        navigate("movies");
+        navigate(PRIVATE_PAGE_MOVIES);
       })
       .catch((err) => {
         if (err === HttpStatusCode.UNAUTHORIZED)
@@ -167,7 +175,7 @@ function App() {
     signinUser(data)
       .then((res) => {
         setLoggedIn(true);
-        navigate("movies");
+        navigate(PRIVATE_PAGE_MOVIES);
       })
       .catch((err) => {
         if (err === HttpStatusCode.UNAUTHORIZED)
@@ -193,7 +201,7 @@ function App() {
           error: false,
         });
         setLoggedIn(false);
-        navigate("/");
+        navigate(PAGE_BASE);
       })
       .catch((err) => {
         setErrorMessagePopup(
@@ -343,7 +351,7 @@ function App() {
       <div className="app__container">
         <Routes>
           <Route
-            path="/"
+            path={PAGE_BASE}
             element={
               <CurrentUserContext.Provider value={currentUser}>
                 <Main isClickMenu={isClickMenu} handleMenu={handleMenu} />
@@ -352,7 +360,7 @@ function App() {
           ></Route>
           <Route element={<ProtectedRoute onLogin={loggedIn} />}>
             <Route
-              path="/movies"
+              path={PRIVATE_PAGE_MOVIES}
               element={
                 <CurrentUserContext.Provider value={currentUser}>
                   <Movies
@@ -376,7 +384,7 @@ function App() {
               }
             ></Route>
             <Route
-              path="/saved-movies"
+              path={PRIVATE_PAGE_SAVED_MOVIES}
               element={
                 <CurrentUserContext.Provider value={currentUser}>
                   <SavedMovies
@@ -391,7 +399,7 @@ function App() {
               }
             ></Route>
             <Route
-              path="/profile"
+              path={PRIVATE_PAGE_PROFILE}
               element={
                 <CurrentUserContext.Provider value={currentUser}>
                   <Profile
@@ -405,21 +413,21 @@ function App() {
             ></Route>
           </Route>
           <Route
-            path="/signin"
+            path={PAGE_SIGNUP}
             element={
-              <Login
+              <Register
                 isLoggedIn={loggedIn}
-                onLogin={handleLogin}
+                onRegister={handleRegister}
                 isButtonDisabled={isButtonDisabled}
               />
             }
           ></Route>
           <Route
-            path="/signup"
+            path={PAGE_SIGNIN}
             element={
-              <Register
+              <Login
                 isLoggedIn={loggedIn}
-                onRegister={handleRegister}
+                onLogin={handleLogin}
                 isButtonDisabled={isButtonDisabled}
               />
             }
