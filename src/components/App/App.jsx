@@ -54,7 +54,9 @@ function App() {
   const [cardListHelpText, setCardListHelpText] = useState(
     "Введите ключевое слово"
   );
-  const [errorMessagePopup, setErrorMessagePopup] = useState("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+  const [errorMessagePopup, setErrorMessagePopup] = useState(
+    "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+  );
   const [isPopupOpened, setPopupOpened] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const windowWidth = useWindowSize().width;
@@ -78,9 +80,18 @@ function App() {
         navigate(path);
       })
       .catch((err) => {
-        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
-        setPopupOpened(true);
+        if (err === HttpStatusCode.UNAUTHORIZED) localStorage.clear();
+        else {
+          setErrorMessagePopup(
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+          );
+          setPopupOpened(true);
+        }
       });
+  }, []);
+
+  useEffect(() => {
+    setPopupOpened(false);
   }, []);
 
   useEffect(() => {
@@ -112,8 +123,13 @@ function App() {
         localStorage.setItem("savedMovies", JSON.stringify(movies));
       })
       .catch((err) => {
-        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
-        setPopupOpened(true);
+        if (err === HttpStatusCode.UNAUTHORIZED) localStorage.clear();
+        else {
+          setErrorMessagePopup(
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+          );
+          setPopupOpened(true);
+        }
       });
   }, [loggedIn, numberOfItemsPerPage]);
 
@@ -138,7 +154,8 @@ function App() {
         navigate("movies");
       })
       .catch((err) => {
-        if (err === HttpStatusCode.UNAUTHORIZED) setErrorMessagePopup("Неправильные почта или пароль");
+        if (err === HttpStatusCode.UNAUTHORIZED)
+          setErrorMessagePopup("Неправильные почта или пароль");
         setPopupOpened(true);
       })
       .finally(() => setButtonDisabled(false));
@@ -153,7 +170,8 @@ function App() {
         navigate("movies");
       })
       .catch((err) => {
-        if (err === HttpStatusCode.UNAUTHORIZED) setErrorMessagePopup("Неправильные почта или пароль");
+        if (err === HttpStatusCode.UNAUTHORIZED)
+          setErrorMessagePopup("Неправильные почта или пароль");
         setPopupOpened(true);
       })
       .finally(() => setButtonDisabled(false));
@@ -181,7 +199,9 @@ function App() {
         navigate("/");
       })
       .catch((err) => {
-        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+        setErrorMessagePopup(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+        );
         setPopupOpened(true);
       });
   };
@@ -193,7 +213,9 @@ function App() {
       })
       .catch((err) => {
         if (err === HttpStatusCode.BAD_REQUEST) {
-          setErrorMessagePopup('Стоит проверить данные. Поле Имя должно быть длиной от 2 до 30 символов. Поле email содержит валидный почтовый адрес.');
+          setErrorMessagePopup(
+            "Стоит проверить данные. Поле Имя должно быть длиной от 2 до 30 символов. Поле email содержит валидный почтовый адрес."
+          );
         }
         handlePopupOpened();
       });
@@ -213,7 +235,9 @@ function App() {
         localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
       })
       .catch((err) => {
-        setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+        setErrorMessagePopup(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+        );
         setPopupOpened(true);
       });
   };
@@ -237,7 +261,9 @@ function App() {
           );
         })
         .catch((err) => {
-          setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+          setErrorMessagePopup(
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+          );
           setPopupOpened(true);
         });
     }
@@ -273,7 +299,9 @@ function App() {
           localStorage.setItem("searchResult", JSON.stringify(searchResult));
         })
         .catch((err) => {
-          setErrorMessagePopup("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.");
+          setErrorMessagePopup(
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+          );
           setPopupOpened(true);
         })
         .finally(() => setIsLoading(false));
@@ -400,7 +428,11 @@ function App() {
           ></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
-        <PopupWithErrorMessage message={errorMessagePopup} onOpened={isPopupOpened} onClick={handlePopupClosed}/>
+        <PopupWithErrorMessage
+          message={errorMessagePopup}
+          onOpened={isPopupOpened}
+          onClick={handlePopupClosed}
+        />
       </div>
     </div>
   );
