@@ -33,7 +33,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isClickMenu, setClickMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [placeholder, setPlaceholder] = useState("Фильм");
   const [isCheked, setChecked] = useState(false);
   const [searchResult, setSearchResult] = useState({
     movies: [],
@@ -85,7 +84,6 @@ function App() {
         visible: numberOfItemsPerPage,
       }));
 
-      setPlaceholder(localStorage.getItem("search"));
       setChecked(JSON.parse(localStorage.getItem("isShortFilm")) || false);
     }
   }, [numberOfItemsPerPage]);
@@ -108,9 +106,9 @@ function App() {
 
   useEffect(() => {
     setCardListHelpText(
-      searchResult.movies.length > 0
-        ? "Введите ключевое слово"
-        : "Ничего не найдено"
+      localStorage.getItem("movies")
+        ? "Ничего не найдено"
+        : "Введите ключевое слово"
     );
   }, [searchResult])
 
@@ -157,6 +155,16 @@ function App() {
         localStorage.removeItem("search");
         localStorage.removeItem("isShortFilm");
         localStorage.removeItem("savedMovies");
+        setSearchResult({
+          movies: [],
+          visible: 0,
+          error: false,
+        });
+        setSavedMovies({
+          movies: [],
+          visible: 0,
+          error: false,
+        });
         setLoggedIn(false);
         navigate("/");
         setErrorMessageProfile(null);
@@ -256,7 +264,6 @@ function App() {
 
     localStorage.setItem("isShortFilm", formValues.checked || false);
     localStorage.setItem("search", formValues.search);
-    setPlaceholder(formValues.search);
     setChecked(formValues.checked);
     setIsLoading(false);
   };
@@ -333,7 +340,7 @@ function App() {
                   >
                     <SearchForm
                       onSearch={handleSearch}
-                      placeholderText={placeholder}
+                      placeholderText="Фильм"
                       isChecked={isCheked}
                       onFilter={handleFilterSearchResult}
                     />
