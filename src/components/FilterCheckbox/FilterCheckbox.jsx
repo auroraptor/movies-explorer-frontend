@@ -1,6 +1,6 @@
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ handleChange, checked }) {
+function FilterCheckbox({ handleChange, checked, register }) {
   return (
     <div className="filter-checkbox">
         <label className="filter-checkbox__label">
@@ -10,6 +10,7 @@ function FilterCheckbox({ handleChange, checked }) {
         id="checked"
         className="filter-checkbox__switch"
         aria-label="Показывать только"
+        register={register}
         onChange={handleChange}
         checked={checked}
       />

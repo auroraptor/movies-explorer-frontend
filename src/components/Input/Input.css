@@ -40,6 +40,12 @@
   margin: 0;
 }
 
+.input-group__error-message_place_search-form {
+  font-family: "Inter", "Arial", sans-serif;
+  align-self: flex-start;
+  margin-left: 19px;
+}
+
 .input-group__error_visible {
   visibility: visible;
   color: #ee3465;
