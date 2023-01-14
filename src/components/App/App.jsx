@@ -271,16 +271,6 @@ function App() {
     setIsLoading(false);
   };
 
-  const handleSearchSavedMovies = (formValues) => {
-    const movies = filter(JSON.parse(localStorage.getItem("savedMovies")), formValues);
-
-    setSavedMovies((prev) => ({
-      ...prev,
-      movies: movies,
-      visible: numberOfItemsPerPage,
-    }));
-  };
-
   const handleFilterSearchResult = (checked) => {
     if (!localStorage.getItem("beatFilmMovies")) return;
 
@@ -298,22 +288,6 @@ function App() {
       }));
     }
   };
-
-  const handleFilterSavedMovies = (checked) => {
-    if (!localStorage.getItem("savedMovies")) return;
-
-    if (checked) {
-      setSavedMovies((prev) => ({
-        ...prev,
-        movies: JSON.parse(localStorage.getItem("savedMovies"))
-      }))
-    } else {
-      setSavedMovies((prev) => ({
-        ...prev,
-        movies: filterShortFilm(savedMovies.movies)
-      }))
-    }
-  }
 
   return (
     <div className="app">
@@ -343,7 +317,6 @@ function App() {
                   >
                     <SearchForm
                       onSearch={handleSearch}
-                      // placeholderText="Фильм"
                       isChecked={isCheked}
                       onFilter={handleFilterSearchResult}
                       searchKeyWord={localStorage.getItem("search")}
@@ -362,8 +335,6 @@ function App() {
                     handleMenu={handleMenu}
                     savedMovies={savedMovies}
                     handleSavedMovie={handleDeleteMovie}
-                    onSearch={handleSearchSavedMovies}
-                    onFilter={handleFilterSavedMovies}
                   >
                     {isLoading && <Preloader />}
                   </SavedMovies>

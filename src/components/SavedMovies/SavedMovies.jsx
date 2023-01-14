@@ -7,6 +7,9 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import "./SavedMovies.css";
 import { toLocaleDuration } from "../../utils/toLocaleDuration";
+import { useState } from "react";
+import { filter, filterShortFilm } from "../../utils/filterResult";
+import { useEffect } from "react";
 
 function SavedMovies(props) {
   const {
@@ -14,16 +17,24 @@ function SavedMovies(props) {
     handleMenu,
     savedMovies,
     handleSavedMovie,
-    onSearch,
-    onFilter
   } = props;
+
+  useEffect(() => {
+    setShowMovies(JSON.parse(localStorage.getItem("savedMovies")))
+  }, [savedMovies])
+
+  const [showMovies, setShowMovies] = useState(JSON.parse(localStorage.getItem("savedMovies")));
 
   const handleDelete = (movie) => {
     handleSavedMovie(movie);
   };
 
   const handleSearch = (formValues) => {
-    onSearch(formValues);
+    setShowMovies(filter(savedMovies?.movies, formValues));
+  }
+
+  const handleFilter = (onFilter) => {
+    onFilter ? setShowMovies(JSON.parse(localStorage.getItem("savedMovies"))) : setShowMovies(filterShortFilm(showMovies));
   }
 
   return (
@@ -39,9 +50,9 @@ function SavedMovies(props) {
           handleMenu={handleMenu}
         />
       </Header>
-      <SearchForm placeholderText={"Фильм"} onSearch={handleSearch} isChecked={false} onFilter={onFilter}/>
+      <SearchForm placeholderText={"Фильм"} onSearch={handleSearch} isChecked={false} onFilter={handleFilter}/>
       <MoviesCardList cardListHelpText={"Все понравившиеся фильмы будут здесь"}>
-        {savedMovies?.movies.map((movie) => (
+        {showMovies.map((movie) => (
           <MoviesCard
             key={movie?.id}
             movie={movie}
