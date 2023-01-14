@@ -56,3 +56,9 @@
   border: none;
   margin-top: 60px;
 }
+
+.popup__button:hover {
+  cursor: pointer;
+  scale: 1.01;
+  transition: 0.2s all ease-in-out;
+}
