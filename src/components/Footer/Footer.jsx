@@ -9,14 +9,16 @@ function Footer() {
       <div className="footer__container">
         <div className="footer__list">
           <a
-            target="_blank" rel="noreferrer"
+            target="_blank"
+            rel="noreferrer"
             href="https://practicum.yandex.ru/"
             className="footer__link footer__link_practicum"
           >
             Яндекс.Практикум
           </a>
           <a
-            target="_blank" rel="noreferrer"
+            target="_blank"
+            rel="noreferrer"
             href="https://github.com/auroraptor/movies-explorer-frontend/"
             className="footer__link footer__link_github"
           >

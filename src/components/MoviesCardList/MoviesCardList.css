@@ -1,11 +1,13 @@
 .movies-card-list {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 40px 10px 26px 10px;
+  margin: 40px auto 26px auto;
   padding: 0;
   gap: 14px;
+  flex: 1;
 }
 
 .movies-card-list_container {
@@ -15,10 +17,13 @@
 }
 
 .movies-card-list__container_empty {
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
   font-size: 12px;
   line-height: 15px;
   text-align: center;
   color: #8b8b8b;
+  margin: 0 auto;
 }
 
 .movies-card-list__container_empty_hidden {
@@ -40,6 +45,12 @@
     gap: 24px;
     max-width: 1140px;
     margin: 70px 70px 10px;
-
   }
+}
+
+.movies-card-list_empty {
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  white-space: pre-line;
 }

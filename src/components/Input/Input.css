@@ -16,6 +16,9 @@
   line-height: 16px;
   color: #ffffff;
   padding-left: 15px;
+  margin: 10px 0 20px;
+  margin: 10px 0 0;
+
 }
 
 .input-group__label {
@@ -32,7 +35,31 @@
   line-height: 12px;
 }
 
+.input-group__error-message {
+  height: 20px;
+  margin: 0;
+}
+
+.input-group__error-message_place_search-form {
+  font-family: "Inter", "Arial", sans-serif;
+  align-self: flex-start;
+  margin-left: 19px;
+}
+
 .input-group__error_visible {
   visibility: visible;
   color: #ee3465;
+}
+
+.input-group__input:-webkit-autofill,
+.input-group__input:-webkit-autofill:hover,
+.input-group__input:-webkit-autofill:focus,
+.input-group__input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #2f2f2f inset !important;
+  -webkit-text-fill-color: white;
+}
+
+.input-group__input:-webkit-autofill {
+  border: none;
+  -webkit-text-fill-color: white;
 }

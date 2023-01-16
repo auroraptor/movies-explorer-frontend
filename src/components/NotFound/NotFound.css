@@ -30,13 +30,22 @@
   flex: 1;
 }
 
-.not-found-page__link {
+.not-found-page__button {
   text-decoration: none;
+  background-color: transparent;
+  border: none;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   color: #4285f4;
   margin-bottom: 30px;
+}
+
+.not-found-page__button:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  opacity: 0.8;
+  transition: all 0.5s ease-in-out;
 }
 
 @media (min-width: 520px) {
@@ -61,7 +70,7 @@
     flex: 0;
   }
 
-  .not-found-page__link {
+  .not-found-page__button {
     margin-top: 184px;
   }
 }
@@ -72,14 +81,13 @@
     margin-top: 0;
     justify-content: center;
     gap: 184px;
-
   }
 
   .not-found-page__container {
     margin-top: 246px;
   }
 
-  .not-found-page__link {
+  .not-found-page__button {
     margin-top: 0;
     margin-bottom: 60px;
   }

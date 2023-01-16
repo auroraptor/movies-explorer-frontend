@@ -3,33 +3,76 @@ import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import Navigation from "../Navigation/Navigation";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
-import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
 import "./SavedMovies.css";
+import { toLocaleDuration } from "../../utils/toLocaleDuration";
+import { useState } from "react";
+import { filter, filterShortFilm } from "../../utils/filterResult";
+import { useEffect } from "react";
 
-function SavedMovies({isClickMenu, handleMenu}) {
+function SavedMovies(props) {
+  const { isClickMenu, handleMenu, savedMovies, handleSavedMovie } = props;
 
-  const items = [...Array(8)].map((item, index) => (<MoviesCard
-    key={index}
-    icon={"movies-card__button movies-card__button_remove"}
-    ariaLabel="Удалить"
-    onClick={() => console.log("remove")}
-    buttonName="remove"
-  ></MoviesCard>))
+  useEffect(() => {
+    setShowMovies(JSON.parse(localStorage.getItem("savedMovies")));
+  }, [savedMovies]);
+
+  const [showMovies, setShowMovies] = useState(
+    JSON.parse(localStorage.getItem("savedMovies"))
+  );
+
+  const handleDelete = (movie) => {
+    handleSavedMovie(movie);
+  };
+
+  const handleSearch = (formValues) => {
+    setShowMovies(filter(savedMovies?.movies, formValues));
+  };
+
+  const handleFilter = (onFilter) => {
+    onFilter
+      ? setShowMovies(JSON.parse(localStorage.getItem("savedMovies")))
+      : setShowMovies(filterShortFilm(showMovies));
+  };
 
   return (
     <section className="saved-movies">
       <Header className={"header"} click={isClickMenu}>
-        <HamburgerMenu click={isClickMenu} handleMenu={handleMenu}></HamburgerMenu>
+        <HamburgerMenu
+          click={isClickMenu}
+          handleMenu={handleMenu}
+        ></HamburgerMenu>
         {isClickMenu && <div className="background"></div>}
-        <Navigation className={`menu menu_desktop ${isClickMenu && "menu_active"}`} handleMenu={handleMenu}/>
+        <Navigation
+          className={`menu menu_desktop ${isClickMenu && "menu_active"}`}
+          handleMenu={handleMenu}
+        />
       </Header>
-      <SearchForm></SearchForm>
-      <MoviesCardList>
-        {items}
+      <SearchForm
+        placeholderText={"Фильм"}
+        onSearch={handleSearch}
+        isChecked={false}
+        onFilter={handleFilter}
+      />
+      <MoviesCardList cardListHelpText={"Все понравившиеся фильмы будут здесь"}>
+        {showMovies.map((movie) => (
+          <MoviesCard
+            key={movie?.id}
+            movie={movie}
+            icon={`movies-card__button movies-card__button_remove`}
+            ariaLabel="Удалить"
+            onMovieClick={handleDelete}
+            buttonName="delete"
+            nameEN={movie?.nameEN}
+            nameRU={movie?.nameRU}
+            trailerLink={movie?.trailerLink}
+            duration={toLocaleDuration(movie?.duration)}
+            thumbnail={movie?.image}
+            savedMovies={savedMovies}
+          ></MoviesCard>
+        ))}
       </MoviesCardList>
-      <MoviesLoadMore></MoviesLoadMore>
       <Footer></Footer>
     </section>
   );

@@ -1,35 +1,29 @@
-import { useState } from "react";
-import SearchForm from "../SearchForm/SearchForm";
-import Preloader from "../Preloader/Preloader";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import Navigation from "../Navigation/Navigation";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesLoadMore from "../MoviesLoadMore/MoviesLoadMore";
 import Footer from "../Footer/Footer";
-
-import "./Movies.css";
 import Header from "../Header/Header";
+import { MOVIES_API } from "../../constants/Api";
+import "./Movies.css";
+import { toLocaleDuration } from "../../utils/toLocaleDuration";
 
-function Movies({ isClickMenu, handleMenu }) {
-  const [like, setLike] = useState("♥︎");
+function Movies(props) {
+  const {
+    isClickMenu,
+    handleMenu,
+    searchResult,
+    loadMore,
+    children,
+    cardListHelpText,
+    handleSavedMovie,
+    savedMovies,
+  } = props;
 
-  const handleLike = () => {
-    alert(like);
-    setLike(like === "♥︎" ? "♡" : "♥︎");
+  const handleLike = (movie) => {
+    handleSavedMovie(movie);
   };
-
-  const items = [...Array(12)].map((item, index) => (
-    <MoviesCard
-      key={index}
-      icon={`movies-card__button movies-card__button_like ${
-        index % 3 === 0 && "movies-card__button_active"
-      }`}
-      ariaLabel="Нравится"
-      onClick={handleLike}
-      buttonName="like"
-    ></MoviesCard>
-  ));
 
   return (
     <div className="movies">
@@ -44,17 +38,28 @@ function Movies({ isClickMenu, handleMenu }) {
           handleMenu={handleMenu}
         />
       </Header>
-      <SearchForm></SearchForm>
-      <Preloader></Preloader>
-      <MoviesCardList>
-        {items}
-        <li>
-          <p className="movies-card-list__container movies-card-list__container_empty movies-card-list__container_empty_hidden">
-            Без результатов поиска
-          </p>
-        </li>
+      {children}
+      <MoviesCardList cardListHelpText={cardListHelpText}>
+        {searchResult?.movies?.slice(0, searchResult?.visible).map((movie) => (
+          <MoviesCard
+            key={movie?.id}
+            movie={movie}
+            icon={`movies-card__button movies-card__button_like`}
+            ariaLabel="Нравится"
+            onMovieClick={handleLike}
+            buttonName="like"
+            nameEN={movie?.nameEN}
+            nameRU={movie?.nameRU}
+            trailerLink={movie?.trailerLink}
+            duration={toLocaleDuration(movie?.duration)}
+            thumbnail={`${MOVIES_API}${movie?.image.url}`}
+            savedMovies={savedMovies}
+          ></MoviesCard>
+        ))}
       </MoviesCardList>
-      <MoviesLoadMore></MoviesLoadMore>
+      {searchResult?.visible < searchResult?.movies?.length && (
+        <MoviesLoadMore loadMore={loadMore} />
+      )}
       <Footer></Footer>
     </div>
   );

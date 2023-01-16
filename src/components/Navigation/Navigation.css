@@ -42,6 +42,10 @@
   height: calc(100vh - 74px);
 }
 
+.menu_place_main {
+  background-color: #073042;
+}
+
 .menu__container {
   display: flex;
   flex-direction: column;
