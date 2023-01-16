@@ -71,7 +71,10 @@ function SearchForm({ onSearch, isChecked, onFilter, searchKeyWord }) {
             className="filter-checkbox__switch"
             aria-label="Показывать только"
             {...register("checked", {
-              onChange: () => onFilter(!watch("checked")),
+              onChange: () => {
+                onFilter(!watch("checked"));
+                localStorage.setItem("isShortFilm", watch("checked"));
+              },
             })}
           />
           <i className="filter-checkbox__container"></i>Короткометражки
