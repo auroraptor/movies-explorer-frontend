@@ -73,7 +73,7 @@ function SearchForm({ onSearch, isChecked, onFilter, searchKeyWord }) {
             {...register("checked", {
               onChange: () => {
                 onFilter(!watch("checked"));
-                localStorage.setItem("isShortFilm", watch("checked"));
+                // localStorage.setItem("isShortFilm", watch("checked"));
               },
             })}
           />

@@ -202,6 +202,7 @@ function App() {
         });
         setLoggedIn(false);
         navigate(PAGE_BASE);
+        setChecked(false);
       })
       .catch((err) => {
         setErrorMessagePopup(
@@ -338,11 +339,15 @@ function App() {
           search: localStorage.getItem("search"),
         }),
       }));
+      localStorage.setItem("isShortFilm", false);
+      setChecked(false);
     } else {
       setSearchResult((prev) => ({
         ...prev,
         movies: filterShortFilm(searchResult.movies),
       }));
+      localStorage.setItem("isShortFilm", true);
+      setChecked(true);
     }
   };
 
