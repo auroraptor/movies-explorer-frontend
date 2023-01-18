@@ -26,7 +26,7 @@ function Techs() {
           <span className="techs__content">Git</span>
         </li>
         <li className="techs__item">
-          <span className="techs__content">Exress.js</span>
+          <span className="techs__content">Express.js</span>
         </li>
         <li className="techs__item">
           <span className="techs__content">mongoDB</span>
