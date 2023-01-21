@@ -101,8 +101,7 @@
 .movies-card__button_remove:hover {
   cursor: pointer;
   opacity: 0.8;
-  transform: rotate(90deg);
-  transition: all 0.5s ease-in-out;
+  transition: 0.2s all ease-in-out;
 }
 
 .movies-card__duration {

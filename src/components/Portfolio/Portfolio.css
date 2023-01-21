@@ -51,8 +51,8 @@
 
 .portfolio__link:hover {
   cursor: pointer;
-  transform: scale(1.02);
-  transition: all 0.2s ease-in-out;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
 }
 
 .link_text {

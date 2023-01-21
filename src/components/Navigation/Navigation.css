@@ -61,12 +61,10 @@
   padding-bottom: 7px;
 }
 
-.menu__link_main {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
+.menu__link:hover {
   color: #ffffff;
   opacity: 0.1;
+  transition: all 0.2s ease-in-out;
 }
 
 .menu__link_active {
@@ -196,10 +194,6 @@
 
   .menu__link_weight_medium {
     font-weight: 500;
-  }
-
-  .menu__link_main {
-    display: none;
   }
 
   .menu__profile-link_type_text {

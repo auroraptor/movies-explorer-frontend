@@ -44,6 +44,12 @@
   padding: 0;
 }
 
+.footer__link:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
+}
+
 .footer__link_practicum {
   margin-top: 30px;
 }

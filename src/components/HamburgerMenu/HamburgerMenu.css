@@ -14,7 +14,9 @@
 }
 
 .hamburger__icon:hover {
+  cursor: pointer;
   opacity: 0.8;
+  transition: 0.2s all ease-in-out;
 }
 
 .hamburger__button {

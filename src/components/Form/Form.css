@@ -33,9 +33,14 @@
   background-color: #2f2f2f;
 }
 
+.form__button:disabled:hover {
+  cursor: auto;
+  opacity: 1;
+}
+
 .form__button:hover {
   cursor: pointer;
-  scale: 1.01;
+  opacity: 0.8;
   transition: 0.2s all ease-in-out;
 }
 

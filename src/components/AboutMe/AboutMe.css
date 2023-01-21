@@ -72,6 +72,12 @@
   margin-top: 40px;
 }
 
+.about-me__link {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
+}
+
 @media (min-width: 520px) {
   .about-me {
     max-width: 668px;
