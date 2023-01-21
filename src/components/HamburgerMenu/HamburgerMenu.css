@@ -24,8 +24,8 @@
   height: 2.5px;
   background: #fff;
   position: absolute;
-  top: 39px;
-  transition: 0.5s;
+  top: 36px;
+  transition: 0.2s;
 }
 
 .hamburger__button:before {

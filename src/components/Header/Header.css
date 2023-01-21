@@ -1,12 +1,10 @@
 .header {
   position: relative;
-  height: 74px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 14px;
-  padding-right: 14px;
+  padding: 14px;
   font-family: "Inter", sans-serif;
 }
 
@@ -50,8 +48,7 @@
 
 @media (min-width: 520px) {
   .header {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 18px 30px;
   }
   .header__navigation_page_main {
     gap: 30px;
@@ -60,7 +57,6 @@
 
 @media (min-width: 980px) {
   .header {
-    padding-left: 70px;
-    padding-right: 70px;
+    padding: 18px 70px;
   }
 }
