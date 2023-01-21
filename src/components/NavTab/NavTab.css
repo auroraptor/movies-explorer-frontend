@@ -25,7 +25,10 @@
 }
 
 .navtab__link:hover {
-  border-bottom: 1px dotted #272727;
+  cursor: pointer;
+  opacity: 0.8;
+  border-bottom: none;
+  transition: 0.2s all ease-in-out;
 }
 
 @media (min-width: 520px) {

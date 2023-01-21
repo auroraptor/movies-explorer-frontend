@@ -43,9 +43,8 @@
 
 .not-found-page__button:hover {
   cursor: pointer;
-  transform: scale(1.01);
   opacity: 0.8;
-  transition: all 0.5s ease-in-out;
+  transition: 0.2s all ease-in-out;
 }
 
 @media (min-width: 520px) {

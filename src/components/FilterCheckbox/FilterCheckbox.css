@@ -30,6 +30,12 @@
   margin-right: 13px;
 }
 
+.filter-checkbox__container {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
+}
+
 .filter-checkbox__container::after {
   content: "";
   width: 10px;

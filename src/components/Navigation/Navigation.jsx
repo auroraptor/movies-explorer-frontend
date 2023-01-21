@@ -7,7 +7,7 @@ function Navigation({ className, handleMenu }) {
       <div className="menu__container">
         <NavLink
           to="/"
-          className="menu__link menu__link_main"
+          className="menu__link"
           onClick={handleMenu}
         >
           Главная

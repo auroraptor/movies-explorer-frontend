@@ -58,15 +58,12 @@
 .menu__link {
   text-decoration: none;
   color: #ffffff;
-  padding-bottom: 7px;
 }
 
-.menu__link_main {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
+.menu__link:hover {
   color: #ffffff;
   opacity: 0.1;
+  transition: all 0.2s ease-in-out;
 }
 
 .menu__link_active {
@@ -165,14 +162,12 @@
     margin: 0;
     flex-direction: row;
     gap: 20px;
-    margin: 28px 0;
     flex: none;
   }
 
   .menu__link {
     text-decoration: none;
     color: #ffffff;
-    padding-bottom: 7px;
   }
 
   .menu__profile_container {
@@ -196,10 +191,6 @@
 
   .menu__link_weight_medium {
     font-weight: 500;
-  }
-
-  .menu__link_main {
-    display: none;
   }
 
   .menu__profile-link_type_text {

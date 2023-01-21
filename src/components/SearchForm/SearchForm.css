@@ -54,8 +54,10 @@
   border-radius: 48px;
 }
 
-.search-form__button {
+.search-form__button:hover {
   cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
 }
 
 .search-form__icon {

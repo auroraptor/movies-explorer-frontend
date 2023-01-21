@@ -6,7 +6,7 @@
   background-image: url(../../images/logo-praktikum.svg);
   background-repeat: no-repeat;
   background-position: left 50% top 44%;
-  background-size: 320px;
+  background-size: 248px;
 }
 
 .promo__title {
@@ -21,6 +21,9 @@
 }
 
 @media (min-width: 520px) {
+  .promo {
+    background-size: 320px;
+  }
   .promo:before {
     content: "";
     display: block;
@@ -30,7 +33,7 @@
   .promo__title {
     position: absolute;
     top: 39%;
-    padding: 0;
+    padding: 0 30px;
     font-style: normal;
     font-weight: 400;
     font-size: 50px;

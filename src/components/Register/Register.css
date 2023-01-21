@@ -55,7 +55,7 @@
 
 .register__button:hover {
   cursor: pointer;
-  scale: 1.02;
+  opacity: 0.8;
   transition: 0.2s all ease-in-out;
 }
 

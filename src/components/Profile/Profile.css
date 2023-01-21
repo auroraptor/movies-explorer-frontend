@@ -108,25 +108,24 @@
   line-height: 15px;
   background-color: transparent;
   border: none;
-  color: #ffffff;
+  color: #3DDC84;
   padding: 7px;
-  border: 1px solid rgba(170, 170, 170, 1);
   border-radius: 50px;
 }
 
 .profile__button_edit:hover {
   cursor: pointer;
-  transform: scale(1.01);
-  transition: all 0.5s ease-in-out;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
 }
 
 .profile__button_edit:disabled {
-  border: 1px solid rgba(170, 170, 170, 0);
+  color: #ffffff;
+  opacity: 0.5;
 }
 
 .profile__button_edit:disabled:hover {
   cursor: auto;
-  transform: none;
 }
 
 .profile__logout {
@@ -140,6 +139,12 @@
   color: #ee3465;
   background-color: transparent;
   border: none;
+}
+
+.profile__logout:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s all ease-in-out;
 }
 
 .profile__settings {

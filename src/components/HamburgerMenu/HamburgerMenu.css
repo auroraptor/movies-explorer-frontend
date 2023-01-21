@@ -14,7 +14,9 @@
 }
 
 .hamburger__icon:hover {
+  cursor: pointer;
   opacity: 0.8;
+  transition: 0.2s all ease-in-out;
 }
 
 .hamburger__button {
@@ -22,8 +24,8 @@
   height: 2.5px;
   background: #fff;
   position: absolute;
-  top: 39px;
-  transition: 0.5s;
+  top: 36px;
+  transition: 0.2s;
 }
 
 .hamburger__button:before {
