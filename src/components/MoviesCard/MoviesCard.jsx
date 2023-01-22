@@ -44,9 +44,8 @@ function MoviesCard(props) {
           aria-label={ariaLabel}
           onClick={handleClick}
         ></button>
+        <p className="movies-card__duration">{duration}</p>
       </div>
-
-      <p className="movies-card__duration">{duration}</p>
     </li>
   );
 }

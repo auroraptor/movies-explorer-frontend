@@ -4,7 +4,7 @@
   align-items: center;
   font-family: "Inter";
   font-style: normal;
-  margin: 0 10px;
+  max-width: 1140px;
   padding: 0 14px;
 }
 
@@ -68,9 +68,9 @@
 
 @media (min-width: 520px) {
   .footer {
-    margin: 0 30px;
+    padding: 0 30px;
   }
-
+  
   .footer__collab {
     padding: 0 0 20px;
     font-size: 13px;
@@ -113,8 +113,6 @@
 
 @media (min-width: 980px) {
   .footer {
-    max-width: 1140px;
-    width: 100%;
-    margin: 0 auto;
+    padding: 0 70px;
   }
 }
