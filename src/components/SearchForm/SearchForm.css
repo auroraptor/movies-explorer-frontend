@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 14px 0 14px;
-  padding-bottom: 10px;
+  padding: 10px 14px;
 }
 
 .search-form__container {
-  margin-top: 80px;
+  margin-top: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,14 +68,12 @@
 
 @media (min-width: 520px) {
   .search-form {
-    margin-left: 30px;
-    margin-right: 30px;
+    padding: 10px 30px;
   }
 }
 
 @media (min-width: 980px) {
   .search-form {
-    margin-left: 70px;
-    margin-right: 70px;
+    padding: 10px 70px;
   }
 }
