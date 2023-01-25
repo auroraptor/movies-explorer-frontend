@@ -78,6 +78,11 @@
   transition: 0.2s all ease-in-out;
 }
 
+.about-me__link-club {
+  cursor: pointer;
+  color: skyblue;
+}
+
 @media (min-width: 520px) {
   .about-me {
     max-width: 668px;

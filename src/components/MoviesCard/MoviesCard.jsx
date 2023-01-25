@@ -36,7 +36,7 @@ function MoviesCard(props) {
         ></img>{" "}
       </a>
       <div className="movies-card__container">
-        <p className="movies-card__name">{nameEN}</p>
+        <p className="movies-card__name" title={nameRU}>{nameEN}</p>
         <button
           type="button"
           name={buttonName}
