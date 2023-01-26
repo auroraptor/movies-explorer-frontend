@@ -86,6 +86,7 @@
 @media (min-width: 520px) {
   .about-me {
     max-width: 668px;
+    padding: 0 50px;
   }
 
   .about-me__title {
@@ -135,6 +136,7 @@
 @media (min-width: 980px) {
   .about-me {
     max-width: 1140px;
+    padding: 0 70px;
   }
 
   .about-me__title {
