@@ -25,7 +25,7 @@ function Footer() {
             Github
           </a>
         </div>
-        <p className="footer__copyright">©2020</p>
+        <p className="footer__copyright">©2023</p>
       </div>
     </footer>
   );
