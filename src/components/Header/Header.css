@@ -17,7 +17,7 @@
 }
 
 .header__navigation_place_main {
-  gap: 14px;
+  gap: 7px;
   text-decoration: none;
 }
 
@@ -37,6 +37,7 @@
   display: flex;
   background-color: transparent;
   color: #ffffff;
+  padding: 0 7px;
 }
 
 .header__button_color_green {

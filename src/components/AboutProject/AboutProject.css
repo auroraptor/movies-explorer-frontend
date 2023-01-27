@@ -77,6 +77,7 @@
 @media (min-width: 520px) {
   .about-project {
     max-width: 668px;
+    padding: 0 50px;
   }
 
   .about-project__title {
@@ -126,6 +127,7 @@
 @media (min-width: 980px) {
   .about-project {
     max-width: 1140px;
+    padding: 0 70px;
   }
 
   .about-project__title {
